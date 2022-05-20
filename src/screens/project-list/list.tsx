@@ -15,7 +15,7 @@ interface ListProps {
 
 }
 
-export const List = ({users, list} :ListProps) => {
+export const List = ({users, list}: ListProps) => {
     return <table>
         <thead>
             <th>Name</th>

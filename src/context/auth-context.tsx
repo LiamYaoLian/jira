@@ -9,9 +9,9 @@ interface AuthForm {
 
 const AuthContext = React.createContext<{
     user: User | null,
-    register: (form:AuthForm) => Promise<void>,
-    login: (form:AuthForm) => Promise<void>,
-    logout: (form:AuthForm) => Promise<void>,
+    register: (form: AuthForm) => Promise<void>,
+    login: (form: AuthForm) => Promise<void>,
+    logout: () => Promise<void>,
 } | undefined>(undefined)
 AuthContext.displayName = 'AuthContext'
 
@@ -23,7 +23,6 @@ export const AuthProvider = ({children} : {children: ReactNode}) => {
     const logout = () => auth.logout().then(user => setUser(null))
 
     return <AuthContext.Provider children={children} value={{user, login, register, logout}}/>
-
 }
 
 export const useAuth = () => {
@@ -32,5 +31,4 @@ export const useAuth = () => {
         throw new Error('useAuth can be used only in AuthProvider')
     }
     return context
-
 }
