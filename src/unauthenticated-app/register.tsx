@@ -1,6 +1,7 @@
 import React, {FormEvent} from 'react';
 import {useAuth} from "../context/auth-context";
 import {Button, Form, Input} from "antd";
+import {LongButton} from "./index";
 
 
 export const RegisterScreen = () => {
@@ -25,7 +26,7 @@ export const RegisterScreen = () => {
             <input placeholder={"password"} type="password" id={"password"}/>
         </Form.Item>
         <Form.Item>
-            <Button htmlType={"submit"} type={"primary"}>Register</Button>
+            <LongButton htmlType={"submit"} type={"primary"}>Register</LongButton>
         </Form.Item>
     </Form>
 }
