@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/preset-env": "^7.18.0",
     "@craco/craco": "^6.4.3",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -16,6 +17,7 @@
     "add": "^2.0.6",
     "antd": "^4.20.5",
     "craco-less": "^2.0.0",
+    "dayjs": "^1.11.2",
     "jira-dev-tool": "^1.7.61",
     "qs": "^6.10.3",
     "react": "^18.1.0",
@@ -53,8 +55,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.0",
     "@commitlint/cli": "^16.2.4",
     "@commitlint/config-conventional": "^16.2.4",
+    "@emotion/babel-preset-css-prop": "^11.2.0",
     "@types/qs": "^6.9.7",
     "eslint-config-prettier": "^8.5.0",
     "husky": "^7.0.4",

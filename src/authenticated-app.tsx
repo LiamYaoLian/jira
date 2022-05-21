@@ -3,20 +3,32 @@ import {ProjectListScreen} from "./screens/project-list";
 import {useAuth} from "./context/auth-context";
 import styled from "@emotion/styled";
 import {Row} from "./components/lib";
+import {ReactComponent as SoftwareLogo} from "assets/software-logo.svg";
+import {Dropdown, Menu} from "antd";
 
 export const AuthenticatedApp = () => {
-    const {logout} = useAuth()
+    const {logout, user} = useAuth()
 
 
     return <Container>
         <Header between={true}>
             <HeaderLeft gap={true}>
-                <h2>Logo</h2>
+                <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"}/>
                 <h2>Project</h2>
                 <h2>User</h2>
             </HeaderLeft>
             <HeaderRight>
-                <button onClick={logout}>log out</button>
+                <Dropdown overlay={<Menu>
+                    <Menu.Item key={"logout"}>
+                        <a onClick={logout}>Log Out</a>
+                    </Menu.Item>
+                </Menu>}>
+                    {/*to prevent refresh*/}
+                    <a onClick={e => e.preventDefault()}>
+                        Hi, {user?.name}
+                    </a>
+                </Dropdown>
+
             </HeaderRight>
         </Header>
         <Main>
@@ -41,7 +53,11 @@ const HeaderItem = styled.h3`
     margin-right: 3rem
 `
 
-const Header = styled(Row)``
+const Header = styled(Row)`
+  padding: 3.2rem;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  z-index: 1;
+`
 
 const HeaderLeft = styled(Row)``
 

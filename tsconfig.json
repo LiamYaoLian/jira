@@ -5,8 +5,9 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
     ],
+    "types": ["@emotion/react/types/css-prop"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
