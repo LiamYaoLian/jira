@@ -4,7 +4,7 @@ import {useAuth} from "./context/auth-context";
 import styled from "@emotion/styled";
 import {Row} from "./components/lib";
 import {ReactComponent as SoftwareLogo} from "assets/software-logo.svg";
-import {Dropdown, Menu} from "antd";
+import {Button, Dropdown, Menu} from "antd";
 
 export const AuthenticatedApp = () => {
     const {logout, user} = useAuth()
@@ -20,13 +20,13 @@ export const AuthenticatedApp = () => {
             <HeaderRight>
                 <Dropdown overlay={<Menu>
                     <Menu.Item key={"logout"}>
-                        <a onClick={logout}>Log Out</a>
+                        {/*<a onClick={logout}>Log Out</a>*/}
+                        <Button type={"link"} onClick={logout}>Log Out</Button>
                     </Menu.Item>
                 </Menu>}>
                     {/*to prevent refresh*/}
-                    <a onClick={e => e.preventDefault()}>
-                        Hi, {user?.name}
-                    </a>
+
+                    <Button type={"link"} onClick={e => e.preventDefault()}>Hi, {user?.name}</Button>
                 </Dropdown>
 
             </HeaderRight>
