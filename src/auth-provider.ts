@@ -1,6 +1,6 @@
 // if we use firebase or other auth services, we don't need this file
 
-import {User} from "./screens/project-list/search-panel";
+import {User} from './screens/project-list/search-panel';
 
 const apiUrl = process.env.REACT_APP_API_URL
 const localStorageKey = '__auth_provider_token__'

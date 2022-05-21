@@ -1,10 +1,10 @@
 import React from 'react';
-import {ProjectListScreen} from "./screens/project-list";
-import {useAuth} from "./context/auth-context";
-import styled from "@emotion/styled";
-import {Row} from "./components/lib";
-import {ReactComponent as SoftwareLogo} from "assets/software-logo.svg";
-import {Button, Dropdown, Menu} from "antd";
+import {ProjectListScreen} from './screens/project-list';
+import {useAuth} from './context/auth-context';
+import styled from '@emotion/styled';
+import {Row} from './components/lib';
+import {ReactComponent as SoftwareLogo} from 'assets/software-logo.svg';
+import {Button, Dropdown, Menu} from 'antd';
 
 export const AuthenticatedApp = () => {
     const {logout, user} = useAuth()
@@ -13,20 +13,20 @@ export const AuthenticatedApp = () => {
     return <Container>
         <Header between={true}>
             <HeaderLeft gap={true}>
-                <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"}/>
+                <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'}/>
                 <h2>Project</h2>
                 <h2>User</h2>
             </HeaderLeft>
             <HeaderRight>
                 <Dropdown overlay={<Menu>
-                    <Menu.Item key={"logout"}>
+                    <Menu.Item key={'logout'}>
                         {/*<a onClick={logout}>Log Out</a>*/}
-                        <Button type={"link"} onClick={logout}>Log Out</Button>
+                        <Button type={'link'} onClick={logout}>Log Out</Button>
                     </Menu.Item>
                 </Menu>}>
                     {/*to prevent refresh*/}
 
-                    <Button type={"link"} onClick={e => e.preventDefault()}>Hi, {user?.name}</Button>
+                    <Button type={'link'} onClick={e => e.preventDefault()}>Hi, {user?.name}</Button>
                 </Dropdown>
 
             </HeaderRight>

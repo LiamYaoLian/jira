@@ -1,52 +1,29 @@
-import React from 'react';
-import {SearchPanel} from "./search-panel";
-import {List} from "./list";
-import {useEffect, useState} from "react";
-import {cleanObject, useDebounce, useMount} from "../../utils";
-import {useHttp} from "../../utils/http";
-import styled from "@emotion/styled";
-import { Typography } from 'antd';
+import React, {useEffect, useState} from 'react';
+import styled from '@emotion/styled';
+import {Typography} from 'antd';
+import {SearchPanel} from './search-panel';
+import {List, Project} from './list';
+import {useDebounce} from '../../utils';
+import {useProjects} from "../../utils/project";
+import {useUsers} from "../../utils/user";
 
 const apiUrl = process.env.REACT_APP_API_URL
-//const apiUrl = "http://localhost:3001"
 
 export const ProjectListScreen = () => {
-    const [users, setUsers] = useState([])
-
     const [param, setParam] = useState({
         name:'',
         personId: ''
     })
 
-    const [isLoading, setIsLoading] = useState(false)
-
-    const [error, setError] = useState<null | Error>(null)
-
     const debouncedParam = useDebounce(param, 200)
-    const [list, setList] = useState([])
-    const client = useHttp()
-
-    useEffect(() => {
-        setIsLoading(true)
-        client("projects", {data: cleanObject(debouncedParam)})
-            .then(setList)
-            .catch(error => {
-                setList([])
-                setError(error)
-            })
-            .finally(() => setIsLoading(false));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[debouncedParam])
-
-    useMount(() => {
-        client("users").then(setUsers)
-    })
+    const {isLoading, error, data: list} = useProjects(debouncedParam)
+    const {data: users} = useUsers()
 
     return <Container>
         <h1>Project List</h1>
-        <SearchPanel users={users} param={param} setParam={setParam}/>
-        {error? <Typography.Text type={"danger"}>{error.message}</Typography.Text> : null}
-        <List loading={isLoading} users={users} dataSource={list}/>
+        <SearchPanel users={users || []} param={param} setParam={setParam}/>
+        {error? <Typography.Text type={'danger'}>{error.message}</Typography.Text> : null}
+        <List loading={isLoading} users={users || []} dataSource={list || []}/>
     </Container>
 }
 

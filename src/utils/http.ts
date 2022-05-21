@@ -1,6 +1,6 @@
-import qs from "qs";
-import * as auth from "auth-provider";
-import {useAuth} from "../context/auth-context";
+import qs from 'qs';
+import * as auth from 'auth-provider';
+import {useAuth} from '../context/auth-context';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -33,7 +33,7 @@ export const http = async (endpoint: string, {data, token, headers, ...customerC
             if (response.status === 401) {
                 await auth.logout()
                 window.location.reload()
-                return Promise.reject({message: "Try again."})
+                return Promise.reject({message: 'Try again.'})
             }
 
             const data = await response.json()

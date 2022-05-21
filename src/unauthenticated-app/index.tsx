@@ -1,11 +1,11 @@
-import {useState} from "react";
-import {RegisterScreen} from "./register";
-import {LoginScreen} from "./login";
-import {Button, Card, Divider} from "antd";
-import styled from "@emotion/styled";
-import logo from "assets/logo.svg";
-import left from "assets/left.svg";
-import right from "assets/right.svg";
+import {useState} from 'react';
+import {RegisterScreen} from './register';
+import {LoginScreen} from './login';
+import {Button, Card, Divider} from 'antd';
+import styled from '@emotion/styled';
+import logo from 'assets/logo.svg';
+import left from 'assets/left.svg';
+import right from 'assets/right.svg';
 
 export const UnauthenticatedApp = () => {
     const [isRegister, setIsRegister] = useState(false)
@@ -14,12 +14,12 @@ export const UnauthenticatedApp = () => {
         <Background/>
         <ShadowCard>
             <Title>
-                {isRegister? "Register" : "Login"}
+                {isRegister? 'Register' : 'Login'}
             </Title>
             { isRegister? <RegisterScreen/> : <LoginScreen/> }
             <Divider/>
 
-            <Button type={"link"} onClick={() => setIsRegister(!isRegister)}>{isRegister? 'Login' : 'Register'}</Button>
+            <Button type={'link'} onClick={() => setIsRegister(!isRegister)}>{isRegister? 'Login' : 'Register'}</Button>
         </ShadowCard>
        </Container>
 
