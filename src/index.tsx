@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import {loadDevTools} from 'jira-dev-tool';
 import ReactDOM from 'react-dom';
 import {AppProviders} from "context";
+// this should be imported after "jira-dev-tool" so that it will override the styles in "jira-dev-tool"
+import "antd/dist/antd.less";
 
 loadDevTools(() => ReactDOM.render(
     <React.StrictMode>
