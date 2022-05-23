@@ -2,12 +2,10 @@ import React, {useEffect, useState} from 'react';
 import styled from '@emotion/styled';
 import {Typography} from 'antd';
 import {SearchPanel} from './search-panel';
-import {List, Project} from './list';
+import {List} from './list';
 import {useDebounce} from '../../utils';
 import {useProjects} from "../../utils/project";
 import {useUsers} from "../../utils/user";
-
-const apiUrl = process.env.REACT_APP_API_URL
 
 export const ProjectListScreen = () => {
     const [param, setParam] = useState({

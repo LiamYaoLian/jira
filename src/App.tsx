@@ -3,6 +3,9 @@ import './App.css';
 import {useAuth} from './context/auth-context';
 import {AuthenticatedApp} from './authenticated-app';
 import {UnauthenticatedApp} from './unauthenticated-app';
+import fundebug from 'fundebug-javascript';
+import {ErrorBoundary} from "./components/error-boundary";
+import {FullPageErrorFallback} from "./components/lib";
 //import {fundebug} from 'fundebug-reactnative';
 
 // const fundebug : any = require("fundebug-reactnative");
@@ -12,13 +15,15 @@ import {UnauthenticatedApp} from './unauthenticated-app';
 
 function App() {
   const {user} = useAuth()
-  // fundebug.notify("Test", "Hello, Fundebug!")
-  // fundebug.text()
+  //fundebug.notify("test 3", "3")
 
   return (
 
     <div className='App'>
-      {user? <AuthenticatedApp/> : <UnauthenticatedApp/>}
+      <ErrorBoundary fallbackRender={FullPageErrorFallback}>
+          {user? <AuthenticatedApp/> : <UnauthenticatedApp/>}
+      </ErrorBoundary>
+
     </div>
   );
 }

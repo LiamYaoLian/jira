@@ -7,18 +7,7 @@ import { loadServer, DevTools} from 'jira-dev-tool';
 import {AppProviders} from 'context';
 // this should be imported after 'jira-dev-tool' so that it will override the styles in 'jira-dev-tool'
 import 'antd/dist/antd.less';
-//import * as fundebug from 'fundebug-nodejs';
-
-// loadDevTools(() => ReactDOM.render(
-//     <React.StrictMode>
-//         <AppProviders>
-//             <App />
-//         </AppProviders>
-//
-//     </React.StrictMode>,
-//     document.getElementById('root')
-// ))
-
+import * as fundebug from "fundebug-javascript";
 
 // const root = ReactDOM.createRoot(
 //   document.getElementById('root') as HTMLElement
@@ -29,9 +18,8 @@ import 'antd/dist/antd.less';
 //   </React.StrictMode>
 // );
 
-var fundebug = require("fundebug-javascript");
 fundebug.apikey = "fbde117182c6d7fc63fd2c6cd42ed7168cb80ea8c6daadb2ad8d4b67c8182c96";
-fundebug.test();
+// fundebug.test();
 
 
 class ErrorBoundary extends React.Component {
@@ -61,21 +49,9 @@ class ErrorBoundary extends React.Component {
     }
 }
 
-
-
-// const root = ReactDOM.createRoot(
-//   document.getElementById('root') as HTMLElement);
-// loadServer(() => root.render(
-//     <React.StrictMode>
-//         <AppProviders>
-//             <DevTools/>
-//                     <App />
-//         </AppProviders>
-//     </React.StrictMode>
-// ))
-
 const root = ReactDOM.createRoot(
   document.getElementById('root'));
+
 loadServer(() => root.render(
     <React.StrictMode>
         <AppProviders>
