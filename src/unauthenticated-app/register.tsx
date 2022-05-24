@@ -4,8 +4,9 @@ import {Button, Form, Input} from 'antd';
 import {LongButton} from './index';
 
 
-export const RegisterScreen = () => {
-    const {register, user} = useAuth()
+export const RegisterScreen = ({onError} : {onError: (error: Error) => void}) => {
+    const {register} = useAuth()
+
 
     // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     //     event.preventDefault()
@@ -14,8 +15,16 @@ export const RegisterScreen = () => {
     //     register({username, password})
     // }
 
-    const handleSubmit = (values: {username: string, password: string}) => {
-        register(values);
+    const handleSubmit = ({confirmedPassword, ...values}: {username: string, password: string, confirmedPassword: string }) => {
+
+        if (confirmedPassword !== values.password) {
+            onError(new Error('Please ensure passwords entered are the same'))
+            return
+        }
+
+        register(values)
+            .catch((e) => onError(e))
+
     }
 
     return <Form onFinish={handleSubmit}>
@@ -24,6 +33,9 @@ export const RegisterScreen = () => {
         </Form.Item>
         <Form.Item name={'password'} rules={[{required:true, message:'Please input password'}]}>
             <input placeholder={'password'} type='password' id={'password'}/>
+        </Form.Item>
+        <Form.Item name={'confirmPassword'} rules={[{required:true, message:'Please confirm password'}]}>
+            <input placeholder={'confirm password'} type='password' id={'confirmPassword'}/>
         </Form.Item>
         <Form.Item>
             <LongButton htmlType={'submit'} type={'primary'}>Register</LongButton>

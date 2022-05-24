@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import {Typography} from 'antd';
 import {SearchPanel} from './search-panel';
 import {List} from './list';
-import {useDebounce} from '../../utils';
+import {useDebounce, useDocumentTitle} from '../../utils';
 import {useProjects} from "../../utils/project";
 import {useUsers} from "../../utils/user";
 
@@ -12,6 +12,8 @@ export const ProjectListScreen = () => {
         name:'',
         personId: ''
     })
+
+    useDocumentTitle('Project List', false)
 
     const debouncedParam = useDebounce(param, 200)
     const {isLoading, error, data: list} = useProjects(debouncedParam)
