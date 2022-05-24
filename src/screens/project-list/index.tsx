@@ -6,19 +6,14 @@ import {List} from './list';
 import {useDebounce, useDocumentTitle} from '../../utils';
 import {useProjects} from "../../utils/project";
 import {useUsers} from "../../utils/user";
-import {useUrlQueryParam} from "../../utils/url";
+import {useProjectsSearchParams} from "./util";
 
 export const ProjectListScreen = () => {
-
-
-
-    const [param, setParam] = useUrlQueryParam(['name', 'personId'])
-    const debouncedParam = useDebounce(param, 200)
-    const {isLoading, error, data: list} = useProjects(debouncedParam)
-    const {data: users} = useUsers()
     useDocumentTitle('Project List', false)
 
-
+    const [param, setParam]  = useProjectsSearchParams()
+    const {isLoading, error, data: list} = useProjects(useDebounce(param, 200))
+    const {data: users} = useUsers()
 
     return <Container>
         <h1>Project List</h1>
@@ -35,7 +30,7 @@ export const ProjectListScreen = () => {
     </Container>
 }
 
-ProjectListScreen.whyDidYouRender = false
+ProjectListScreen.whyDidYouRender = true
 
 const Container = styled.div`
   padding: 3.2rem
