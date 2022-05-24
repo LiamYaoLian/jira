@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import {User} from './search-panel';
 import {Link} from "react-router-dom";
 import {BrowserRouter as Router} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router';
 
 
 export interface Project {
@@ -23,14 +24,11 @@ interface ListProps extends TableProps<Project> {
 
 export const List = ({users, ...props}: ListProps) => {
     return <Table pagination={false} columns={[{
-        title: 'Name',
-        sorter: (a, b) => a.name.localeCompare(b.name),
-        render(value, project) {
-            return <Router>
-                <Link to={String(project.id)}>{project.name}</Link>
-            </Router>
-
-        }
+            title: 'Name',
+            sorter: (a, b) => a.name.localeCompare(b.name),
+            render(value, project) {
+                return <Link to={`projects/${String(project.id)}`}>{project.name}</Link>
+            }
         },
         {
             title: 'Department',

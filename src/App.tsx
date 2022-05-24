@@ -18,7 +18,6 @@ function App() {
       <ErrorBoundary fallbackRender={FullPageErrorFallback}>
           {user? <AuthenticatedApp/> : <UnauthenticatedApp/>}
       </ErrorBoundary>
-
     </div>
   );
 }
