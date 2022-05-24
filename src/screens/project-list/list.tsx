@@ -3,6 +3,8 @@ import {Table} from 'antd';
 import {TableProps} from 'antd/es';
 import dayjs from 'dayjs';
 import {User} from './search-panel';
+import {Link} from "react-router-dom";
+import {BrowserRouter as Router} from 'react-router-dom';
 
 
 export interface Project {
@@ -22,8 +24,13 @@ interface ListProps extends TableProps<Project> {
 export const List = ({users, ...props}: ListProps) => {
     return <Table pagination={false} columns={[{
         title: 'Name',
-        dataIndex: 'name',
-        sorter: (a, b) => a.name.localeCompare(b.name)
+        sorter: (a, b) => a.name.localeCompare(b.name),
+        render(value, project) {
+            return <Router>
+                <Link to={String(project.id)}>{project.name}</Link>
+            </Router>
+
+        }
         },
         {
             title: 'Department',
