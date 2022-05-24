@@ -18,7 +18,7 @@ import * as fundebug from "fundebug-javascript";
 //   </React.StrictMode>
 // );
 
-fundebug.apikey = "fbde117182c6d7fc63fd2c6cd42ed7168cb80ea8c6daadb2ad8d4b67c8182c96";
+fundebug.apikey = "be016abbbcf8ff9d35cdbde22a341d84edf938f630294b6d5491006c0bfd4cc7";
 // fundebug.test();
 
 

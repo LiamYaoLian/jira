@@ -2,10 +2,12 @@ import React, {FormEvent} from 'react';
 import {useAuth} from '../context/auth-context';
 import {Button, Form, Input} from 'antd';
 import {LongButton} from './index';
+import {useAsync} from "../utils/use-async";
 
 
 export const RegisterScreen = ({onError} : {onError: (error: Error) => void}) => {
     const {register} = useAuth()
+    const {run, isLoading} = useAsync(undefined, { throwOnError: true });
 
 
     // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -15,14 +17,14 @@ export const RegisterScreen = ({onError} : {onError: (error: Error) => void}) =>
     //     register({username, password})
     // }
 
-    const handleSubmit = ({confirmedPassword, ...values}: {username: string, password: string, confirmedPassword: string }) => {
+    const handleSubmit = async ({confirmedPassword, ...values}: {username: string, password: string, confirmedPassword: string }) => {
 
         if (confirmedPassword !== values.password) {
             onError(new Error('Please ensure passwords entered are the same'))
             return
         }
 
-        register(values)
+        await run(register(values))
             .catch((e) => onError(e))
 
     }
@@ -34,11 +36,11 @@ export const RegisterScreen = ({onError} : {onError: (error: Error) => void}) =>
         <Form.Item name={'password'} rules={[{required:true, message:'Please input password'}]}>
             <input placeholder={'password'} type='password' id={'password'}/>
         </Form.Item>
-        <Form.Item name={'confirmPassword'} rules={[{required:true, message:'Please confirm password'}]}>
-            <input placeholder={'confirm password'} type='password' id={'confirmPassword'}/>
+        <Form.Item name={'confirmedPassword'} rules={[{required:true, message:'Please confirm password'}]}>
+            <input placeholder={'confirm password'} type='password' id={'confirmedPassword'}/>
         </Form.Item>
         <Form.Item>
-            <LongButton htmlType={'submit'} type={'primary'}>Register</LongButton>
+            <LongButton loading={isLoading} htmlType={'submit'} type={'primary'}>Register</LongButton>
         </Form.Item>
     </Form>
 }
