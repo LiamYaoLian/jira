@@ -8,23 +8,24 @@ interface IdSelectProps extends Omit<SelectProps, 'value' | 'onChange' | 'option
     value: Raw | null | undefined
     onChange: (value?: number) => void
     defaultOptionName?: string
-    options?:{name: string, id:number}[]
+    options?: {name: string, id: number}[]
 }
 
 /**
- * can pass various types of value into value
- * can only pass number | undefined into onChange
- * if isNaN(Number(value)), choose the default type
- * if choose the default type, onChange will call back undefined
+ * can pass various types into value
+ * onChange can only call back number or undefined
+ * if isNaN(Number(value)), choose defaultOptionName
+ * if choose defaultOptionName, onChange will call back undefined
  * @param props
  * @constructor
  */
 export const IdSelect = (props: IdSelectProps) => {
     const {value, onChange, defaultOptionName, options, ...restProps} = props
-    return <Select value={options?.length ? toNumber(value) : 0}
-                   onChange={value => onChange(toNumber(value) || undefined)}
-                   {...restProps}
-    >
+    return <Select
+                value={options?.length ? toNumber(value) : 0}
+                onChange={value => onChange(toNumber(value) || undefined)}
+                {...restProps}
+            >
         {
             defaultOptionName ? <Select.Option value={0}>{defaultOptionName}</Select.Option> : null
         }
