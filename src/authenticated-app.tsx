@@ -21,7 +21,8 @@ export const AuthenticatedApp = () => {
                 <Routes>
                     <Route path={'/projects'} element={<ProjectListScreen/>}></Route>
                     <Route path={'/projects/:projectId/*'} element={<ProjectScreen/>}></Route>
-                    <Route index element={<ProjectListScreen/>}/>
+                    {/*<Route index element={<ProjectListScreen/>}/>*/}
+                    <Route index element={<Navigate to={'/projects'}/>}/>
                 </Routes>
             </Router>
         </Main>
@@ -63,12 +64,10 @@ const PageHeader = () => {
         <HeaderRight>
             <Dropdown overlay={<Menu>
                 <Menu.Item key={'logout'}>
-                    {/*<a onClick={logout}>Log Out</a>*/}
                     <Button type={'link'} onClick={logout}>Log Out</Button>
                 </Menu.Item>
             </Menu>}>
                 {/*to prevent refresh*/}
-
                 <Button type={'link'} onClick={e => e.preventDefault()}>Hi, {user?.name}</Button>
             </Dropdown>
 

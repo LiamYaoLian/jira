@@ -4,9 +4,6 @@ import {TableProps} from 'antd/es';
 import dayjs from 'dayjs';
 import {User} from './search-panel';
 import {Link} from "react-router-dom";
-import {BrowserRouter as Router} from 'react-router-dom';
-import {Navigate, Route, Routes} from 'react-router';
-
 
 export interface Project {
     id: string;
