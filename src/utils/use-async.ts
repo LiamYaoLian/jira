@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useCallback, useState} from 'react';
 import {useMountedRef} from "./index";
 
 interface State<D> {
@@ -33,22 +33,23 @@ export const useAsync = <D>(
   * */
   const [retry, setRetry] = useState(() => () => {})
 
-  const setData = (data: D) =>
+  const setData = useCallback((data: D) =>
     setState({
       data,
       stat: 'success',
       error: null,
-    });
+    }),[]);
 
-  const setError = (error: Error) =>
+  const setError = useCallback((error: Error) =>
     setState({
       error,
       stat: 'error',
       data: null,
-    });
+    }),[]);
 
   // used to trigger an async request
-  const run = (promise: Promise<D>, runConfig?: { retry: () => Promise<D> }) => {
+
+  const run = useCallback((promise: Promise<D>, runConfig?: { retry: () => Promise<D> }) => {
     if (!promise || !promise.then) {
       throw new Error('Please pass a Promise instance');
     }
@@ -58,10 +59,10 @@ export const useAsync = <D>(
       if (runConfig?.retry) {
         run(runConfig?.retry(), runConfig)
       }
-
     })
 
-    setState({ ...state, stat: 'loading' });
+    // use "prevState" to prevent circular dependency
+    setState(prevState => ({ ...prevState, stat: 'loading' }));
     return promise
       .then((data) => {
         if (mountedRef.current) {
@@ -77,7 +78,7 @@ export const useAsync = <D>(
         }
         return error;
       });
-  };
+  }, [config.throwOnError, mountedRef, setData, setError])
 
 
 
