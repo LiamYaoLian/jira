@@ -1,5 +1,5 @@
 // to review
-import React from 'react';
+import React, {useState} from 'react';
 import { ProjectListScreen } from './screens/project-list';
 import { useAuth } from './context/auth-context';
 import styled from '@emotion/styled';
@@ -10,8 +10,13 @@ import { Navigate, Route, Routes } from 'react-router';
 import { ProjectScreen } from './screens/project';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { resetRoute } from 'index';
+import {ProjectModal} from "./screens/project-list/project-modal";
+import {ProjectPopover} from "./components/project-popover";
 
 export const AuthenticatedApp = () => {
+  const [projectModalOpen, setProjectModalOpen] = useState(false)
+
+
   return (
     <Container>
       <PageHeader />
@@ -29,6 +34,7 @@ export const AuthenticatedApp = () => {
           </Routes>
         </Router>
       </Main>
+      <ProjectModal projectModalOpen={projectModalOpen} onClose={() => setProjectModalOpen(false)} />
     </Container>
   );
 };
@@ -51,35 +57,43 @@ const HeaderRight = styled.header``;
 const Main = styled.main``;
 
 const PageHeader = () => {
-  const { logout, user } = useAuth();
+
 
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
-        <Button type={'link'} onClick={resetRoute}>
+        <Button style={{padding: 0}} type={'link'} onClick={resetRoute}>
           <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'} />
         </Button>
-        <h2>Project</h2>
-        <h2>User</h2>
+        <ProjectPopover />
+        <span>User</span>
       </HeaderLeft>
       <HeaderRight>
-        <Dropdown
-          overlay={
-            <Menu>
-              <Menu.Item key={'logout'}>
-                <Button type={'link'} onClick={logout}>
-                  Log Out
-                </Button>
-              </Menu.Item>
-            </Menu>
-          }
-        >
-          {/*to prevent refresh*/}
-          <Button type={'link'} onClick={(e) => e.preventDefault()}>
-            Hi, {user?.name}
-          </Button>
-        </Dropdown>
+        <User/>
       </HeaderRight>
     </Header>
   );
 };
+
+const User = () => {
+    const { logout, user } = useAuth();
+
+    return <Dropdown
+        overlay={
+            <Menu>
+                <Menu.Item key={'logout'}>
+                    <Button type={'link'} onClick={logout}>
+                        Log Out
+                    </Button>
+                </Menu.Item>
+            </Menu>
+        }
+    >
+        {/*to prevent refresh*/}
+        <Button type={'link'} onClick={(e) => e.preventDefault()}>
+            Hi, {user?.name}
+        </Button>
+    </Dropdown>
+}
+
+
