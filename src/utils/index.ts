@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
 export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 
 export const isVoid = (value: unknown) =>
-  value === undefined || value === null || value === "";
+  value === undefined || value === null || value === '';
 
 export const cleanObject = (object: { [key: string]: unknown }) => {
   const result = { ...object };
@@ -23,6 +23,9 @@ export const useMount = (callback: () => void) => {
   }, []);
 };
 
+/*
+* To prevent sending too many requests while the user is typing
+* */
 export const useDebounce = <V>(value: V, delay?: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
@@ -36,6 +39,11 @@ export const useDebounce = <V>(value: V, delay?: number) => {
 };
 
 export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
+
+  /*
+  * useRef returns a mutable ref object whose .current property is initialized to the passed argument (initialValue).
+  * The returned object will persist for the full lifetime of the component.
+  * */
   const oldTitle = useRef(document.title).current;
 
   useEffect(() => {

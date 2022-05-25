@@ -1,27 +1,27 @@
-import { useState } from "react";
-import { RegisterScreen } from "./register";
-import { LoginScreen } from "./login";
-import { Button, Card, Divider, Typography } from "antd";
-import styled from "@emotion/styled";
-import logo from "assets/logo.svg";
-import left from "assets/left.svg";
-import right from "assets/right.svg";
-import { useDocumentTitle } from "../utils";
+import { useState } from 'react';
+import { RegisterScreen } from './register';
+import { LoginScreen } from './login';
+import { Button, Card, Divider, Typography } from 'antd';
+import styled from '@emotion/styled';
+import logo from 'assets/logo.svg';
+import left from 'assets/left.svg';
+import right from 'assets/right.svg';
+import { useDocumentTitle } from '../utils';
 
 export const UnauthenticatedApp = () => {
   const [isRegister, setIsRegister] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
-  useDocumentTitle("Please Log In or Register to Continue", false);
+  useDocumentTitle('Please Log In or Register to Continue', false);
 
   return (
     <Container>
       <Header />
       <Background />
       <ShadowCard>
-        <Title>{isRegister ? "Register" : "Login"}</Title>
+        <Title>{isRegister ? 'Register' : 'Login'}</Title>
         {error ? (
-          <Typography.Text type={"danger"}>{error.message}</Typography.Text>
+          <Typography.Text type={'danger'}>{error.message}</Typography.Text>
         ) : null}
         {isRegister ? (
           <RegisterScreen onError={setError} />
@@ -30,8 +30,8 @@ export const UnauthenticatedApp = () => {
         )}
         <Divider />
 
-        <Button type={"link"} onClick={() => setIsRegister(!isRegister)}>
-          {isRegister ? "Login" : "Register"}
+        <Button type={'link'} onClick={() => setIsRegister(!isRegister)}>
+          {isRegister ? 'Login' : 'Register'}
         </Button>
       </ShadowCard>
     </Container>
@@ -73,7 +73,7 @@ const ShadowCard = styled(Card)`
   border-radius: 0.3rem;
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.1) 0 0 10px;
-  text-algn: center;
+  text-align: center;
 `;
 
 const Header = styled.header`

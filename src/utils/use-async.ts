@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 interface State<D> {
   error: Error | null;
   data: D | null;
-  stat: "idle" | "loading" | "error" | "success";
+  stat: 'idle' | 'loading' | 'error' | 'success';
 }
 
 const defaultInitialState: State<null> = {
-  stat: "idle",
+  stat: 'idle',
   data: null,
   error: null,
 };
@@ -29,24 +29,24 @@ export const useAsync = <D>(
   const setData = (data: D) =>
     setState({
       data,
-      stat: "success",
+      stat: 'success',
       error: null,
     });
 
   const setError = (error: Error) =>
     setState({
       error,
-      stat: "error",
+      stat: 'error',
       data: null,
     });
 
-  // to trigger an async request
+  // used to trigger an async request
   const run = (promise: Promise<D>) => {
     if (!promise || !promise.then) {
-      throw new Error("Please pass an argument whose type is Promise");
+      throw new Error('Please pass a Promise instance');
     }
 
-    setState({ ...state, stat: "loading" });
+    setState({ ...state, stat: 'loading' });
     return promise
       .then((data) => {
         setData(data);
@@ -62,10 +62,10 @@ export const useAsync = <D>(
   };
 
   return {
-    isIdle: state.stat === "idle",
-    isLoading: state.stat === "loading",
-    isError: state.stat === "error",
-    isSuccess: state.stat === "success",
+    isIdle: state.stat === 'idle',
+    isLoading: state.stat === 'loading',
+    isError: state.stat === 'error',
+    isSuccess: state.stat === 'success',
     run,
     setData,
     setError,

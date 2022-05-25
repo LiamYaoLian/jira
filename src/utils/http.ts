@@ -1,6 +1,6 @@
-import qs from "qs";
-import * as auth from "auth-provider";
-import { useAuth } from "../context/auth-context";
+import qs from 'qs';
+import * as auth from 'auth-provider';
+import { useAuth } from '../context/auth-context';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -15,15 +15,16 @@ export const http = async (
 ) => {
   const config = {
     // default method: 'GET'
-    method: "GET",
+    method: 'GET',
     headers: {
-      Authorization: token ? `Bearer ${token}` : "",
-      "Content-Type": data ? "application/json" : "",
+      Authorization: token ? `Bearer ${token}` : '',
+      'Content-Type': data ? 'application/json' : '',
     },
+    // may override the default method
     ...customerConfig,
   };
 
-  if (config.method.toUpperCase() === "GET") {
+  if (config.method.toUpperCase() === 'GET') {
     endpoint += `?${qs.stringify(data)}`;
   } else {
     config.body = JSON.stringify(data || {});
@@ -32,10 +33,11 @@ export const http = async (
   return window
     .fetch(`${apiUrl}/${endpoint}`, config)
     .then(async (response) => {
+      // 401: Unauthorized
       if (response.status === 401) {
         await auth.logout();
         window.location.reload();
-        return Promise.reject({ message: "Try again." });
+        return Promise.reject({ message: 'Try again.' });
       }
 
       const data = await response.json();

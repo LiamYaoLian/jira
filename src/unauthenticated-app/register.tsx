@@ -1,8 +1,9 @@
-import React, { FormEvent } from "react";
-import { useAuth } from "../context/auth-context";
-import { Button, Form, Input } from "antd";
-import { LongButton } from "./index";
-import { useAsync } from "../utils/use-async";
+// to review
+import React from 'react';
+import { useAuth } from '../context/auth-context';
+import { Form, Input } from 'antd';
+import { LongButton } from './index';
+import { useAsync } from '../utils/use-async';
 
 export const RegisterScreen = ({
   onError,
@@ -28,7 +29,7 @@ export const RegisterScreen = ({
     confirmedPassword: string;
   }) => {
     if (confirmedPassword !== values.password) {
-      onError(new Error("Please ensure passwords entered are the same"));
+      onError(new Error('Please ensure passwords entered are the same'));
       return;
     }
 
@@ -38,29 +39,29 @@ export const RegisterScreen = ({
   return (
     <Form onFinish={handleSubmit}>
       <Form.Item
-        name={"username"}
-        rules={[{ required: true, message: "Please input username" }]}
+        name={'username'}
+        rules={[{ required: true, message: 'Please input username' }]}
       >
-        <Input placeholder={"username"} type="text" id={"username"} />
+        <Input placeholder={'username'} type='text' id={'username'} />
       </Form.Item>
       <Form.Item
-        name={"password"}
-        rules={[{ required: true, message: "Please input password" }]}
+        name={'password'}
+        rules={[{ required: true, message: 'Please input password' }]}
       >
-        <input placeholder={"password"} type="password" id={"password"} />
+        <input placeholder={'password'} type='password' id={'password'} />
       </Form.Item>
       <Form.Item
-        name={"confirmedPassword"}
-        rules={[{ required: true, message: "Please confirm password" }]}
+        name={'confirmedPassword'}
+        rules={[{ required: true, message: 'Please confirm password' }]}
       >
         <input
-          placeholder={"confirm password"}
-          type="password"
-          id={"confirmedPassword"}
+          placeholder={'confirm password'}
+          type='password'
+          id={'confirmedPassword'}
         />
       </Form.Item>
       <Form.Item>
-        <LongButton loading={isLoading} htmlType={"submit"} type={"primary"}>
+        <LongButton loading={isLoading} htmlType={'submit'} type={'primary'}>
           Register
         </LongButton>
       </Form.Item>

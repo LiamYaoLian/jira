@@ -1,8 +1,9 @@
-import { useUrlQueryParam } from "../../utils/url";
-import { useMemo } from "react";
+// to review
+import { useUrlQueryParam } from '../../utils/url';
+import { useMemo } from 'react';
 
 export const useProjectsSearchParams = () => {
-  const [param, setParam] = useUrlQueryParam(["name", "personId"]);
+  const [param, setParam] = useUrlQueryParam(['name', 'personId']);
   return [
     useMemo(
       () => ({ ...param, personId: Number(param.personId) || undefined }),

@@ -1,14 +1,15 @@
-import React from "react";
-import { ProjectListScreen } from "./screens/project-list";
-import { useAuth } from "./context/auth-context";
-import styled from "@emotion/styled";
-import { Row } from "./components/lib";
-import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
-import { Button, Dropdown, Menu } from "antd";
-import { Navigate, Route, Routes } from "react-router";
-import { ProjectScreen } from "./screens/project";
-import { BrowserRouter as Router } from "react-router-dom";
-import { resetRoute } from "index";
+// to review
+import React from 'react';
+import { ProjectListScreen } from './screens/project-list';
+import { useAuth } from './context/auth-context';
+import styled from '@emotion/styled';
+import { Row } from './components/lib';
+import { ReactComponent as SoftwareLogo } from 'assets/software-logo.svg';
+import { Button, Dropdown, Menu } from 'antd';
+import { Navigate, Route, Routes } from 'react-router';
+import { ProjectScreen } from './screens/project';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { resetRoute } from 'index';
 
 export const AuthenticatedApp = () => {
   return (
@@ -18,13 +19,13 @@ export const AuthenticatedApp = () => {
         <Router>
           {/*<Navigate to={'/projects'}/>*/}
           <Routes>
-            <Route path={"/projects"} element={<ProjectListScreen />}></Route>
+            <Route path={'/projects'} element={<ProjectListScreen />}></Route>
             <Route
-              path={"/projects/:projectId/*"}
+              path={'/projects/:projectId/*'}
               element={<ProjectScreen />}
             ></Route>
             {/*<Route index element={<ProjectListScreen/>}/>*/}
-            <Route index element={<Navigate to={"/projects"} />} />
+            <Route index element={<Navigate to={'/projects'} />} />
           </Routes>
         </Router>
       </Main>
@@ -55,8 +56,8 @@ const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
-        <Button type={"link"} onClick={resetRoute}>
-          <SoftwareLogo width={"18rem"} color={"rgb(38, 132, 255)"} />
+        <Button type={'link'} onClick={resetRoute}>
+          <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'} />
         </Button>
         <h2>Project</h2>
         <h2>User</h2>
@@ -65,8 +66,8 @@ const PageHeader = () => {
         <Dropdown
           overlay={
             <Menu>
-              <Menu.Item key={"logout"}>
-                <Button type={"link"} onClick={logout}>
+              <Menu.Item key={'logout'}>
+                <Button type={'link'} onClick={logout}>
                   Log Out
                 </Button>
               </Menu.Item>
@@ -74,7 +75,7 @@ const PageHeader = () => {
           }
         >
           {/*to prevent refresh*/}
-          <Button type={"link"} onClick={(e) => e.preventDefault()}>
+          <Button type={'link'} onClick={(e) => e.preventDefault()}>
             Hi, {user?.name}
           </Button>
         </Dropdown>

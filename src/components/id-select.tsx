@@ -14,9 +14,8 @@ interface IdSelectProps
 
 /**
  * can pass various types into value
- * onChange can only call back number or undefined
- * if isNaN(Number(value)), choose defaultOptionName
- * if choose defaultOptionName, onChange will call back undefined
+ * onChange can call back only number or undefined
+ * if isNaN(Number(value)), select defaultOptionName
  * @param props
  * @constructor
  */
@@ -40,4 +39,4 @@ export const IdSelect = (props: IdSelectProps) => {
   );
 };
 
-const toNumber = (value: unknown) => (isNaN(Number(value)) ? 0 : Number(value));
+const toNumber = (value: unknown) => isNaN(Number(value)) ? 0 : Number(value);

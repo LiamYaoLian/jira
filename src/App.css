@@ -1,6 +1,4 @@
 html {
-  /* em: font-size relative to the parent element */
-  /* rem: font-sze relative to the root */
   /* 16 (default) * 62.5% = 10px */
   font-size: 62.5%;
 }
