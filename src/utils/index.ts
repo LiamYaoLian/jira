@@ -58,3 +58,22 @@ export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
     };
   }, []);
 };
+
+/*
+* a function to indicate whether a component is mounted
+*
+* return false if not mounted
+*
+* */
+export const useMountedRef = () => {
+  const mountedRef = useRef(false)
+
+  useEffect(() => {
+    mountedRef.current = true
+    return () => {
+      mountedRef.current = false
+    }
+  })
+
+  return mountedRef
+}

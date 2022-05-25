@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import {useMountedRef} from "./index";
 
 interface State<D> {
   error: Error | null;
@@ -25,6 +26,7 @@ export const useAsync = <D>(
     ...defaultInitialState,
     ...initialState,
   });
+  const mountedRef = useMountedRef()
   /*
   * if we pass a function into useState(), the funciton will be used for lazy init
   * Therefore, if we want to store a function as a state, we cannot pass the function directly
@@ -62,7 +64,10 @@ export const useAsync = <D>(
     setState({ ...state, stat: 'loading' });
     return promise
       .then((data) => {
-        setData(data);
+        if (mountedRef.current) {
+          setData(data);
+        }
+
         return data;
       })
       .catch((error) => {
