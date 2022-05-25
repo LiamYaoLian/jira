@@ -25,6 +25,11 @@ export const useAsync = <D>(
     ...defaultInitialState,
     ...initialState,
   });
+  /*
+  * if we pass a function into useState(), the funciton will be used for lazy init
+  * Therefore, if we want to store a function as a state, we cannot pass the function directly
+  * */
+  const [retry, setRetry] = useState(() => () => {})
 
   const setData = (data: D) =>
     setState({
@@ -41,10 +46,18 @@ export const useAsync = <D>(
     });
 
   // used to trigger an async request
-  const run = (promise: Promise<D>) => {
+  const run = (promise: Promise<D>, runConfig?: { retry: () => Promise<D> }) => {
     if (!promise || !promise.then) {
       throw new Error('Please pass a Promise instance');
     }
+
+    setRetry(() => () => {
+
+      if (runConfig?.retry) {
+        run(runConfig?.retry(), runConfig)
+      }
+
+    })
 
     setState({ ...state, stat: 'loading' });
     return promise
@@ -61,12 +74,15 @@ export const useAsync = <D>(
       });
   };
 
+
+
   return {
     isIdle: state.stat === 'idle',
     isLoading: state.stat === 'loading',
     isError: state.stat === 'error',
     isSuccess: state.stat === 'success',
     run,
+    retry,
     setData,
     setError,
     ...state,
