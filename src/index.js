@@ -9,6 +9,8 @@ import { AppProviders } from "context";
 // this should be imported after 'jira-dev-tool' so that it will override the styles in 'jira-dev-tool'
 import "antd/dist/antd.less";
 import * as fundebug from "fundebug-javascript";
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
 
 // const root = ReactDOM.createRoot(
 //   document.getElementById('root') as HTMLElement
@@ -18,6 +20,17 @@ import * as fundebug from "fundebug-javascript";
 //     <App />
 //   </React.StrictMode>
 // );
+
+
+Sentry.init({
+  dsn: "https://cc49dd4bedf542f1b972f8fc4e022f26@o1261937.ingest.sentry.io/6440210",
+  integrations: [new BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 fundebug.apikey =
   "be016abbbcf8ff9d35cdbde22a341d84edf938f630294b6d5491006c0bfd4cc7";

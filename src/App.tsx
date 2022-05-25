@@ -17,6 +17,7 @@ function App() {
         {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
 
       </ErrorBoundary>
+        <button onClick={methodDoesNotExist}>Break the world</button>;
     </div>
   );
 }
