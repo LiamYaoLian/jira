@@ -1,14 +1,20 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Typography } from 'antd';
+import {Button, Typography } from 'antd';
 import { SearchPanel } from './search-panel';
 import { List } from './list';
 import { useDebounce, useDocumentTitle } from '../../utils';
 import { useProjects } from '../../utils/project';
 import { useUsers } from '../../utils/user';
 import { useProjectsSearchParams } from './util';
+import {
+    ButtonNoPadding,
+    ErrorBox,
+    Row,
+    ScreenContainer,
+} from "components/lib";
 
-export const ProjectListScreen = () => {
+export const ProjectListScreen = (props: {setProjectModalOpen: (isOpen: boolean) => void }) => {
   useDocumentTitle('Project List', false);
 
   const [param, setParam] = useProjectsSearchParams();
@@ -17,7 +23,11 @@ export const ProjectListScreen = () => {
 
   return (
     <Container>
-      <h1>Project List</h1>
+      <Row between={true}>
+          <h1>Project List</h1>
+          <Button onClick={() => props.setProjectModalOpen(true)}>Create Project</Button>
+      </Row>
+
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       {error ? (
         <Typography.Text type={'danger'}>{error.message}</Typography.Text>

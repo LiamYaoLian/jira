@@ -1,11 +1,12 @@
 import React from 'react';
-import { Table } from 'antd';
+import {Dropdown, Table } from 'antd';
 import { TableProps } from 'antd/es';
 import dayjs from 'dayjs';
 import { User } from './search-panel';
 import { Link } from 'react-router-dom';
 import {Pin} from "../../components/pin";
 import {useEditProject} from "../../utils/project";
+import { ButtonNoPadding } from 'components/lib';
 
 export interface Project {
   id: number;
@@ -72,6 +73,13 @@ export const List = ({ users, ...props }: ListProps) => {
             );
           },
         },
+        {
+            render(value, project) {
+                return<Dropdown overlay={}>
+                    <ButtonNoPadding type={'link'}>...</ButtonNoPadding>
+                </Dropdown>
+            }
+        }
       ]}
       {...props}
     />
