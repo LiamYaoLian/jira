@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dropdown, Table } from 'antd';
+import {Dropdown, Table, Menu } from 'antd';
 import { TableProps } from 'antd/es';
 import dayjs from 'dayjs';
 import { User } from './search-panel';
@@ -20,6 +20,7 @@ export interface Project {
 interface ListProps extends TableProps<Project> {
   users: User[];
   refresh?: () => void;
+  setProjectModalOpen: (isOpen: boolean) => void
 }
 
 export const List = ({ users, ...props }: ListProps) => {
@@ -75,7 +76,11 @@ export const List = ({ users, ...props }: ListProps) => {
         },
         {
             render(value, project) {
-                return<Dropdown overlay={}>
+                return<Dropdown overlay={<Menu>
+                    <Menu.Item key={'edit'}>
+                        <ButtonNoPadding onClick={() => props.setProjectModalOpen(true)}>Edit</ButtonNoPadding>
+                    </Menu.Item>
+                </Menu>}>
                     <ButtonNoPadding type={'link'}>...</ButtonNoPadding>
                 </Dropdown>
             }

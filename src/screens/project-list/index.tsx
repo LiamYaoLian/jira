@@ -32,7 +32,7 @@ export const ProjectListScreen = (props: {setProjectModalOpen: (isOpen: boolean)
       {error ? (
         <Typography.Text type={'danger'}>{error.message}</Typography.Text>
       ) : null}
-      <List refresh={retry} loading={isLoading} users={users || []} dataSource={list || []} />
+      <List setProjectModalOpen={props.setProjectModalOpen} refresh={retry} loading={isLoading} users={users || []} dataSource={list || []} />
     </Container>
   );
 };
