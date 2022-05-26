@@ -60,3 +60,7 @@ export const ScreenContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+export const ButtonNoPadding = styled(Button)`
+  padding: 0;
+`
