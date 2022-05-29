@@ -34,8 +34,7 @@ Sentry.init({
 
 fundebug.apikey =
   "be016abbbcf8ff9d35cdbde22a341d84edf938f630294b6d5491006c0bfd4cc7";
-
-fundebug.notifierUrl = "https://web.fundebug.net/event/";
+fundebug.notifierUrl = "https://127.0.0.1:10010/event/";
 fundebug.test();
 
 class ErrorBoundary extends React.Component {
