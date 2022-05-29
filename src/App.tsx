@@ -9,7 +9,7 @@ import { FullPageErrorFallback } from './components/lib';
 
 function App() {
   const { user } = useAuth();
-  fundebug.notify('test 3', '3');
+  //fundebug.notify('test 3', '3');
 
   return (
     <div className='App'>
