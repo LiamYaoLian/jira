@@ -2,6 +2,7 @@
 import { Project } from '../screens/project-list/list';
 import { useHttp } from './http';
 import { QueryKey, useMutation, useQuery, useQueryClient} from "react-query";
+import {useEditConfig} from "./use-optimistic-options";
 
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp();
@@ -9,17 +10,17 @@ export const useProjects = (param?: Partial<Project>) => {
   return useQuery<Project[]>(['projects', param], () => client('projects', {data: param}))
 }
 
-export const useEditProject = () => {
-  const queryClient = useQueryClient()
-  const client = useHttp()
-  return useMutation((params: Partial<Project>) => client(`projects/${params.id}`,{
-    method:'PATCH',
-    data: params
-  }), {
-    onSuccess: () => queryClient.invalidateQueries('projects')
-
-  })
-}
+export const useEditProject = (queryKey: QueryKey) => {
+  const client = useHttp();
+  return useMutation(
+    (params: Partial<Project>) =>
+      client(`projects/${params.id}`, {
+        method: "PATCH",
+        data: params,
+      }),
+    useEditConfig(queryKey)
+  );
+};
 
 export const useAddProject = () => {
   const client = useHttp()
@@ -31,3 +32,14 @@ export const useAddProject = () => {
     onSuccess: () => queryClient.invalidateQueries('projects')
   })
 }
+
+export const useProject = (id?: number) => {
+  const client = useHttp();
+  return useQuery<Project>(
+    ["project", { id }],
+    () => client(`projects/${id}`),
+    {
+      enabled: Boolean(id),
+    }
+  );
+};

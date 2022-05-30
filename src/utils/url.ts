@@ -27,15 +27,13 @@ export const useUrlQueryParam = <K extends string>(keys: K[]) => {
   ] as const;
 };
 
-export const useProjectModal = () => {
-  const [{projectCreate}, setProjectCreate] = useUrlQueryParam(['projectCreate'])
-
-  const open = () => setProjectCreate({projectCreate: true})
-  const close = () => setProjectCreate({projectCreate: undefined})
-
-  return {
-    projectModalOpen: projectCreate === 'true',
-    open,
-    close
-  }
-}
+export const useSetUrlSearchParam = () => {
+  const [searchParams, setSearchParam] = useSearchParams();
+  return (params: { [key in string]: unknown }) => {
+    const o = cleanObject({
+      ...Object.fromEntries(searchParams),
+      ...params,
+    }) as URLSearchParamsInit;
+    return setSearchParam(o);
+  };
+};
