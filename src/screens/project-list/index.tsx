@@ -13,10 +13,12 @@ import {
     Row,
     ScreenContainer,
 } from "components/lib";
+import {useProjectModal} from "../../utils/url";
 
-export const ProjectListScreen = (props: {projectButton: JSX.Element}) => {
+export const ProjectListScreen = () => {
   useDocumentTitle('Project List', false);
 
+  const {open} = useProjectModal()
   const [param, setParam] = useProjectsSearchParams();
   const { isLoading, error, data: list, retry } = useProjects(useDebounce(param, 200));
   const { data: users } = useUsers();
@@ -25,14 +27,14 @@ export const ProjectListScreen = (props: {projectButton: JSX.Element}) => {
     <Container>
       <Row between={true}>
           <h1>Project List</h1>
-          {props.projectButton}
+          <ButtonNoPadding onClick={open} type={'link'}>Create New Project</ButtonNoPadding>
       </Row>
 
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       {error ? (
         <Typography.Text type={'danger'}>{error.message}</Typography.Text>
       ) : null}
-      <List projectButton={props.projectButton} refresh={retry} loading={isLoading} users={users || []} dataSource={list || []} />
+      <List refresh={retry} loading={isLoading} users={users || []} dataSource={list || []} />
     </Container>
   );
 };
