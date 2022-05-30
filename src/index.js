@@ -3,14 +3,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { loadServer, DevTools } from "jira-dev-tool";
+import {DevTools, loadServer} from "jira-dev-tool";
 //import ReactDOM from 'react-dom';
-import { AppProviders } from "context";
 // this should be imported after 'jira-dev-tool' so that it will override the styles in 'jira-dev-tool'
 import "antd/dist/antd.less";
 import * as fundebug from "fundebug-javascript";
 import * as Sentry from "@sentry/react";
-import { BrowserTracing } from "@sentry/tracing";
+import {BrowserTracing} from "@sentry/tracing";
+import {AppProviders} from "./context";
 
 
 // const root = ReactDOM.createRoot(
@@ -44,11 +44,11 @@ const ws = new WebSocket("wss://ap.fundebug.com/api/events/count");
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false };
+    this.state = {hasError: false};
   }
 
   componentDidCatch(error, info) {
-    this.setState({ hasError: true });
+    this.setState({hasError: true});
     // 将component中的报错发送到Fundebug
     fundebug.notifyError(error, {
       metaData: {
@@ -74,10 +74,10 @@ loadServer(() =>
   root.render(
     <React.StrictMode>
       <AppProviders>
-        <DevTools />
+        <DevTools/>
         <ErrorBoundary>
           {/*<img src="notExist.jpg"/>*/}
-          <App />
+          <App/>
         </ErrorBoundary>
       </AppProviders>
     </React.StrictMode>

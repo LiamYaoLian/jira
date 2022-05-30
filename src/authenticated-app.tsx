@@ -1,39 +1,35 @@
 // to review
-import React, {useState} from 'react';
-import { ProjectListScreen } from './screens/project-list';
-import { useAuth } from './context/auth-context';
+import React from 'react';
+import {ProjectListScreen} from './screens/project-list';
+import {useAuth} from './context/auth-context';
 import styled from '@emotion/styled';
-import {ButtonNoPadding, Row } from './components/lib';
-import { ReactComponent as SoftwareLogo } from 'assets/software-logo.svg';
-import { Button, Dropdown, Menu } from 'antd';
-import { Navigate, Route, Routes } from 'react-router';
-import { ProjectScreen } from './screens/project';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { resetRoute } from 'index';
+import {ButtonNoPadding, Row} from './components/lib';
+import {ReactComponent as SoftwareLogo} from 'assets/software-logo.svg';
+import {Button, Dropdown, Menu} from 'antd';
+import {Navigate, Route, Routes} from 'react-router';
+import {ProjectScreen} from './screens/project';
+import {BrowserRouter as Router} from 'react-router-dom';
+import {resetRoute} from 'index';
 import {ProjectModal} from "./screens/project-list/project-modal";
 import {ProjectPopover} from "./components/project-popover";
 import {projectListActions} from "./screens/project-list/project-list.slice";
 import {useDispatch} from "react-redux";
 
 export const AuthenticatedApp = () => {
-  //const [projectModalOpen, setProjectModalOpen] = useState(false)
   const dispatch = useDispatch()
 
   return (
     <Container>
-      <PageHeader />
+      <PageHeader/>
       <Main>
         <Router>
-          {/*<Navigate to={'/projects'}/>*/}
           <Routes>
             <Route path={'/projects'} element={<ProjectListScreen projectButton={
-                <ButtonNoPadding onClick={() => dispatch(projectListActions.openProjectModal())} type={'link'}>Create New Project</ButtonNoPadding>
-            } />}/>
-            <Route
-              path={'/projects/:projectId/*'}
-              element={<ProjectScreen />} />
-            {/*<Route index element={<ProjectListScreen/>}/>*/}
-            <Route index element={<Navigate to={'/projects'} />} />
+              <ButtonNoPadding onClick={() => dispatch(projectListActions.openProjectModal())}
+                               type={'link'}>Create New Project</ButtonNoPadding>
+            }/>}/>
+            <Route path={'/projects/:projectId/*'} element={<ProjectScreen/>}/>
+            <Route index element={<Navigate to={'/projects'}/>}/>
           </Routes>
         </Router>
       </Main>
@@ -47,6 +43,7 @@ const Container = styled.div`
   grid-template-rows: 6rem 1fr 6rem;
   height: 100vh;
 `;
+
 const Header = styled(Row)`
   padding: 3.2rem;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
@@ -64,7 +61,7 @@ const PageHeader = () => {
     <Header between={true}>
       <HeaderLeft gap={true}>
         <ButtonNoPadding type={'link'} onClick={resetRoute}>
-          <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'} />
+          <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'}/>
         </ButtonNoPadding>
         <ProjectPopover/>
         <span>User</span>
@@ -77,24 +74,24 @@ const PageHeader = () => {
 };
 
 const User = () => {
-    const { logout, user } = useAuth();
+  const {logout, user} = useAuth();
 
-    return <Dropdown
-        overlay={
-            <Menu>
-                <Menu.Item key={'logout'}>
-                    <Button type={'link'} onClick={logout}>
-                        Log Out
-                    </Button>
-                </Menu.Item>
-            </Menu>
-        }
-    >
-        {/*to prevent refresh*/}
-        <Button type={'link'} onClick={(e) => e.preventDefault()}>
-            Hi, {user?.name}
-        </Button>
-    </Dropdown>
+  return <Dropdown
+    overlay={
+      <Menu>
+        <Menu.Item key={'logout'}>
+          <Button type={'link'} onClick={logout}>
+            Log Out
+          </Button>
+        </Menu.Item>
+      </Menu>
+    }
+  >
+    {/*to prevent refresh*/}
+    <Button type={'link'} onClick={(e) => e.preventDefault()}>
+      Hi, {user?.name}
+    </Button>
+  </Dropdown>
 }
 
 
