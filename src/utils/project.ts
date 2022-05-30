@@ -6,8 +6,9 @@ import { QueryKey, useMutation, useQuery, useQueryClient} from "react-query";
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp();
   // when queryKey changes, useQuery will be called again
-  return useQuery<Project[]>(['projects', param], () => client('project', {data: param}))
+  return useQuery<Project[]>(['projects', param], () => client('projects', {data: param}))
 }
+
 export const useEditProject = () => {
   const queryClient = useQueryClient()
   const client = useHttp()

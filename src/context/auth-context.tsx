@@ -3,6 +3,7 @@ import * as auth from 'auth-provider';
 import { User } from '../screens/project-list/search-panel';
 import { useMount } from '../utils';
 import { http } from '../utils/http';
+import {resetRoute} from "../index";
 
 
 interface AuthForm {
@@ -36,7 +37,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = (form: AuthForm) => auth.login(form).then(setUser);
   const register = (form: AuthForm) => auth.register(form).then(setUser);
-  const logout = () => auth.logout().then((user) => setUser(null));
+  const logout = () => auth.logout().then((user) => {
+    setUser(null)
+    resetRoute()
+  });
 
   useMount(() => {
     bootstrapUser().then(setUser);
