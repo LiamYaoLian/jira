@@ -1,22 +1,18 @@
-import React from 'react';
-import {Button, Drawer, Form, Input, Spin} from "antd";
-import {useAddProject, useEditProject} from "../../utils/project";
-import {useProjectModal, useProjectsQueryKey} from "./util";
-import {UserSelect} from "components/user-select";
-import styled from "@emotion/styled";
+import React, {useEffect} from 'react';
+import {Button, Drawer, Form, Input, Spin} from 'antd';
+import {useAddProject, useEditProject} from '../../utils/project';
+import {useProjectModal, useProjectsQueryKey} from './util';
+import {UserSelect} from 'components/user-select';
+import styled from '@emotion/styled';
+import { ErrorBox } from 'components/lib';
 
 export const ProjectModal = () => {
+
   const {projectModalOpen, close, editingProject, isLoading} = useProjectModal()
   const useMutateProject = editingProject ? useEditProject : useAddProject
-  const title = editingProject ? 'Edit Project' : 'Create Project'
+
+  const {mutateAsync, error, isLoading: mutateLoading} = useMutateProject(useProjectsQueryKey());
   const [form] = Form.useForm();
-
-  const {
-    mutateAsync,
-    error,
-    isLoading: mutateLoading,
-  } = useMutateProject(useProjectsQueryKey());
-
   const onFinish = (values: any) => {
     mutateAsync({...editingProject, ...values}).then(() => {
       form.resetFields();
@@ -24,42 +20,54 @@ export const ProjectModal = () => {
     });
   };
 
-  return <Drawer onClose={close} visible={projectModalOpen} width={'100%'}>
+  const title = editingProject ? 'Edit Project' : 'Create Project'
+
+  const closeModal = () => {
+    form.resetFields();
+    close();
+  };
+
+  useEffect(() => {
+    form.setFieldsValue(editingProject);
+  }, [editingProject, form]);
+
+  return <Drawer forceRender={true} onClose={close} visible={projectModalOpen} width={'100%'}>
     <Container>
       {
         isLoading ? <Spin size={'large'}/> : <>
           <h1>{title}</h1>
+          <ErrorBox error={error} />
           <Form
             form={form}
-            layout={"vertical"}
-            style={{width: "40rem"}}
+            layout={'vertical'}
+            style={{width: '40rem'}}
             onFinish={onFinish}
           >
             <Form.Item
-              label={"Name"}
-              name={"name"}
-              rules={[{required: true, message: "Please input project name"}]}
+              label={'Name'}
+              name={'name'}
+              rules={[{required: true, message: 'Please input project name'}]}
             >
-              <Input placeholder={"Please input project name"}/>
+              <Input placeholder={'Please input project name'}/>
             </Form.Item>
 
             <Form.Item
-              label={"Organization"}
-              name={"organization"}
-              rules={[{required: true, message: "Please input organization name"}]}
+              label={'Organization'}
+              name={'organization'}
+              rules={[{required: true, message: 'Please input organization name'}]}
             >
-              <Input placeholder={"Please input organization name"}/>
+              <Input placeholder={'Please input organization name'}/>
             </Form.Item>
 
-            <Form.Item label={"Person in Charge"} name={"personId"}>
-              <UserSelect defaultOptionName={"Person in Charge"}/>
+            <Form.Item label={'Person in Charge'} name={'personId'}>
+              <UserSelect defaultOptionName={'Person in Charge'}/>
             </Form.Item>
 
-            <Form.Item style={{textAlign: "right"}}>
+            <Form.Item style={{textAlign: 'right'}}>
               <Button
                 loading={mutateLoading}
-                type={"primary"}
-                htmlType={"submit"}
+                type={'primary'}
+                htmlType={'submit'}
               >
                 Submit
               </Button>
