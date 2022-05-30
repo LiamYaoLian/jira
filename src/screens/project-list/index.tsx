@@ -13,6 +13,8 @@ import {
     Row,
     ScreenContainer,
 } from "components/lib";
+import {useDispatch} from "react-redux";
+import {projectListActions} from "./project-list.slice";
 
 export const ProjectListScreen = (props: {projectButton: JSX.Element}) => {
   useDocumentTitle('Project List', false);
@@ -20,12 +22,13 @@ export const ProjectListScreen = (props: {projectButton: JSX.Element}) => {
   const [param, setParam] = useProjectsSearchParams();
   const { isLoading, error, data: list, retry } = useProjects(useDebounce(param, 200));
   const { data: users } = useUsers();
+  const dispatch = useDispatch();
 
   return (
     <Container>
       <Row between={true}>
           <h1>Project List</h1>
-          {props.projectButton}
+          <ButtonNoPadding onClick={() => dispatch(projectListActions.openProjectModal())} type={'link'}></ButtonNoPadding>
       </Row>
 
       <SearchPanel users={users || []} param={param} setParam={setParam} />

@@ -76,7 +76,7 @@ loadServer(() =>
       <AppProviders>
         <DevTools />
         <ErrorBoundary>
-          <img src="notExist.jpg"/>
+          {/*<img src="notExist.jpg"/>*/}
           <App />
         </ErrorBoundary>
       </AppProviders>
