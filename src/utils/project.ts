@@ -1,54 +1,32 @@
-import {useCallback, useEffect} from 'react';
-import { cleanObject } from './index';
+
 import { Project } from '../screens/project-list/list';
 import { useHttp } from './http';
-import { useAsync } from './use-async';
+import { QueryKey, useMutation, useQuery, useQueryClient} from "react-query";
 
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp();
-  const { run, ...result } = useAsync<Project[]>();
-  
-  const fetchProjects = useCallback(() => client('projects', { data: cleanObject(param || {}) })
-  ,[client, param])
-  
-  useEffect(() => {
-    run(fetchProjects(), {
-      retry: fetchProjects
-    });
-
-  }, [param, run, fetchProjects]);
-
-  return result;
-};
-
+  // when queryKey changes, useQuery will be called again
+  return useQuery<Project[]>(['projects', param], () => client('project', {data: param}))
+}
 export const useEditProject = () => {
-  const {run, ...asyncResult} = useAsync()
+  const queryClient = useQueryClient()
   const client = useHttp()
-  const mutate = (params : Partial<Project>) => {
-    return run(client(`projects/${params.id}`, {
-      data: params,
-      method: 'PATCH'
-    }))
-  }
+  return useMutation((params: Partial<Project>) => client(`projects/${params.id}`,{
+    method:'PATCH',
+    data: params
+  }), {
+    onSuccess: () => queryClient.invalidateQueries('projects')
 
-  return {
-    mutate,
-    ...asyncResult
-  }
+  })
 }
 
 export const useAddProject = () => {
-  const {run, ...asyncResult} = useAsync()
   const client = useHttp()
-  const mutate = (params : Partial<Project>) => {
-    return run(client(`projects/${params.id}`, {
-      data: params,
-      method: 'POST'
-    }))
-  }
-
-  return {
-    mutate,
-    ...asyncResult
-  }
+  const queryClient = useQueryClient()
+  return useMutation((params:Partial<Project>) => client(`projects/${params.id}`, {
+    data: params,
+    method: 'POST'
+  }), {
+    onSuccess: () => queryClient.invalidateQueries('projects')
+  })
 }

@@ -7,12 +7,7 @@ import { useDebounce, useDocumentTitle } from '../../utils';
 import { useProjects } from '../../utils/project';
 import { useUsers } from '../../utils/user';
 import { useProjectsSearchParams } from './util';
-import {
-    ButtonNoPadding,
-    ErrorBox,
-    Row,
-    ScreenContainer,
-} from "components/lib";
+import { ButtonNoPadding, ErrorBox, Row } from "components/lib";
 import {useProjectModal} from "../../utils/url";
 
 export const ProjectListScreen = () => {
@@ -20,7 +15,7 @@ export const ProjectListScreen = () => {
 
   const {open} = useProjectModal()
   const [param, setParam] = useProjectsSearchParams();
-  const { isLoading, error, data: list, retry } = useProjects(useDebounce(param, 200));
+  const { isLoading, error, data: list} = useProjects(useDebounce(param, 200));
   const { data: users } = useUsers();
 
   return (
@@ -31,10 +26,8 @@ export const ProjectListScreen = () => {
       </Row>
 
       <SearchPanel users={users || []} param={param} setParam={setParam} />
-      {error ? (
-        <Typography.Text type={'danger'}>{error.message}</Typography.Text>
-      ) : null}
-      <List refresh={retry} loading={isLoading} users={users || []} dataSource={list || []} />
+      <ErrorBox error={error} />
+      <List loading={isLoading} users={users || []} dataSource={list || []} />
     </Container>
   );
 };

@@ -39,7 +39,7 @@ fundebug.notifierUrl = "http://127.0.0.1:10010/event/";
 //fundebug.notifierUrl = "http://localhost:10010/event/";
 //fundebug.test();
 //Promise.reject("hello");
-const ws = new WebSocket("wss://ap.fundebug.com/api/events/count");
+// const ws = new WebSocket("wss://ap.fundebug.com/api/events/count");
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
