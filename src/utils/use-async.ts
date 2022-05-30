@@ -1,4 +1,4 @@
-import {useCallback, useState} from 'react';
+import {useCallback, useReducer, useState} from 'react';
 import {useMountedRef} from "./index";
 
 interface State<D> {
@@ -17,16 +17,22 @@ const defaultConfig = {
   throwOnError: false,
 };
 
+// TODO ?
+const useSafeDispatch = <T>(dispatch: (...args: T[]) => void ) => {
+  const mountedRef = useMountedRef()
+  return useCallback((...args: T[]) => (mountedRef.current ? dispatch(...args) : void 0), [dispatch, mountedRef])
+}
+
 export const useAsync = <D>(
   initialState?: State<D>,
   initialConfig?: typeof defaultConfig
 ) => {
   const config = { ...defaultConfig, ...initialConfig };
-  const [state, setState] = useState<State<D>>({
+  const [state, dispatch] = useReducer((state: State<D>, action: Partial<State<D>>) => ({...state, ...action}),{
     ...defaultInitialState,
     ...initialState,
   });
-  const mountedRef = useMountedRef()
+  const safeDispatch = useSafeDispatch(dispatch)
   /*
   * if we pass a function into useState(), the funciton will be used for lazy init
   * Therefore, if we want to store a function as a state, we cannot pass the function directly
@@ -34,18 +40,18 @@ export const useAsync = <D>(
   const [retry, setRetry] = useState(() => () => {})
 
   const setData = useCallback((data: D) =>
-    setState({
+    safeDispatch({
       data,
       stat: 'success',
       error: null,
-    }),[]);
+    }),[safeDispatch]);
 
   const setError = useCallback((error: Error) =>
-    setState({
+    safeDispatch({
       error,
       stat: 'error',
       data: null,
-    }),[]);
+    }),[safeDispatch]);
 
   // used to trigger an async request
 
@@ -62,12 +68,10 @@ export const useAsync = <D>(
     })
 
     // use "prevState" to prevent circular dependency
-    setState(prevState => ({ ...prevState, stat: 'loading' }));
+    safeDispatch({ stat: 'loading' });
     return promise
       .then((data) => {
-        if (mountedRef.current) {
-          setData(data);
-        }
+        setData(data);
 
         return data;
       })
@@ -78,7 +82,7 @@ export const useAsync = <D>(
         }
         return error;
       });
-  }, [config.throwOnError, mountedRef, setData, setError])
+  }, [config.throwOnError, setData, setError, safeDispatch])
 
 
 

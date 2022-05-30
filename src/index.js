@@ -12,6 +12,7 @@ import * as fundebug from "fundebug-javascript";
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
 
+
 // const root = ReactDOM.createRoot(
 //   document.getElementById('root') as HTMLElement
 // );
