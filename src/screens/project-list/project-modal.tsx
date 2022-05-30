@@ -35,23 +35,23 @@ export const ProjectModal = () => {
                   onFinish={onFinish}
                 >
                     <Form.Item
-                      label={"名称"}
+                      label={"name"}
                       name={"name"}
-                      rules={[{ required: true, message: "请输入项目名" }]}
+                      rules={[{ required: true, message: "Please input project name" }]}
                     >
-                        <Input placeholder={"请输入项目名称"} />
+                        <Input placeholder={"Please input project name"} />
                     </Form.Item>
 
                     <Form.Item
-                      label={"部门"}
-                      name={"organization"}
-                      rules={[{ required: true, message: "请输入部门名" }]}
+                      label={"department"}
+                      name={"department"}
+                      rules={[{ required: true, message: "Please input department name" }]}
                     >
-                        <Input placeholder={"请输入部门名"} />
+                        <Input placeholder={"Please input department name"} />
                     </Form.Item>
 
-                    <Form.Item label={"负责人"} name={"personId"}>
-                        <UserSelect defaultOptionName={"负责人"} />
+                    <Form.Item label={"Person in Charge"} name={"personId"}>
+                        <UserSelect defaultOptionName={"Person in Charge"} />
                     </Form.Item>
 
                     <Form.Item style={{ textAlign: "right" }}>
@@ -60,7 +60,7 @@ export const ProjectModal = () => {
                           type={"primary"}
                           htmlType={"submit"}
                         >
-                            提交
+                            Submit
                         </Button>
                     </Form.Item>
                 </Form>
