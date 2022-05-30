@@ -6,9 +6,8 @@ import { List } from './list';
 import { useDebounce, useDocumentTitle } from '../../utils';
 import { useProjects } from '../../utils/project';
 import { useUsers } from '../../utils/user';
-import { useProjectsSearchParams } from './util';
+import {useProjectModal, useProjectsSearchParams} from './util';
 import { ButtonNoPadding, ErrorBox, Row } from "components/lib";
-import {useProjectModal} from "../../utils/url";
 
 export const ProjectListScreen = () => {
   useDocumentTitle('Project List', false);
