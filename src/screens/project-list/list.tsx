@@ -79,13 +79,7 @@ export const List = ({users, ...props}: ListProps) => {
         },
         {
           render(value, project) {
-            return <Dropdown overlay={
-              <Menu>
-                <Menu.Item onClick={editProject(project.id)} key={'edit'}>Edit</Menu.Item>
-                <Menu.Item key={'delete'}>Delete</Menu.Item>
-              </Menu>}>
-              <ButtonNoPadding type={'link'}>...</ButtonNoPadding>
-            </Dropdown>
+            return <More project={project} />;
           }
         }
       ]}
@@ -100,9 +94,9 @@ const More = ({project}: { project: Project }) => {
   const {mutate: deleteProject} = useDeleteProject(useProjectsQueryKey());
   const confirmDeleteProject = (id: number) => {
     Modal.confirm({
-      title: "确定删除这个项目吗?",
-      content: "点击确定删除",
-      okText: "确定",
+      title: "Are you sure about deleting it?",
+      content: "Click yes to confirm",
+      okText: "Yes",
       onOk() {
         deleteProject({id});
       },
