@@ -18,6 +18,7 @@ function App() {
 
       </ErrorBoundary>
         {/*<button onClick={methodDoesNotExist}>Break the world</button>;*/}
+      <img src={'NotExist.jpg'}/>
     </div>
   );
 }
