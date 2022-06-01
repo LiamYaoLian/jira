@@ -17,8 +17,6 @@ function App() {
         {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
 
       </ErrorBoundary>
-        {/*<button onClick={methodDoesNotExist}>Break the world</button>;*/}
-      <img src={'notExist.jpg'} />
     </div>
   );
 }

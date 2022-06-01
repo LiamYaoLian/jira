@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Routes, Route } from 'react-router';
+import {Routes, Route, Navigate} from 'react-router';
 import { EpicScreen } from '../epic';
 import { KanbanScreen } from '../kanban';
 

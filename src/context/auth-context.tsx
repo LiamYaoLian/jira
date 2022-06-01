@@ -1,9 +1,10 @@
 import React, { ReactNode, useState } from 'react';
 import * as auth from 'auth-provider';
-import { User } from '../screens/project-list/search-panel';
 import { useMount } from '../utils';
 import { http } from '../utils/http';
 import {resetRoute} from "../index";
+import {useQueryClient} from "react-query";
+import {User} from "../types/user";
 
 
 interface AuthForm {
@@ -34,11 +35,13 @@ AuthContext.displayName = 'AuthContext';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const queryClient = useQueryClient();
 
   const login = (form: AuthForm) => auth.login(form).then(setUser);
   const register = (form: AuthForm) => auth.register(form).then(setUser);
   const logout = () => auth.logout().then((user) => {
     setUser(null)
+    queryClient.clear()
     resetRoute()
   });
 

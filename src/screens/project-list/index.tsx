@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import {Button, Typography } from 'antd';
 import { SearchPanel } from './search-panel';
 import { List } from './list';
 import { useDebounce, useDocumentTitle } from '../../utils';

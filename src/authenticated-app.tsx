@@ -20,14 +20,13 @@ export const AuthenticatedApp = () => {
       <Router>
         <PageHeader/>
         <Main>
-          {/*<Navigate to={'/projects'}/>*/}
           <Routes>
             <Route path={'/projects'} element={<ProjectListScreen/>}/>
             <Route
               path={'/projects/:projectId/*'}
               element={<ProjectScreen/>}/>
-            {/*<Route index element={<ProjectListScreen/>}/>*/}
-            <Route index element={<Navigate to={'/projects'}/>}/>
+            <Route index element={<ProjectListScreen/>}/>
+            {/*<Route index element={<Navigate to={'/projects'}/>}/>*/}
           </Routes>
         </Main>
         <ProjectModal/>
