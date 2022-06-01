@@ -21,7 +21,7 @@ import { Drag, Drop, DropChild } from "components/drag-and-drop";
 import { Profiler } from "components/profiler";
 
 export const KanbanScreen = () => {
-  useDocumentTitle("看板列表");
+  useDocumentTitle("Kanban List");
 
   const { data: currentProject } = useProjectInUrl();
   const { data: kanbans, isLoading: kanbanIsLoading } = useKanbans(
@@ -32,7 +32,7 @@ export const KanbanScreen = () => {
 
   const onDragEnd = useDragEnd();
   return (
-      <Profiler id={"看板页面"}>
+      <Profiler id={"kanban-page"}>
         <DragDropContext onDragEnd={onDragEnd}>
           <ScreenContainer>
             <h1>{currentProject?.name}看板</h1>
@@ -78,7 +78,7 @@ export const useDragEnd = () => {
         if (!destination) {
           return;
         }
-        // 看板排序
+        // Kanban sorting
         if (type === "COLUMN") {
           const fromId = kanbans?.[source.index].id;
           const toId = kanbans?.[destination.index].id;
