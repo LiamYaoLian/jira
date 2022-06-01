@@ -24,14 +24,14 @@ export const CreateTask = ({ kanbanId }: { kanbanId: number }) => {
   }, [inputMode]);
 
   if (!inputMode) {
-    return <div onClick={toggle}>+创建事务</div>;
+    return <div onClick={toggle}>+Create Task</div>;
   }
 
   return (
     <Card>
       <Input
         onBlur={toggle}
-        placeholder={"需要做些什么"}
+        placeholder={"To-do"}
         autoFocus={true}
         onPressEnter={submit}
         value={name}
