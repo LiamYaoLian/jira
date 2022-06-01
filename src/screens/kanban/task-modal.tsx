@@ -32,9 +32,9 @@ export const TaskModal = () => {
     const startDelete = () => {
         close();
         Modal.confirm({
-            okText: "确定",
-            cancelText: "取消",
-            title: "确定删除任务吗",
+            okText: "Confirm",
+            cancelText: "Cancel",
+            title: "Are you sure about deleting the task?",
             onOk() {
                 return deleteTask({ id: Number(editingTaskId) });
             },
@@ -50,27 +50,27 @@ export const TaskModal = () => {
             forceRender={true}
             onCancel={onCancel}
             onOk={onOk}
-            okText={"确认"}
-            cancelText={"取消"}
+            okText={"Confirm"}
+            cancelText={"Cancel"}
             confirmLoading={editLoading}
-            title={"编辑任务"}
+            title={"Edit Task"}
             visible={!!editingTaskId}
         >
             <Form {...layout} initialValues={editingTask} form={form}>
                 <Form.Item
-                    label={"任务名"}
+                    label={"Task Name"}
                     name={"name"}
-                    rules={[{ required: true, message: "请输入任务名" }]}
+                    rules={[{ required: true, message: "Please input task name" }]}
                 >
                     <Input />
                 </Form.Item>
-                <Form.Item label={"任务组"} name={"epicId"}>
-                    <EpicSelect defaultOptionName={"任务组"} />
+                <Form.Item label={"Epic"} name={"epicId"}>
+                    <EpicSelect defaultOptionName={"Epic"} />
                 </Form.Item>
-                <Form.Item label={"经办人"} name={"processorId"}>
-                    <UserSelect defaultOptionName={"经办人"} />
+                <Form.Item label={"Processor"} name={"processorId"}>
+                    <UserSelect defaultOptionName={"Processor"} />
                 </Form.Item>
-                <Form.Item label={"类型"} name={"typeId"}>
+                <Form.Item label={"Type"} name={"typeId"}>
                     <TaskTypeSelect />
                 </Form.Item>
             </Form>
@@ -80,7 +80,7 @@ export const TaskModal = () => {
                     style={{ fontSize: "14px" }}
                     size={"small"}
                 >
-                    删除
+                    Delete
                 </Button>
             </div>
         </Modal>

@@ -6,15 +6,15 @@ import styled from '@emotion/styled';
 import {ButtonNoPadding, Row} from './components/lib';
 import {ReactComponent as SoftwareLogo} from 'assets/software-logo.svg';
 import {Button, Dropdown, Menu} from 'antd';
-import {Navigate, Route, Routes} from 'react-router';
+import {Route, Routes} from 'react-router';
 import {ProjectScreen} from './screens/project';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {resetRoute} from 'index';
 import {ProjectModal} from "./screens/project-list/project-modal";
 import {ProjectPopover} from "./components/project-popover";
+import {UserPopover} from "./components/user-popover";
 
 export const AuthenticatedApp = () => {
-
   return (
     <Container>
       <Router>
@@ -35,25 +35,6 @@ export const AuthenticatedApp = () => {
   );
 };
 
-const Container = styled.div`
-  display: grid;
-  grid-template-rows: 6rem 1fr 6rem;
-  height: 100vh;
-`;
-const Header = styled(Row)`
-  padding: 3.2rem;
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
-  z-index: 1;
-`;
-
-const HeaderLeft = styled(Row)``;
-
-const HeaderRight = styled.header``;
-
-const Main = styled.main`
-  display: flex;
-  overflow: hidden;
-`;
 
 const PageHeader = () => {
   return (
@@ -63,7 +44,8 @@ const PageHeader = () => {
           <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'}/>
         </ButtonNoPadding>
         <ProjectPopover/>
-        <span>User</span>
+        <UserPopover/>
+        {/*<span>User</span>*/}
       </HeaderLeft>
       <HeaderRight>
         <User/>
@@ -94,3 +76,22 @@ const User = () => {
 }
 
 
+const Container = styled.div`
+  display: grid;
+  grid-template-rows: 6rem 1fr;
+  height: 100vh;
+`;
+const Header = styled(Row)`
+  padding: 3.2rem;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  z-index: 1;
+`;
+
+const HeaderLeft = styled(Row)``;
+
+const HeaderRight = styled.header``;
+
+const Main = styled.main`
+  display: flex;
+  overflow: hidden;
+`;

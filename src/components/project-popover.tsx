@@ -7,7 +7,7 @@ import {useProjectModal} from "../screens/project-list/util";
 
 export const ProjectPopover = () => {
     const {open} = useProjectModal()
-    const {data: projects} = useProjects()
+    const {data: projects, refetch} = useProjects()
     const pinnedProjects = projects?.filter(project => project.pin)
 
     const content = <ContentContainer>
@@ -22,7 +22,7 @@ export const ProjectPopover = () => {
         <Divider/>
         <ButtonNoPadding onClick={open} type={'link'}>Create New Project</ButtonNoPadding>
     </ContentContainer>
-    return <Popover placement={'bottom'} content={content}><span>Project</span></Popover>
+    return <Popover onVisibleChange={() => refetch()} placement={'bottom'} content={content}><span>Project</span></Popover>
 }
 
 const ContentContainer = styled(Button)`

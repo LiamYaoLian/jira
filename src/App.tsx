@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { useAuth } from './context/auth-context';
-import { AuthenticatedApp } from './authenticated-app';
+import {AuthenticatedApp} from './authenticated-app';
 import { UnauthenticatedApp } from './unauthenticated-app';
 import fundebug from 'fundebug-javascript';
 import { ErrorBoundary } from './components/error-boundary';
