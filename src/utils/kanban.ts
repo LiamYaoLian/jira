@@ -1,3 +1,6 @@
+/**
+ * What: util functions to create, read, update, delete Kanbans
+ */
 import {useHttp} from "utils/http";
 import {QueryKey, useMutation, useQuery} from "react-query";
 import {Kanban} from "types/kanban";

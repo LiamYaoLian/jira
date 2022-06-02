@@ -10,7 +10,7 @@ import {SortProps} from "utils/kanban";
 import {useDebounce} from "utils/index";
 
 /*
-* What: get an array of tasks from backend
+* What: a function to get an array of tasks from backend
 * How: send an HTTP request to "tasks" to get an array of tasks; avoid sending too many requests while user is typing
 * */
 export const useTasks = (param?: Partial<Task>) => {
@@ -23,7 +23,17 @@ export const useTasks = (param?: Partial<Task>) => {
 };
 
 /*
-* What: return useMutation for adding task
+* What: a function to get a task by id from backend
+* */
+export const useTask = (id?: number) => {
+  const client = useHttp();
+  return useQuery<Project>(["task", {id}], () => client(`tasks/${id}`), {
+    enabled: Boolean(id),
+  });
+};
+
+/*
+* What: a function to return useMutation for adding task
 * */
 export const useAddTask = (queryKey: QueryKey) => {
   const client = useHttp();
@@ -41,17 +51,7 @@ export const useAddTask = (queryKey: QueryKey) => {
 };
 
 /*
-* What: get a task by id from backend
-* */
-export const useTask = (id?: number) => {
-  const client = useHttp();
-  return useQuery<Project>(["task", {id}], () => client(`tasks/${id}`), {
-    enabled: Boolean(id),
-  });
-};
-
-/*
-* What: return useMutation for editing task
+* What: a function to return useMutation for editing task
 * */
 export const useEditTask = (queryKey: QueryKey) => {
   const client = useHttp();
@@ -66,7 +66,7 @@ export const useEditTask = (queryKey: QueryKey) => {
 };
 
 /*
-* What: return useMutation for deleting task
+* What: a function to return useMutation for deleting task
 * */
 export const useDeleteTask = (queryKey: QueryKey) => {
   const client = useHttp();
@@ -81,7 +81,7 @@ export const useDeleteTask = (queryKey: QueryKey) => {
 };
 
 /*
-* What: return useMutation for reordering task
+* What: a function to return useMutation for reordering task
 * */
 export const useReorderTask = (queryKey: QueryKey) => {
   const client = useHttp();
