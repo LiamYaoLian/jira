@@ -23,13 +23,11 @@ export const ProjectModal = () => {
   const title = editingProject ? 'Edit Project' : 'Create Project'
 
   const closeModal = () => {
-    form.resetFields();
-    close();
-  };
+    form.resetFields()
+    close()
+  }
 
-  useEffect(() => {
-    form.setFieldsValue(editingProject);
-  }, [editingProject, form]);
+  useEffect(() => form.setFieldsValue(editingProject), [editingProject, form])
 
   return <Drawer forceRender={true} onClose={closeModal} visible={projectModalOpen} width={'100%'}>
     <Container>

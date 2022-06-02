@@ -1,3 +1,6 @@
+/**
+ * List
+ */
 import React from 'react';
 import {Dropdown, Menu, Modal, Table} from 'antd';
 import {TableProps} from 'antd/es';
@@ -16,9 +19,7 @@ interface ListProps extends TableProps<Project> {
 
 export const List = ({users, ...props}: ListProps) => {
   const {mutate} = useEditProject(useProjectsQueryKey())
-  const {startEdit} = useProjectModal();
   const pinProject = (id: number) => (pin: boolean) => mutate({id, pin})
-  const editProject = (id: number) => () => startEdit(id)
 
   return (
     <Table
@@ -36,42 +37,29 @@ export const List = ({users, ...props}: ListProps) => {
           title: 'Name',
           sorter: (r1, r2) => r1.name.localeCompare(r2.name),
           render(value, project) {
-            return (
-              <Link to={`projects/${String(project.id)}`}>{project.name}</Link>
-            );
+            return <Link to={`projects/${String(project.id)}`}>{project.name}</Link>
           },
         },
         {
-          title: 'Orginazation',
+          title: 'Organization',
           dataIndex: 'organization',
         },
 
         {
           title: 'Person in Charge',
           render(value, project) {
-            return (
-              <span>
-                {users.find((user) => user.id === project.personId)?.name ||
-                  'unknown'}
-              </span>
-            );
+            return <span>{users.find((user) => user.id === project.personId)?.name || 'unknown'}</span>
           },
         },
         {
           title: 'Created at',
           render(value, project) {
-            return (
-              <span>
-                {project.created
-                  ? dayjs(project.created).format('YYYY-MM-DD')
-                  : 'None'}
-              </span>
-            );
+            return <span>{project.created ? dayjs(project.created).format('YYYY-MM-DD') : 'None'}</span>
           },
         },
         {
           render(value, project) {
-            return <More project={project} />;
+            return <More project={project}/>;
           }
         }
       ]}
@@ -90,23 +78,17 @@ const More = ({project}: { project: Project }) => {
       content: "Click yes to confirm",
       okText: "Yes",
       onOk() {
-        deleteProject({id});
+        deleteProject({id})
       },
-    });
-  };
+    })
+  }
+
   return (
     <Dropdown
       overlay={
         <Menu>
-          <Menu.Item onClick={editProject(project.id)} key={"edit"}>
-            编辑
-          </Menu.Item>
-          <Menu.Item
-            onClick={() => confirmDeleteProject(project.id)}
-            key={"delete"}
-          >
-            删除
-          </Menu.Item>
+          <Menu.Item onClick={editProject(project.id)} key={"edit"}>Edit</Menu.Item>
+          <Menu.Item onClick={() => confirmDeleteProject(project.id)} key={"delete"}>Delete</Menu.Item>
         </Menu>
       }
     >

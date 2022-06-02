@@ -1,12 +1,15 @@
-import { useState } from 'react';
-import { RegisterScreen } from './register';
-import { LoginScreen } from './login';
-import { Button, Card, Divider, Typography } from 'antd';
+/**
+ * Screen before authentication
+ */
+import {useState} from 'react';
+import {RegisterScreen} from './register';
+import {LoginScreen} from './login';
+import {Button, Card, Divider} from 'antd';
 import styled from '@emotion/styled';
 import logo from 'assets/logo.svg';
 import left from 'assets/left.svg';
 import right from 'assets/right.svg';
-import { useDocumentTitle } from '../utils';
+import {useDocumentTitle} from '../utils';
 import {ErrorBox} from "../components/lib";
 
 export default () => {
@@ -17,26 +20,25 @@ export default () => {
 
   return (
     <Container>
-      <Header />
-      <Background />
+      <Header/>
+      <Background/>
       <ShadowCard>
         <Title>{isRegister ? 'Register' : 'Login'}</Title>
-        <ErrorBox error={error} />
+        <ErrorBox error={error}/>
         {isRegister ? (
-          <RegisterScreen onError={setError} />
+          <RegisterScreen onError={setError}/>
         ) : (
-          <LoginScreen onError={setError} />
+          <LoginScreen onError={setError}/>
         )}
-        <Divider />
+        <Divider/>
 
-        <Button type={'link'} onClick={() => setIsRegister(!isRegister)}>
-          {isRegister ? 'Login' : 'Register'}
-        </Button>
+        <Button type={'link'} onClick={() => setIsRegister(!isRegister)}>{isRegister ? 'Login' : 'Register'}</Button>
       </ShadowCard>
     </Container>
   );
 };
 
+// TODO css below
 export const LongButton = styled(Button)`
   width: 100%;
 `;
@@ -54,7 +56,7 @@ const Background = styled.div`
   background-attachment: fixed;
   background-position: left bottom, right bottom;
   background-size: calc((100vw - 40rem) / 2 - 3.2rem),
-    calc((100vw - 40rem) / 2 - 3.2rem), cover;
+  calc((100vw - 40rem) / 2 - 3.2rem), cover;
   background-image: url(${left}), url(${right});
 `;
 

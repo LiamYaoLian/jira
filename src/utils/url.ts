@@ -6,7 +6,7 @@ import {useMemo, useState} from 'react';
 import {cleanObject, subset} from './index';
 
 /**
- * What: a function to get the parameter in the page url based on keys and a function to set search params
+ * A function to get the parameters in the page url based on keys and a function to set search params in a clean way
  * How:
  * Highlight: useMemo; clean params in url
  */

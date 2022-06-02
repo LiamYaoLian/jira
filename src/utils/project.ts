@@ -1,8 +1,8 @@
 /**
  * What: util functions to create, read, update, delete projects
  */
-import { useHttp } from './http';
-import { QueryKey, useMutation, useQuery, useQueryClient} from "react-query";
+import {useHttp} from './http';
+import {QueryKey, useMutation, useQuery, useQueryClient} from "react-query";
 import {useDeleteConfig, useEditConfig} from "./use-optimistic-options";
 import {Project} from "../types/project";
 
@@ -22,11 +22,9 @@ export const useProjects = (param?: Partial<Project>) => {
 export const useProject = (id?: number) => {
   const client = useHttp();
   return useQuery<Project>(
-    ["project", { id }],
+    ["project", {id}],
     () => client(`projects/${id}`),
-    {
-      enabled: Boolean(id),
-    }
+    {enabled: Boolean(id)}
   );
 };
 
@@ -36,7 +34,7 @@ export const useProject = (id?: number) => {
 export const useAddProject = () => {
   const client = useHttp()
   const queryClient = useQueryClient()
-  return useMutation((params:Partial<Project>) => client(`projects`, {
+  return useMutation((params: Partial<Project>) => client(`projects`, {
     data: params,
     method: 'POST'
   }), {
@@ -66,7 +64,7 @@ export const useDeleteProject = (queryKey: QueryKey) => {
   const client = useHttp();
 
   return useMutation(
-    ({ id }: { id: number }) =>
+    ({id}: { id: number }) =>
       client(`projects/${id}`, {
         method: "DELETE",
       }),
