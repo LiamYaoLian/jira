@@ -6,13 +6,9 @@ import {User} from "./types/user";
 const apiUrl = process.env.REACT_APP_API_URL;
 const localStorageKey = '__auth_provider_token__';
 
-export const getToken = () => window.localStorage.getItem(localStorageKey);
-
-export const handleUserResponse = ({ user }: { user: User }) => {
-  window.localStorage.setItem(localStorageKey, user.token || '');
-  return user;
-};
-
+/*
+* How: send username and password to backend; then handle response
+* */
 export const login = (data: { username: string; password: string }) => {
   return fetch(`${apiUrl}/login`, {
     method: 'POST',
@@ -29,6 +25,22 @@ export const login = (data: { username: string; password: string }) => {
   });
 };
 
+/*
+* How: put token into localStorage
+*/
+export const handleUserResponse = ({ user }: { user: User }) => {
+  window.localStorage.setItem(localStorageKey, user.token || '');
+  return user;
+};
+
+/*
+* How: get token from localStorage
+*/
+export const getToken = () => window.localStorage.getItem(localStorageKey);
+
+/*
+* How: send username and password to backend; then handle response
+*/
 export const register = (data: { username: string; password: string }) => {
   return fetch(`${apiUrl}/register`, {
     method: 'POST',
@@ -45,6 +57,9 @@ export const register = (data: { username: string; password: string }) => {
   });
 };
 
+/*
+* How: remove token from localStorage
+*/
 export const logout = async () => {
   window.localStorage.removeItem(localStorageKey);
 };

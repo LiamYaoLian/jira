@@ -1,10 +1,11 @@
 // to review
-import { URLSearchParamsInit, useSearchParams } from 'react-router-dom';
-import { useMemo, useState } from 'react';
+import {URLSearchParamsInit, useSearchParams} from 'react-router-dom';
+import {useMemo, useState} from 'react';
 import {cleanObject, subset} from './index';
 
 /**
- * Return the parameter values of keys of the page url
+ * What: get the parameter values in the page url
+ * How:
  */
 export const useUrlQueryParam = <K extends string>(keys: K[]) => {
   const [searchParams] = useSearchParams();
@@ -27,6 +28,9 @@ export const useUrlQueryParam = <K extends string>(keys: K[]) => {
   ] as const;
 };
 
+/*
+* What:
+* */
 export const useSetUrlSearchParam = () => {
   const [searchParams, setSearchParam] = useSearchParams();
   return (params: { [key in string]: unknown }) => {

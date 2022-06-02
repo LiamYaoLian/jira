@@ -1,6 +1,6 @@
 import qs from 'qs';
 import * as auth from 'auth-provider';
-import { useAuth } from '../context/auth-context';
+import {useAuth} from '../context/auth-context';
 import {useCallback} from "react";
 
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -10,9 +10,12 @@ interface Config extends RequestInit {
   data?: object;
 }
 
+/*
+* How: send a HTTP request; log out if "401: Unauthorized"
+* */
 export const http = async (
   endpoint: string,
-  { data, token, headers, ...customerConfig }: Config = {}
+  {data, token, headers, ...customConfig}: Config = {}
 ) => {
   const config = {
     // default method: 'GET'
@@ -22,7 +25,7 @@ export const http = async (
       'Content-Type': data ? 'application/json' : '',
     },
     // may override the default method
-    ...customerConfig,
+    ...customConfig,
   };
 
   if (config.method.toUpperCase() === 'GET') {
@@ -38,7 +41,7 @@ export const http = async (
       if (response.status === 401) {
         await auth.logout();
         window.location.reload();
-        return Promise.reject({ message: 'Try again.' });
+        return Promise.reject({message: 'Try again.'});
       }
 
       const data = await response.json();
@@ -50,8 +53,11 @@ export const http = async (
     });
 };
 
+/*
+* What: return a function that can send an HTTP request with config and user token
+* */
 export const useHttp = () => {
-  const { user } = useAuth();
+  const {user} = useAuth();
   return useCallback((...[endpoint, config]: Parameters<typeof http>) =>
-    http(endpoint, { ...config, token: user?.token }),[user?.token]);
+    http(endpoint, {...config, token: user?.token}), [user?.token]);
 };
