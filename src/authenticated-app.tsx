@@ -9,28 +9,26 @@ import {Button, Dropdown, Menu} from 'antd';
 import {Route, Routes} from 'react-router';
 import {ProjectScreen} from './screens/project';
 import {BrowserRouter as Router} from 'react-router-dom';
-import {resetRoute} from 'index';
 import {ProjectModal} from "./screens/project-list/project-modal";
 import {ProjectPopover} from "./components/project-popover";
 import {UserPopover} from "./components/user-popover";
+import {resetRoute} from "./utils";
 
 export default () => {
   return (
     <Container>
-      <Router>
-        <PageHeader/>
-        <Main>
-          <Routes>
-            <Route path={'/projects'} element={<ProjectListScreen/>}/>
-            <Route
-              path={'/projects/:projectId/*'}
-              element={<ProjectScreen/>}/>
-            <Route index element={<ProjectListScreen/>}/>
-            {/*<Route index element={<Navigate to={'/projects'}/>}/>*/}
-          </Routes>
-        </Main>
-        <ProjectModal/>
-      </Router>
+      <PageHeader/>
+      <Main>
+        <Routes>
+          <Route path={'/projects'} element={<ProjectListScreen/>}/>
+          <Route
+            path={'/projects/:projectId/*'}
+            element={<ProjectScreen/>}/>
+          <Route index element={<ProjectListScreen/>}/>
+          {/*<Route index element={<Navigate to={'/projects'}/>}/>*/}
+        </Routes>
+      </Main>
+      <ProjectModal/>
     </Container>
   );
 };

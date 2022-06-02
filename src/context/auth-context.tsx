@@ -1,8 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 import * as auth from 'auth-provider';
-import { useMount } from '../utils';
+import {resetRoute, useMount} from '../utils';
 import { http } from '../utils/http';
-import {resetRoute} from "../index";
 import {useQueryClient} from "react-query";
 import {User} from "../types/user";
 
