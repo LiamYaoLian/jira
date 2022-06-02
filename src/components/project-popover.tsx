@@ -25,7 +25,6 @@ export const ProjectPopover = () => {
     return <Popover onVisibleChange={() => refetch()} placement={'bottom'} content={content}><span>Project</span></Popover>
 }
 
-const ContentContainer = styled(Button)`
+const ContentContainer = styled.div`
   min-weight: 30rem;
-  
 `
