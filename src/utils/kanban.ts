@@ -1,23 +1,27 @@
-import { useHttp } from "utils/http";
-import { QueryKey, useMutation, useQuery } from "react-query";
-import { Kanban } from "types/kanban";
-import {
-  useAddConfig,
-  useDeleteConfig,
-  useReorderKanbanConfig,
-} from "utils/use-optimistic-options";
+import {useHttp} from "utils/http";
+import {QueryKey, useMutation, useQuery} from "react-query";
+import {Kanban} from "types/kanban";
+import {useAddConfig, useDeleteConfig, useReorderKanbanConfig,} from "utils/use-optimistic-options";
 
+/*
+* What: a function to get an array of Kanbans from backend
+* How: send an HTTP request to "kanbans" to get an array of Kanbans
+* */
 export const useKanbans = (param?: Partial<Kanban>) => {
   const client = useHttp();
 
   return useQuery<Kanban[]>(["kanbans", param], () =>
-    client("kanbans", { data: param })
+    client("kanbans", {data: param})
   );
 };
 
+/*
+* What: a function to return useMutation for adding Kanban
+* */
 export const useAddKanban = (queryKey: QueryKey) => {
   const client = useHttp();
 
+  // https://react-query.tanstack.com/reference/useMutation
   return useMutation(
     (params: Partial<Kanban>) =>
       client(`kanbans`, {
@@ -28,11 +32,14 @@ export const useAddKanban = (queryKey: QueryKey) => {
   );
 };
 
+/*
+* What: a function to return useMutation for deleting Kanban
+* */
 export const useDeleteKanban = (queryKey: QueryKey) => {
   const client = useHttp();
 
   return useMutation(
-    ({ id }: { id: number }) =>
+    ({id}: { id: number }) =>
       client(`kanbans/${id}`, {
         method: "DELETE",
       }),
@@ -41,16 +48,24 @@ export const useDeleteKanban = (queryKey: QueryKey) => {
 };
 
 export interface SortProps {
-  // 要重新排序的 item
+
+  // ID of the item that will sorted
   fromId: number;
-  // 目标 item
+
+  // target item ID
   referenceId: number;
-  // 放在目标item的前还是后
+
+  // put the item before or after the target item
   type: "before" | "after";
+
   fromKanbanId?: number;
+
   toKanbanId?: number;
 }
 
+/*
+* What: a function to return useMutation for reordering Kanban
+* */
 export const useReorderKanban = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation((params: SortProps) => {

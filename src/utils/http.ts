@@ -11,7 +11,7 @@ interface Config extends RequestInit {
 }
 
 /*
-* How: send a HTTP request; log out if "401: Unauthorized"
+* How: a function to send an HTTP request; log out if "401: Unauthorized"
 * */
 export const http = async (
   endpoint: string,
@@ -54,7 +54,7 @@ export const http = async (
 };
 
 /*
-* What: return a function that can send an HTTP request with config and user token
+* What: a function to return a function that can send an HTTP request with config and user token
 * */
 export const useHttp = () => {
   const {user} = useAuth();

@@ -29,7 +29,7 @@ export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 
 // TODO
 /*
-* What: when a component is mounted, call the callback
+* What: a function to achieve "when a component is mounted, call the callback"
 * */
 export const useMount = (callback: () => void) => {
   useEffect(() => {
