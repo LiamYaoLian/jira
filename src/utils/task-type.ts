@@ -6,7 +6,7 @@ import { useQuery } from "react-query";
 import { TaskType } from "types/task-type";
 
 /*
-* How: send an HTTP request to "taskTypes" to get an array of TaskType
+* How: a function to send an HTTP request to "taskTypes" to get an array of TaskType
 * */
 export const useTaskTypes = () => {
     const client = useHttp();
