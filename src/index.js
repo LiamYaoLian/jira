@@ -11,6 +11,7 @@ import "antd/dist/antd.less";
 import * as fundebug from "fundebug-javascript";
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
+import {Profiler} from "./components/profiler";
 
 
 // const root = ReactDOM.createRoot(
@@ -73,12 +74,15 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 loadServer(() =>
   root.render(
     <React.StrictMode>
-      <AppProviders>
-        <DevTools />
-        <ErrorBoundary>
-          <App />
-        </ErrorBoundary>
-      </AppProviders>
+      <Profiler id={'Root App'} phases={['mount']}>
+        <AppProviders>
+          <DevTools />
+          <ErrorBoundary>
+            <App />
+          </ErrorBoundary>
+        </AppProviders>
+      </Profiler>
+
     </React.StrictMode>
   )
 );

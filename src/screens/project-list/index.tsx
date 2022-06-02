@@ -7,6 +7,7 @@ import { useProjects } from '../../utils/project';
 import { useUsers } from '../../utils/user';
 import {useProjectModal, useProjectsSearchParams} from './util';
 import { ButtonNoPadding, ErrorBox, Row } from "components/lib";
+import {Profiler} from "../../components/profiler";
 
 export const ProjectListScreen = () => {
   useDocumentTitle('Project List', false);
@@ -17,16 +18,19 @@ export const ProjectListScreen = () => {
   const { data: users } = useUsers();
 
   return (
-    <Container>
-      <Row between={true}>
+    <Profiler id={'project-list'}>
+      <Container>
+        <Row between={true}>
           <h1>Project List</h1>
           <ButtonNoPadding onClick={open} type={'link'}>Create New Project</ButtonNoPadding>
-      </Row>
+        </Row>
 
-      <SearchPanel users={users || []} param={param} setParam={setParam} />
-      <ErrorBox error={error} />
-      <List loading={isLoading} users={users || []} dataSource={list || []} />
-    </Container>
+        <SearchPanel users={users || []} param={param} setParam={setParam} />
+        <ErrorBox error={error} />
+        <List loading={isLoading} users={users || []} dataSource={list || []} />
+      </Container>
+    </Profiler>
+
   );
 };
 
