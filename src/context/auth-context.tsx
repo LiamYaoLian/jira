@@ -1,9 +1,11 @@
-import React, { ReactNode, useState } from 'react';
+import React, {ReactNode, useCallback} from 'react';
 import * as auth from 'auth-provider';
 import {resetRoute, useMount} from '../utils';
 import { http } from '../utils/http';
-import {useQueryClient} from "react-query";
-import {User} from "../types/user";
+import {useQueryClient} from 'react-query';
+import {User} from '../types/user';
+import {useAsync} from '../utils/use-async';
+import { FullPageErrorFallback, FullPageLoading } from 'components/lib';
 
 
 interface AuthForm {
@@ -12,7 +14,7 @@ interface AuthForm {
 }
 
 /**
- * A function to return user by sending token to backend
+ * a function to return user by sending token to backend
  */
 const bootstrapUser = async () => {
   let user = null;
@@ -25,7 +27,7 @@ const bootstrapUser = async () => {
 };
 
 /**
- * An context object
+ * a context object
  */
 const AuthContext = React.createContext<
   | {
@@ -39,12 +41,13 @@ const AuthContext = React.createContext<
 AuthContext.displayName = 'AuthContext';
 
 /**
- * A function to return AuthContext.Provider component
+ * a function to return AuthContext.Provider component
  * @param children
  * @constructor
  */
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  // TODO
+  const {data: user, error, isLoading, isIdle, isError, run, setData: setUser} = useAsync<User | null>();
   const queryClient = useQueryClient();
 
   const login = (form: AuthForm) => auth.login(form).then(setUser);
@@ -57,9 +60,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     resetRoute()
   });
 
-  useMount(() => {
-    bootstrapUser().then(setUser);
-  });
+  // TODO
+  useMount(
+    useCallback(() => {
+      run(bootstrapUser());
+    }, [])
+  );
+
+  if (isIdle || isLoading) {
+    return <FullPageLoading />;
+  }
+
+  if (isError) {
+    return <FullPageErrorFallback error={error} />;
+  }
 
   /*
   * The Provider component accepts a value prop to be passed to consuming components that are descendants of this Provider.
