@@ -1,5 +1,5 @@
 /**
- * What: util functions to create, read, update, delete tasks
+ * util functions to create, read, update, delete tasks
  */
 import {useHttp} from "utils/http";
 import {QueryKey, useMutation, useQuery} from "react-query";
@@ -10,7 +10,7 @@ import {SortProps} from "utils/kanban";
 import {useDebounce} from "utils/index";
 
 /*
-* What: a function to get an array of tasks from backend
+* a function to get an array of tasks from backend
 * How: send an HTTP request to "tasks" to get an array of tasks; avoid sending too many requests while user is typing
 * */
 export const useTasks = (param?: Partial<Task>) => {
@@ -23,7 +23,7 @@ export const useTasks = (param?: Partial<Task>) => {
 };
 
 /*
-* What: a function to get a task by id from backend
+* a function to get a task by id from backend
 * */
 export const useTask = (id?: number) => {
   const client = useHttp();
@@ -33,7 +33,7 @@ export const useTask = (id?: number) => {
 };
 
 /*
-* What: a function to return useMutation for adding task
+* a function to return the return values of useMutation for adding task
 * */
 export const useAddTask = (queryKey: QueryKey) => {
   const client = useHttp();
@@ -51,7 +51,7 @@ export const useAddTask = (queryKey: QueryKey) => {
 };
 
 /*
-* What: a function to return useMutation for editing task
+* a function to return the return values of useMutation for editing task
 * */
 export const useEditTask = (queryKey: QueryKey) => {
   const client = useHttp();
@@ -66,7 +66,7 @@ export const useEditTask = (queryKey: QueryKey) => {
 };
 
 /*
-* What: a function to return useMutation for deleting task
+* a function to return the return values of useMutation for deleting task
 * */
 export const useDeleteTask = (queryKey: QueryKey) => {
   const client = useHttp();
@@ -81,7 +81,7 @@ export const useDeleteTask = (queryKey: QueryKey) => {
 };
 
 /*
-* What: a function to return useMutation for reordering task
+* a function to return the return values of useMutation for reordering task
 * */
 export const useReorderTask = (queryKey: QueryKey) => {
   const client = useHttp();

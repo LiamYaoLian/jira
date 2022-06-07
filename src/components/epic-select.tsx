@@ -1,3 +1,6 @@
+/**
+ * Select component for Epics
+ */
 import React from "react";
 import { IdSelect } from "components/id-select";
 import { useEpics } from "utils/epic";

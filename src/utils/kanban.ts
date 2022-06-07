@@ -1,5 +1,5 @@
 /**
- * What: util functions to create, read, update, delete Kanbans
+ * util functions to create, read, update, delete Kanbans
  */
 import {useHttp} from "utils/http";
 import {QueryKey, useMutation, useQuery} from "react-query";
@@ -7,7 +7,7 @@ import {Kanban} from "types/kanban";
 import {useAddConfig, useDeleteConfig, useReorderKanbanConfig,} from "utils/use-optimistic-options";
 
 /*
-* What: a function to get an array of Kanbans from backend
+* a function to get an array of Kanbans from backend
 * How: send an HTTP request to "kanbans" to get an array of Kanbans
 * */
 export const useKanbans = (param?: Partial<Kanban>) => {
@@ -19,7 +19,7 @@ export const useKanbans = (param?: Partial<Kanban>) => {
 };
 
 /*
-* What: a function to return useMutation for adding Kanban
+* a function to return the return values of useMutation for adding Kanban
 * */
 export const useAddKanban = (queryKey: QueryKey) => {
   const client = useHttp();
@@ -36,7 +36,7 @@ export const useAddKanban = (queryKey: QueryKey) => {
 };
 
 /*
-* What: a function to return useMutation for deleting Kanban
+* a function to return the return values of useMutation for deleting Kanban
 * */
 export const useDeleteKanban = (queryKey: QueryKey) => {
   const client = useHttp();
@@ -67,7 +67,7 @@ export interface SortProps {
 }
 
 /*
-* What: a function to return useMutation for reordering Kanban
+* a function to return the return values of useMutation for reordering Kanban
 * */
 export const useReorderKanban = (queryKey: QueryKey) => {
   const client = useHttp();

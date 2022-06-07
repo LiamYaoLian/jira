@@ -1,10 +1,10 @@
 /*
-* What: some util functions
+* some util functions
 * */
 import {useEffect, useRef, useState} from "react";
 
 /*
-* What: a function to remove keys whose values are undefined, null, or ''
+* a function to remove keys whose values are undefined, null, or ''
 * */
 export const cleanObject = (object?: { [key: string]: unknown }) => {
 
@@ -29,7 +29,7 @@ export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 
 // TODO
 /*
-* What: a function to achieve "when a component is mounted, call the callback"
+* a function to achieve "when a component is mounted, call the callback"
 * */
 export const useMount = (callback: () => void) => {
   useEffect(() => {
@@ -38,9 +38,9 @@ export const useMount = (callback: () => void) => {
 };
 
 /*
-* What: a function to set value after a delay
+* a function to set value after a delay
 * Why: to avoid sending too many requests while user is typing
-* Key: closure
+* Highlight: closure
 * */
 export const useDebounce = <V>(value: V, delay?: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -56,8 +56,8 @@ export const useDebounce = <V>(value: V, delay?: number) => {
 };
 
 /*
-* What: a function to update the document title; recover the old title in componentWillUnmount if we don't want to keep the new title
-* Key: useRef
+* a function to update the document title; recover the old title in componentWillUnmount if we don't want to keep the new title
+* Highlight: useRef
 * */
 export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
   const oldTitle = useRef(document.title).current;
@@ -78,12 +78,12 @@ export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
 };
 
 /*
-* What: a function to reset route to origin
+* a function to reset route to origin
 * */
 export const resetRoute = () => (window.location.href = window.location.origin);
 
 /*
-* What: a function to return a subset of an object
+* a function to return a subset of an object
 * How: pass an object and an array of keys, return a new object whose keys exist in the array of keys
 * */
 export const subset = <O extends { [key in string]: unknown }, K extends keyof O>(obj: O, keys: K[])=> {
@@ -94,8 +94,8 @@ export const subset = <O extends { [key in string]: unknown }, K extends keyof O
 };
 
 /*
-* What: a function to indicate whether a component is mounted (true) or not (false)
-* Key: useRef
+* a function to indicate whether a component is mounted (true) or not (false)
+* Highlight: useRef
 * */
 export const useMountedRef = () => {
   const mountedRef = useRef(false);

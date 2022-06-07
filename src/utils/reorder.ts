@@ -1,5 +1,5 @@
 /**
- * What: a function to do optimistic update locally
+ * a function to do optimistic update locally
  * @param fromId the item to be reordered
  * @param type 'before' | 'after': before or after the reference
  * @param referenceId
@@ -24,7 +24,7 @@ export const reorder = ({fromId, type, referenceId, list}: {
 };
 
 /**
- * What: a function to put the "from" item before the "to" item; return a list
+ * a function to put the "from" item before the "to" item; return a list
  * @param list
  * @param from
  * @param to
@@ -39,7 +39,7 @@ const insertBefore = (list: unknown[], from: number, to: number) => {
 };
 
 /**
- * What: a function to put the "from" item after the "to" item; return a list
+ * a function to put the "from" item after the "to" item; return a list
  * @param list
  * @param from
  * @param to

@@ -11,6 +11,9 @@ interface AuthForm {
   password: string;
 }
 
+/**
+ * A function to return user by sending token to backend
+ */
 const bootstrapUser = async () => {
   let user = null;
   const token = auth.getToken();
@@ -21,6 +24,9 @@ const bootstrapUser = async () => {
   return user;
 };
 
+/**
+ * An context object
+ */
 const AuthContext = React.createContext<
   | {
       user: User | null;
@@ -32,6 +38,11 @@ const AuthContext = React.createContext<
 >(undefined);
 AuthContext.displayName = 'AuthContext';
 
+/**
+ * A function to return AuthContext.Provider component
+ * @param children
+ * @constructor
+ */
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const queryClient = useQueryClient();
@@ -40,7 +51,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const register = (form: AuthForm) => auth.register(form).then(setUser);
   const logout = () => auth.logout().then((user) => {
     setUser(null)
+    // TODO
     queryClient.clear()
+    // TODO
     resetRoute()
   });
 
@@ -48,6 +61,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     bootstrapUser().then(setUser);
   });
 
+  /*
+  * The Provider component accepts a value prop to be passed to consuming components that are descendants of this Provider.
+  * https://reactjs.org/docs/context.html#contextprovider
+  * */
   return (
     <AuthContext.Provider
       children={children}
@@ -56,6 +73,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+/**
+ * A function to return the current context value
+ */
 export const useAuth = () => {
   const context = React.useContext(AuthContext);
   if (!context) {

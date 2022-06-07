@@ -1,14 +1,17 @@
-import React, { useState } from "react";
-import { Row, ScreenContainer } from "components/lib";
-import { useProjectInUrl } from "screens/kanban/util";
-import { useDeleteEpic, useEpics } from "utils/epic";
-import { Button, List, Modal } from "antd";
-import dayjs from "dayjs";
-import { useTasks } from "utils/task";
-import { Link } from "react-router-dom";
-import { useEpicSearchParams, useEpicsQueryKey } from "screens/epic/util";
-import { Epic } from "types/epic";
-import { CreateEpic } from "screens/epic/create-epic";
+/**
+ * Epic screen
+ */
+import React, { useState } from 'react';
+import { Row, ScreenContainer } from 'components/lib';
+import { useProjectInUrl } from 'screens/kanban/util';
+import { useDeleteEpic, useEpics } from 'utils/epic';
+import { Button, List, Modal } from 'antd';
+import dayjs from 'dayjs';
+import { useTasks } from 'utils/task';
+import { Link } from 'react-router-dom';
+import { useEpicSearchParams, useEpicsQueryKey } from 'screens/epic/util';
+import { Epic } from 'types/epic';
+import { CreateEpic } from 'screens/epic/create-epic';
 
 export const EpicScreen = () => {
   const { data: currentProject } = useProjectInUrl();
@@ -20,8 +23,8 @@ export const EpicScreen = () => {
   const confirmDeleteEpic = (epic: Epic) => {
     Modal.confirm({
       title: `Confirm Deleting Epic：${epic.name}`,
-      content: "Click to Delete",
-      okText: "OK",
+      content: 'Click to Delete',
+      okText: 'OK',
       onOk() {
         deleteEpic({ id: epic.id });
       },
@@ -32,35 +35,30 @@ export const EpicScreen = () => {
     <ScreenContainer>
       <Row between={true}>
         <h1>{currentProject?.name}Epic</h1>
-        <Button onClick={() => setEpicCreateOpen(true)} type={"link"}>
-          Create Epic
-        </Button>
+        <Button onClick={() => setEpicCreateOpen(true)} type={'link'}>Create Epic</Button>
       </Row>
       <List
-        style={{ overflow: "scroll" }}
+        style={{ overflow: 'scroll' }}
         dataSource={epics}
-        itemLayout={"vertical"}
+        itemLayout={'vertical'}
         renderItem={(epic) => (
           <List.Item>
             <List.Item.Meta
               title={
                 <Row between={true}>
                   <span>{epic.name}</span>
-                  <Button onClick={() => confirmDeleteEpic(epic)} type={"link"}>
-                    Delete
-                  </Button>
+                  <Button onClick={() => confirmDeleteEpic(epic)} type={'link'}>Delete</Button>
                 </Row>
               }
               description={
                 <div>
-                  <div>Start Time：{dayjs(epic.start).format("YYYY-MM-DD")}</div>
-                  <div>End Time：{dayjs(epic.end).format("YYYY-MM-DD")}</div>
+                  <div>Start Time：{dayjs(epic.start).format('YYYY-MM-DD')}</div>
+                  <div>End Time：{dayjs(epic.end).format('YYYY-MM-DD')}</div>
                 </div>
               }
             />
             <div>
-              {tasks
-                ?.filter((task) => task.epicId === epic.id)
+              {tasks?.filter((task) => task.epicId === epic.id)
                 .map((task) => (
                   <Link
                     to={`/projects/${currentProject?.id}/kanban?editingTaskId=${task.id}`}
@@ -73,10 +71,7 @@ export const EpicScreen = () => {
           </List.Item>
         )}
       />
-      <CreateEpic
-        onClose={() => setEpicCreateOpen(false)}
-        visible={epicCreateOpen}
-      />
+      <CreateEpic onClose={() => setEpicCreateOpen(false)} visible={epicCreateOpen}/>
     </ScreenContainer>
   );
 };

@@ -18,7 +18,7 @@ const defaultConfig = {
 };
 
 /**
- * What: a function to return a function that will call dispatch if the component is mounted
+ * a function to return a function that will call dispatch if the component is mounted
  * @param dispatch
  */
 const useSafeDispatch = <T>(dispatch: (...args: T[]) => void) => {

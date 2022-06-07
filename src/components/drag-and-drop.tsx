@@ -1,4 +1,5 @@
-import React, {ReactNode} from "react";
+// TODO
+import React, {ReactNode} from 'react';
 import {
   Draggable,
   DraggableProps,
@@ -6,9 +7,9 @@ import {
   DroppableProps,
   DroppableProvided,
   DroppableProvidedProps,
-} from "react-beautiful-dnd";
+} from 'react-beautiful-dnd';
 
-type DropProps = Omit<DroppableProps, "children"> & { children: ReactNode };
+type DropProps = Omit<DroppableProps, 'children'> & { children: ReactNode };
 
 export const Drop = ({children, ...props}: DropProps) => {
   return (
@@ -38,7 +39,7 @@ export const DropChild = React.forwardRef<HTMLDivElement, DropChildProps>(
   )
 );
 
-type DragProps = Omit<DraggableProps, "children"> & { children: ReactNode };
+type DragProps = Omit<DraggableProps, 'children'> & { children: ReactNode };
 export const Drag = ({children, ...props}: DragProps) => {
   return (
     <Draggable {...props}>

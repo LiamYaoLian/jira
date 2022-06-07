@@ -1,3 +1,6 @@
+/**
+ * ErrorBoundary component
+ */
 import React from "react";
 
 type FallbackRender = (props: { error: Error | null }) => React.ReactElement;
@@ -14,7 +17,11 @@ export class ErrorBoundary extends React.Component<
 > {
   state = { error: null };
 
-  // when a child component throws an error, this function will receive it and call
+  /*
+  * This lifecycle is invoked after an error has been thrown by a descendant component.
+  * It receives the error that was thrown as a parameter and should return a value to update state.
+  * https://reactjs.org/docs/react-component.html#static-getderivedstatefromerror
+  * */
   static getDerivedStateFromError(error: Error) {
     return { error };
   }

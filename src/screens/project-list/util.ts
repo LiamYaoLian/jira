@@ -3,7 +3,7 @@ import {useMemo} from 'react';
 import {useProject} from '../../utils/project';
 
 /**
- * A function to get parameters (['name','personId']) in the page url based and a function to set search params in a clean way
+ * a function to get parameters (['name','personId']) in the page url based and a function to set search params in a clean way
  */
 export const useProjectsSearchParams = () => {
   const [param, setParam] = useUrlQueryParam(['name', 'personId']);
@@ -14,7 +14,7 @@ export const useProjectsSearchParams = () => {
 };
 
 /**
- * A function to return an object related to the Project Modal. This object includes:
+ * a function to return an object related to the Project Modal. This object includes:
  * {
  *   projectModalOpen: true | false,
  *   open: fn to change url
@@ -47,7 +47,7 @@ export const useProjectModal = () => {
 }
 
 /**
- * A function to return an array: ['projects',  {personId: number | undefined, name: string}]
+ * a function to return an array: ['projects',  {personId: number | undefined, name: string}]
  */
 export const useProjectsQueryKey = () => {
   const [params] = useProjectsSearchParams();

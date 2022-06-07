@@ -1,39 +1,48 @@
-import React from "react";
-import { Kanban } from "types/kanban";
-import { useTaskTypes } from "utils/task-type";
-import taskIcon from "assets/task.svg";
-import bugIcon from "assets/bug.svg";
-import styled from "@emotion/styled";
-import { Button, Card, Dropdown, Menu, Modal } from "antd";
-import { useTasks } from "utils/task";
+import React from 'react';
+import { Kanban } from 'types/kanban';
+import { useTaskTypes } from 'utils/task-type';
+import taskIcon from 'assets/task.svg';
+import bugIcon from 'assets/bug.svg';
+import styled from '@emotion/styled';
+import { Button, Card, Dropdown, Menu, Modal } from 'antd';
+import { useTasks } from 'utils/task';
 import {
     useKanbansQueryKey,
     useTasksModal,
     useTasksSearchParams,
-} from "screens/kanban/util";
-import { CreateTask } from "screens/kanban/create-task";
-import { Task } from "types/task";
-import { Mark } from "components/mark";
-import { useDeleteKanban } from "utils/kanban";
-import { Row } from "components/lib";
-import { Drag, Drop, DropChild } from "components/drag-and-drop";
+} from 'screens/kanban/util';
+import { CreateTask } from 'screens/kanban/create-task';
+import { Task } from 'types/task';
+import { Mark } from 'components/mark';
+import { useDeleteKanban } from 'utils/kanban';
+import { Row } from 'components/lib';
+import { Drag, Drop, DropChild } from 'components/drag-and-drop';
 
+/**
+ * A function to return a task icon or a bug icon img based on id
+ * @param id
+ * @constructor
+ */
 const TaskTypeIcon = ({ id }: { id: number }) => {
     const { data: taskTypes } = useTaskTypes();
     const name = taskTypes?.find((taskType) => taskType.id === id)?.name;
-    if (!name) {
-        return null;
-    }
-    return <img alt={"task-icon"} src={name === "task" ? taskIcon : bugIcon} />;
+    if (!name) return null;
+    return <img alt={'task-icon'} src={name === 'task' ? taskIcon : bugIcon} />;
 };
 
+// TODO Mark
+/**
+ * A function to return a TaskCard
+ * @param task
+ * @constructor
+ */
 const TaskCard = ({ task }: { task: Task }) => {
     const { startEdit } = useTasksModal();
     const { name: keyword } = useTasksSearchParams();
     return (
         <Card
             onClick={() => startEdit(task.id)}
-            style={{ marginBottom: "0.5rem", cursor: "pointer" }}
+            style={{ marginBottom: '0.5rem', cursor: 'pointer' }}
             key={task.id}
         >
             <p>
@@ -44,12 +53,13 @@ const TaskCard = ({ task }: { task: Task }) => {
     );
 };
 
+// TODO
 export const KanbanColumn = React.forwardRef<
     HTMLDivElement,
     { kanban: Kanban }
     >(({ kanban, ...props }, ref) => {
     const { data: allTasks } = useTasks(useTasksSearchParams());
-    const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id);
+    const tasks = allTasks?.filter(task => task.kanbanId === kanban.id);
     return (
         <Container {...props} ref={ref}>
             <Row between={true}>
@@ -58,16 +68,16 @@ export const KanbanColumn = React.forwardRef<
             </Row>
             <TasksContainer>
                 <Drop
-                    type={"ROW"}
-                    direction={"vertical"}
+                    type={'ROW'}
+                    direction={'vertical'}
                     droppableId={String(kanban.id)}
                 >
-                    <DropChild style={{ minHeight: "1rem" }}>
+                    <DropChild style={{ minHeight: '1rem' }}>
                         {tasks?.map((task, taskIndex) => (
                             <Drag
                                 key={task.id}
                                 index={taskIndex}
-                                draggableId={"task" + task.id}
+                                draggableId={'task' + task.id}
                             >
                                 <div>
                                     <TaskCard key={task.id} task={task} />
@@ -82,13 +92,14 @@ export const KanbanColumn = React.forwardRef<
     );
 });
 
+// TODO
 const More = ({ kanban }: { kanban: Kanban }) => {
     const { mutateAsync } = useDeleteKanban(useKanbansQueryKey());
     const startDelete = () => {
         Modal.confirm({
-            okText: "确定",
-            cancelText: "取消",
-            title: "确定删除看板吗",
+            okText: 'Confirm',
+            cancelText: 'Cancel',
+            title: 'Are you sure about deleting this Kanban?',
             onOk() {
                 return mutateAsync({ id: kanban.id });
             },
@@ -97,19 +108,20 @@ const More = ({ kanban }: { kanban: Kanban }) => {
     const overlay = (
         <Menu>
             <Menu.Item>
-                <Button type={"link"} onClick={startDelete}>
-                    删除
+                <Button type={'link'} onClick={startDelete}>
+                    Delete
                 </Button>
             </Menu.Item>
         </Menu>
     );
     return (
         <Dropdown overlay={overlay}>
-            <Button type={"link"}>...</Button>
+            <Button type={'link'}>...</Button>
         </Dropdown>
     );
 };
 
+// TODO
 export const Container = styled.div`
   min-width: 27rem;
   border-radius: 6px;
@@ -120,6 +132,7 @@ export const Container = styled.div`
   margin-right: 1.5rem;
 `;
 
+// TODO
 const TasksContainer = styled.div`
   overflow: scroll;
   flex: 1;

@@ -1,56 +1,55 @@
-import React, { useCallback } from "react";
-import { useDocumentTitle } from "utils";
+import React, { useCallback } from 'react';
+import { useDocumentTitle } from 'utils';
 import {
   useKanbanSearchParams,
   useKanbansQueryKey,
   useProjectInUrl,
   useTasksQueryKey,
   useTasksSearchParams,
-} from "screens/kanban/util";
-import { KanbanColumn } from "screens/kanban/kanban-column";
-import styled from "@emotion/styled";
-import { useKanbans, useReorderKanban } from "utils/kanban";
-import { SearchPanel } from "screens/kanban/search-panel";
-import { ScreenContainer } from "components/lib";
-import { useReorderTask, useTasks } from "utils/task";
-import { Spin } from "antd";
-import { CreateKanban } from "screens/kanban/create-kanban";
-import { TaskModal } from "screens/kanban/task-modal";
-import { DragDropContext, DropResult } from "react-beautiful-dnd";
-import { Drag, Drop, DropChild } from "components/drag-and-drop";
-import { Profiler } from "components/profiler";
+} from 'screens/kanban/util';
+import { KanbanColumn } from 'screens/kanban/kanban-column';
+import styled from '@emotion/styled';
+import { useKanbans, useReorderKanban } from 'utils/kanban';
+import { SearchPanel } from 'screens/kanban/search-panel';
+import { ScreenContainer } from 'components/lib';
+import { useReorderTask, useTasks } from 'utils/task';
+import { Spin } from 'antd';
+import { CreateKanban } from 'screens/kanban/create-kanban';
+import { TaskModal } from 'screens/kanban/task-modal';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
+import { Drag, Drop, DropChild } from 'components/drag-and-drop';
+import { Profiler } from 'components/profiler';
 
 export const KanbanScreen = () => {
-  useDocumentTitle("Kanban List");
+  useDocumentTitle('Kanban List');
 
   const { data: currentProject } = useProjectInUrl();
-  const { data: kanbans, isLoading: kanbanIsLoading } = useKanbans(
-      useKanbanSearchParams()
-  );
+  const { data: kanbans, isLoading: kanbanIsLoading } = useKanbans(useKanbanSearchParams());
   const { isLoading: taskIsLoading } = useTasks(useTasksSearchParams());
   const isLoading = taskIsLoading || kanbanIsLoading;
 
+  // TODO
   const onDragEnd = useDragEnd();
   return (
-      <Profiler id={"kanban-page"}>
+      <Profiler id={'kanban-page'}>
         <DragDropContext onDragEnd={onDragEnd}>
           <ScreenContainer>
             <h1>{currentProject?.name}Kanban</h1>
             <SearchPanel />
             {isLoading ? (
-                <Spin size={"large"} />
+                <Spin size={'large'} />
             ) : (
                 <ColumnsContainer>
                   <Drop
-                      type={"COLUMN"}
-                      direction={"horizontal"}
-                      droppableId={"kanban"}
+                      type={'COLUMN'}
+                      direction={'horizontal'}
+                      droppableId={'kanban'}
                   >
-                    <DropChild style={{ display: "flex" }}>
+                    <DropChild style={{ display: 'flex' }}>
                       {kanbans?.map((kanban, index) => (
                           <Drag
                               key={kanban.id}
-                              draggableId={"kanban" + kanban.id}
+                              draggableId={'kanban' + kanban.id}
                               index={index}
                           >
                             <KanbanColumn kanban={kanban} key={kanban.id} />
@@ -68,6 +67,7 @@ export const KanbanScreen = () => {
   );
 };
 
+// TODO
 export const useDragEnd = () => {
   const { data: kanbans } = useKanbans(useKanbanSearchParams());
   const { mutate: reorderKanban } = useReorderKanban(useKanbansQueryKey());
@@ -79,16 +79,16 @@ export const useDragEnd = () => {
           return;
         }
         // Kanban sorting
-        if (type === "COLUMN") {
+        if (type === 'COLUMN') {
           const fromId = kanbans?.[source.index].id;
           const toId = kanbans?.[destination.index].id;
           if (!fromId || !toId || fromId === toId) {
             return;
           }
-          const type = destination.index > source.index ? "after" : "before";
+          const type = destination.index > source.index ? 'after' : 'before';
           reorderKanban({ fromId, referenceId: toId, type });
         }
-        if (type === "ROW") {
+        if (type === 'ROW') {
           const fromKanbanId = +source.droppableId;
           const toKanbanId = +destination.droppableId;
           const fromTask = allTasks.filter(
@@ -107,8 +107,8 @@ export const useDragEnd = () => {
             toKanbanId,
             type:
                 fromKanbanId === toKanbanId && destination.index > source.index
-                    ? "after"
-                    : "before",
+                    ? 'after'
+                    : 'before',
           });
         }
       },
@@ -116,7 +116,7 @@ export const useDragEnd = () => {
   );
 };
 
-export const ColumnsContainer = styled("div")`
+export const ColumnsContainer = styled('div')`
   display: flex;
   overflow-x: scroll;
   flex: 1;

@@ -1,12 +1,17 @@
 import React from 'react';
-import {Button, Divider, List, Popover, Typography} from "antd";
-import {useProjects} from "../utils/project";
-import styled from "@emotion/styled";
+import {Button, Divider, List, Popover, Typography} from 'antd';
+import {useProjects} from '../utils/project';
+import styled from '@emotion/styled';
 import { ButtonNoPadding } from './lib';
-import {useProjectModal} from "../screens/project-list/util";
+import {useProjectModal} from '../screens/project-list/util';
 
+/**
+ * ProjectPopover component
+ * @constructor
+ */
 export const ProjectPopover = () => {
     const {open} = useProjectModal()
+    // TODO refetch: how to implement
     const {data: projects, refetch} = useProjects()
     const pinnedProjects = projects?.filter(project => project.pin)
 
@@ -26,5 +31,5 @@ export const ProjectPopover = () => {
 }
 
 const ContentContainer = styled.div`
-  min-weight: 30rem;
+  min-width: 30rem;
 `

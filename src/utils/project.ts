@@ -1,5 +1,5 @@
 /**
- * What: util functions to create, read, update, delete projects
+ * util functions to create, read, update, delete projects
  */
 import {useHttp} from './http';
 import {QueryKey, useMutation, useQuery, useQueryClient} from "react-query";
@@ -7,7 +7,7 @@ import {useDeleteConfig, useEditConfig} from "./use-optimistic-options";
 import {Project} from "../types/project";
 
 /*
-* What: a function to get an array of projects from backend
+* a function to get an array of projects from backend
 * How: send an HTTP request to "projects" to get an array of tasks
 * */
 export const useProjects = (param?: Partial<Project>) => {
@@ -17,7 +17,7 @@ export const useProjects = (param?: Partial<Project>) => {
 }
 
 /*
-* What: a function to get a project by id from backend
+* a function to get a project by id from backend
 * */
 export const useProject = (id?: number) => {
   const client = useHttp();
@@ -29,7 +29,7 @@ export const useProject = (id?: number) => {
 };
 
 /*
-* What: a function to return useMutation for adding project
+* a function to return the return values of useMutation for adding project
 * */
 export const useAddProject = () => {
   const client = useHttp()
@@ -43,7 +43,7 @@ export const useAddProject = () => {
 }
 
 /*
-* What: a function to return useMutation for editing task
+* a function to return the return values of useMutation for editing task
 * */
 export const useEditProject = (queryKey: QueryKey) => {
   const client = useHttp();
@@ -58,7 +58,7 @@ export const useEditProject = (queryKey: QueryKey) => {
 };
 
 /*
-* What: a function to return useMutation for deleting project
+* a function to return the return values of useMutation for deleting project
 * */
 export const useDeleteProject = (queryKey: QueryKey) => {
   const client = useHttp();

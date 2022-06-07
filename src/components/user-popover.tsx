@@ -1,14 +1,18 @@
-import React from "react";
-import { Divider, List, Popover, Typography } from "antd";
-import styled from "@emotion/styled";
-import { useUsers } from "utils/user";
+import React from 'react';
+import { Divider, List, Popover, Typography } from 'antd';
+import styled from '@emotion/styled';
+import { useUsers } from 'utils/user';
 
+/**
+ * UserPopover component
+ * @constructor
+ */
 export const UserPopover = () => {
   const { data: users, refetch } = useUsers();
 
   const content = (
     <ContentContainer>
-      <Typography.Text type={"secondary"}>Member List</Typography.Text>
+      <Typography.Text type={'secondary'}>Member List</Typography.Text>
       <List>
         {users?.map((user) => (
           <List.Item key={user.id}>
@@ -23,7 +27,7 @@ export const UserPopover = () => {
   return (
     <Popover
       onVisibleChange={() => refetch()}
-      placement={"bottom"}
+      placement={'bottom'}
       content={content}
     >
       <span>Member</span>

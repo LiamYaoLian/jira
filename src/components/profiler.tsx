@@ -1,9 +1,7 @@
-import React, { ProfilerOnRenderCallback, ProfilerProps } from "react";
+// TODO
+import React, { ProfilerOnRenderCallback, ProfilerProps } from 'react';
 
-type Props = { metadata?: any; phases?: ("mount" | "update")[] } & Omit<
-    ProfilerProps,
-    "onRender"
-    >;
+type Props = { metadata?: any; phases?: ('mount' | 'update')[] } & Omit<ProfilerProps, 'onRender'>;
 
 let queue: unknown[] = [];
 

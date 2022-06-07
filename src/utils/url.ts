@@ -1,12 +1,12 @@
 /**
- * What: util functions for optimistic update
+ * util functions for optimistic update
  */
 import {URLSearchParamsInit, useSearchParams} from 'react-router-dom';
 import {useMemo, useState} from 'react';
 import {cleanObject, subset} from './index';
 
 /**
- * A function to get the parameters in the page url based on keys and a function to set search params in a clean way
+ * a function to get the parameters in the page url based on keys and a function to set search params in a clean way
  * How:
  * Highlight: useMemo; clean params in url
  */
@@ -26,7 +26,7 @@ export const useUrlQueryParam = <K extends string>(keys: K[]) => {
 };
 
 /*
-* What: a function to clean params in url by deleting void params
+* a function to clean params in url by deleting void params
 * */
 export const useSetUrlSearchParam = () => {
   const [searchParams, setSearchParam] = useSearchParams();

@@ -1,6 +1,7 @@
-import {QueryKey, useQueryClient} from "react-query";
-import {reorder} from "./reorder";
-import {Task} from "../types/task";
+// TODO
+import {QueryKey, useQueryClient} from 'react-query';
+import {reorder} from './reorder';
+import {Task} from '../types/task';
 
 
 export const useConfig = (queryKey: QueryKey, callback: (target: any, old?: any[]) => any[]) => {
