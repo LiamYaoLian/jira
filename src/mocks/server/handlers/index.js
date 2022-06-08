@@ -27,41 +27,42 @@ export const handlers = [
   ...getRestHandlers("tags", tagDB),
   ...getRestHandlers("users", userDB),
   ...reorderHandlers,
-].map((handler) => {
-  return {
-    ...handler,
-    async resolver(req, res, ctx) {
-      try {
-        if (shouldFail(req)) {
-          throw new Error("请求失败，请检查 jira-dev-tool 的设置");
-        }
-        const result = await handler.resolver(req, res, ctx);
-        return result;
-      } catch (error) {
-        const status = error.status || 500;
-        return res(
-          ctx.status(status),
-          ctx.json({ status, message: error.message || "Unknown Error" })
-        );
-      } finally {
-        await sleep();
-      }
-    },
-  };
-});
-
-function shouldFail(req) {
-  if (JSON.stringify(req.body)?.includes("FAIL")) return true;
-  if (req.url.searchParams.toString()?.includes("FAIL")) return true;
-  if (process.env.NODE_ENV === "test") return false;
-  const failureRate = Number(
-    window.localStorage.getItem("__jira_failure_rate__") || 0
-  );
-  if (Math.random() < failureRate) return true;
-  if (requestMatchesFailConfig(req)) return true;
-
-  return false;
-}
+]
+// ].map((handler) => {
+//   return {
+//     ...handler,
+//     async resolver(req, res, ctx) {
+//       try {
+//         if (shouldFail(req)) {
+//           throw new Error("请求失败，请检查 jira-dev-tool 的设置");
+//         }
+//         const result = await handler.resolver(req, res, ctx);
+//         return result;
+//       } catch (error) {
+//         const status = error.status || 500;
+//         return res(
+//           ctx.status(status),
+//           ctx.json({ status, message: error.message || "Unknown Error" })
+//         );
+//       } finally {
+//         await sleep();
+//       }
+//     },
+//   };
+// });
+//
+// function shouldFail(req) {
+//   if (JSON.stringify(req.body)?.includes("FAIL")) return true;
+//   if (req.url.searchParams.toString()?.includes("FAIL")) return true;
+//   if (process.env.NODE_ENV === "test") return false;
+//   const failureRate = Number(
+//     window.localStorage.getItem("__jira_failure_rate__") || 0
+//   );
+//   if (Math.random() < failureRate) return true;
+//   if (requestMatchesFailConfig(req)) return true;
+//
+//   return false;
+// }
 
 function requestMatchesFailConfig(req) {
   function configMatches({ requestMethod, urlMatch }) {
