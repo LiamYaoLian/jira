@@ -17,28 +17,10 @@ import {Profiler} from "components/profiler";
 
 // TODO profiler
 
-loadServer(() =>
-  ReactDOM.render(
-    <React.StrictMode>
-      <Profiler id={"Root App"} phases={["mount"]}>
-        <AppProviders>
-          {/*<DevTools />*/}
-          <App />
-        </AppProviders>
-      </Profiler>
-    </React.StrictMode>,
-    document.getElementById("root")
-  )
-);
-
-// if (process.env.NODE_ENV === 'development') {
-//   const {worker} = require('./mocks/browser')
-//   worker.start()
-// }
-//
-// ReactDOM.render(
+// loadServer(() =>
+//   ReactDOM.render(
 //     <React.StrictMode>
-//       <Profiler id={'Root App'} phases={["mount"]}>
+//       <Profiler id={"Root App"} phases={["mount"]}>
 //         <AppProviders>
 //           {/*<DevTools />*/}
 //           <App />
@@ -46,7 +28,25 @@ loadServer(() =>
 //       </Profiler>
 //     </React.StrictMode>,
 //     document.getElementById("root")
+//   )
 // );
+
+if (process.env.NODE_ENV === 'development') {
+  const {worker} = require('./mocks/browser')
+  worker.start()
+}
+
+ReactDOM.render(
+    <React.StrictMode>
+      <Profiler id={'Root App'} phases={["mount"]}>
+        <AppProviders>
+          {/*<DevTools />*/}
+          <App />
+        </AppProviders>
+      </Profiler>
+    </React.StrictMode>,
+    document.getElementById("root")
+);
 
 
 

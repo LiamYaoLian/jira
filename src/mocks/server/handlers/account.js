@@ -31,8 +31,6 @@ export const userHandlers = [
     const user = await getUser(req);
     const token = getToken(req);
     return res(
-      // TODO
-      ctx.status(200),
       ctx.json({ user: { ...user, token } }));
 
   }),
