@@ -1,5 +1,6 @@
 import * as initialData from './initial-data'
-import { epicDB, kanbanDB, projectDB, tagDB, taskDB, taskTypeDB, userDB } from './data/rest'
+import { bootstrapDB, epicDB, kanbanDB, projectDB, tagDB, taskDB, taskTypeDB, userDB } from './data/rest'
+import {bootstrapped} from "./initial-data";
 
 Array.prototype.random = function () {
   return this[Math.floor(Math.random() * this.length)];
@@ -8,6 +9,13 @@ Array.prototype.random = function () {
 const pickId = (item) => item.id;
 
 export const bootstrap = (id) => {
+
+  const hasBootstrappedKey = '__hasBootstrapped';
+  const hasBootstrapped = window.localStorage.getItem(hasBootstrappedKey);
+  if (hasBootstrapped === 'true') {
+    return;
+  }
+  window.localStorage.setItem(hasBootstrappedKey, 'true');
   userDB.push(assignId(id, initialData.users));
   taskTypeDB.push(assignId(id, initialData.taskTypes));
   projectDB.push(assignId(id, initialData.projects));

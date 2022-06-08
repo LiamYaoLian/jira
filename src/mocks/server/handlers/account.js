@@ -52,7 +52,6 @@ export const userHandlers = [
         ctx.json({user})
       );
     }
-
   }),
 
   rest.post(`${apiUrl}/register`, async (req, res, ctx) => {

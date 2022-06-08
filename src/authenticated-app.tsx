@@ -15,9 +15,9 @@ import {resetRoute} from './utils';
 
 export default () => {
   return (
-    <Container>
+    <AppContainer>
       <PageHeader/>
-      <Main>
+      <AppMain>
         <Routes>
           <Route path={'/projects'} element={<ProjectListScreen/>}/>
           <Route
@@ -25,14 +25,14 @@ export default () => {
             element={<ProjectScreen/>}/>
           <Route index element={<ProjectListScreen/>}/>
         </Routes>
-      </Main>
+      </AppMain>
       <ProjectModal/>
-    </Container>
+    </AppContainer>
   );
 };
 
 // TODO review antd components
-const PageHeader = () => {
+export const PageHeader = () => {
   return (
     <Header between={true}>
       <HeaderLeft gap={true}>
@@ -73,7 +73,7 @@ const User = () => {
 
 // TODO review css
 // TODO grid
-const Container = styled.div`
+export const AppContainer = styled.div`
   display: grid;
   grid-template-rows: 6rem 1fr;
   height: 100vh;
@@ -92,7 +92,7 @@ const HeaderLeft = styled(Row)``;
 const HeaderRight = styled.header``;
 
 // TODO flex
-const Main = styled.main`
+export const AppMain = styled.main`
   display: flex;
   overflow: hidden;
 `;
