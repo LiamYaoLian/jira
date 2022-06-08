@@ -9,7 +9,7 @@ import {useDebounce, useDocumentTitle} from '../../utils';
 import {useProjects} from '../../utils/project';
 import {useUsers} from '../../utils/user';
 import {useProjectModal, useProjectsSearchParams} from './util';
-import {ButtonNoPadding, ErrorBox, Row} from "components/lib";
+import {ButtonNoPadding, ErrorBox, Row, ScreenContainer} from "components/lib";
 import {Profiler} from "../../components/profiler";
 
 export const ProjectListScreen = () => {
@@ -39,6 +39,4 @@ export const ProjectListScreen = () => {
 
 ProjectListScreen.whyDidYouRender = false;
 
-const Container = styled.div`
-  padding: 3.2rem;
-`;
+

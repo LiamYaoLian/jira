@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {Routes, Route, useLocation} from 'react-router';
 import {EpicScreen} from '../epic';
 import {KanbanScreen} from '../kanban';
+import {CapacityScreen} from '../capacity';
 import styled from "@emotion/styled";
 import {Menu} from 'antd';
 
@@ -24,6 +25,9 @@ export const ProjectScreen = () => {
           <Menu.Item key={'epic'}>
             <Link to={'epic'}>Epic</Link>
           </Menu.Item>
+          <Menu.Item key={'wbs'}>
+            <Link to={'capacity'}>Capacity</Link>
+          </Menu.Item>
 
         </Menu>
 
@@ -32,6 +36,7 @@ export const ProjectScreen = () => {
         <Routes>
           <Route path={'/kanban'} element={<KanbanScreen/>}/>
           <Route path={'/epic'} element={<EpicScreen/>}/>
+          <Route path={'/capacity'} element={<CapacityScreen/>}/>
           <Route index element={<KanbanScreen/>}/>
         </Routes>
       </Main>

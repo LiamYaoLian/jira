@@ -34,7 +34,7 @@ export const EpicScreen = () => {
   return (
     <ScreenContainer>
       <Row between={true}>
-        <h1>{currentProject?.name}Epic</h1>
+        <h1>{currentProject?.name} Epic</h1>
         <Button onClick={() => setEpicCreateOpen(true)} type={'link'}>Create Epic</Button>
       </Row>
       <List
