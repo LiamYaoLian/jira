@@ -1,85 +1,99 @@
 export const taskTypes = [
   {
-    name: "task",
+    name: 'Task',
   },
   {
-    name: "bug",
+    name: 'Bug',
   },
 ];
 
 export const tags = [
   {
-    name: "初始",
+    name: 'Initial',
   },
   {
-    name: "中期",
+    name: 'Mid-Term',
   },
   {
-    name: "结项",
+    name: 'Closure',
   },
 ];
 
 export const epics = [
   {
-    name: "骑手物料表单开发",
-    start: new Date("2020-12-10").getTime(),
-    end: new Date("2021-01-11").getTime(),
+    name: 'Group A',
+    start: new Date('2021-06-10').getTime(),
+    end: new Date('2021-08-11').getTime(),
   },
   {
-    name: "骑手地图开发",
-    start: new Date("2021-01-12").getTime(),
-    end: new Date("2021-02-14").getTime(),
+    name: 'Group B',
+    start: new Date('2021-07-12').getTime(),
+    end: new Date('2021-09-14').getTime(),
   },
   {
-    name: "骑手地图开发",
-    start: new Date("2021-01-12").getTime(),
-    end: new Date("2021-02-14").getTime(),
+    name: 'Group C',
+    start: new Date('2021-01-12').getTime(),
+    end: new Date('2021-02-14').getTime(),
   },
 ];
 
 export const kanbans = [
   {
-    name: "待完成",
+    name: 'To-do',
   },
   {
-    name: "开发中",
+    name: 'In Progress',
   },
   {
-    name: "已完成",
+    name: 'Close',
   },
 ];
 
 export const users = [
   {
-    name: "高修文",
-    organization: "外卖组",
+    name: 'Adam',
+    organization: 'Analytics',
   },
   {
-    name: "熊天成",
-    organization: "外卖组",
+    name: 'Jack',
+    organization: 'M&A',
   },
   {
-    name: "郑华",
-    organization: "总部组",
+    name: 'Leo',
+    organization: 'Account Management',
   },
   {
-    name: "王文静",
-    organization: "中台组",
+    name: 'Liam',
+    organization: 'Software Development',
   },
 ];
 
 export const projects = [
   {
-    name: "快递管理",
+    name: 'Project A',
     personId: 1,
-    organization: "快递组",
+    organization: 'Account Management',
+    created: 1604989757139,
+  },
+
+  {
+    name: 'ABC',
+    personId: 1,
+    organization: 'Software Development',
+    created: 1604989757139,
+  },
+
+  {
+    name: 'M&A',
+    personId: 1,
+    organization: 'M&A',
     created: 1604989757139,
   },
 ];
 
 export const tasks = [
   {
-    name: "管理注册界面开发",
+    name: 'Design',
     tags: [1, 2],
     reporterId: 1,
     processorId: 2,
@@ -87,10 +101,10 @@ export const tasks = [
     kanbanId: 1,
     favorite: true,
     typeId: 1,
-    note: "请尽快完成",
+    note: 'ASAP',
   },
   {
-    name: "管理登录界面开发",
+    name: 'Login Module',
     tags: [2],
     reporterId: 1,
     processorId: 2,
@@ -98,10 +112,10 @@ export const tasks = [
     kanbanId: 1,
     favorite: true,
     typeId: 1,
-    note: "请使用JWT完成",
+    note: 'Use JWT',
   },
   {
-    name: "单元测试",
+    name: 'Unit Test',
     tags: [1],
     reporterId: 1,
     processorId: 2,
@@ -109,10 +123,10 @@ export const tasks = [
     kanbanId: 1,
     favorite: true,
     typeId: 1,
-    note: "",
+    note: '',
   },
   {
-    name: "性能优化",
+    name: 'Optimization',
     tags: [1],
     reporterId: 1,
     processorId: 2,
@@ -120,10 +134,10 @@ export const tasks = [
     kanbanId: 1,
     favorite: true,
     typeId: 1,
-    note: "",
+    note: '',
   },
   {
-    name: "权限管理界面开发",
+    name: 'RBAC',
     tags: [1],
     reporterId: 1,
     processorId: 2,
@@ -131,10 +145,10 @@ export const tasks = [
     kanbanId: 1,
     favorite: true,
     typeId: 1,
-    note: "",
+    note: '',
   },
   {
-    name: "UI开发",
+    name: 'UI',
     tags: [1],
     reporterId: 1,
     processorId: 2,
@@ -142,10 +156,10 @@ export const tasks = [
     kanbanId: 1,
     favorite: true,
     typeId: 1,
-    note: "",
+    note: '',
   },
   {
-    name: "自测",
+    name: 'Unit Test',
     tags: [1],
     reporterId: 1,
     processorId: 2,
@@ -153,6 +167,6 @@ export const tasks = [
     kanbanId: 1,
     favorite: true,
     typeId: 1,
-    note: "",
+    note: '',
   },
 ];
