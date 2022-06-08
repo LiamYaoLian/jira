@@ -23,7 +23,7 @@ export const ProjectListScreen = () => {
 
   return (
     <Profiler id={'project-list'}>
-      <Container>
+      <ScreenContainer>
         <Row between={true}>
           <h1>Project List</h1>
           <ButtonNoPadding onClick={open} type={'link'}>Create New Project</ButtonNoPadding>
@@ -31,7 +31,7 @@ export const ProjectListScreen = () => {
         <SearchPanel param={param} setParam={setParam}/>
         <ErrorBox error={error}/>
         <List loading={isLoading} users={users || []} dataSource={list || []}/>
-      </Container>
+      </ScreenContainer>
     </Profiler>
 
   );
