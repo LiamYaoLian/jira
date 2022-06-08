@@ -47,7 +47,7 @@ export const userHandlers = [
     let user;
     try {
       user = await accountDB.authenticate(userFields);
-      bootstrap(user.id);
+      // bootstrap(user.id);
     } catch (error) {
       return res(
         ctx.status(error.status),
