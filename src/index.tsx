@@ -5,7 +5,8 @@ import ReactDOM from "react-dom";
 //import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import {DevTools, loadServer} from "jira-dev-tool";
+// import {DevTools, loadServer} from "jira-dev-tool";
+import {loadServer} from "./mocks";
 // 务必在jira-dev-tool后面引入
 import "antd/dist/antd.less";
 import {AppProviders} from "context";
@@ -16,28 +17,10 @@ import {Profiler} from "components/profiler";
 
 // TODO profiler
 
-// loadServer(() =>
-//   ReactDOM.render(
-//     <React.StrictMode>
-//       <Profiler id={"Root App"} phases={["mount"]}>
-//         <AppProviders>
-//           {/*<DevTools />*/}
-//           <App />
-//         </AppProviders>
-//       </Profiler>
-//     </React.StrictMode>,
-//     document.getElementById("root")
-//   )
-// );
-
-if (process.env.NODE_ENV === 'development') {
-  const {worker} = require('./mocks/browser')
-  worker.start()
-}
-
-ReactDOM.render(
+loadServer(() =>
+  ReactDOM.render(
     <React.StrictMode>
-      <Profiler id={'Root App'} phases={["mount"]}>
+      <Profiler id={"Root App"} phases={["mount"]}>
         <AppProviders>
           {/*<DevTools />*/}
           <App />
@@ -45,7 +28,25 @@ ReactDOM.render(
       </Profiler>
     </React.StrictMode>,
     document.getElementById("root")
+  )
 );
+
+// if (process.env.NODE_ENV === 'development') {
+//   const {worker} = require('./mocks/browser')
+//   worker.start()
+// }
+//
+// ReactDOM.render(
+//     <React.StrictMode>
+//       <Profiler id={'Root App'} phases={["mount"]}>
+//         <AppProviders>
+//           {/*<DevTools />*/}
+//           <App />
+//         </AppProviders>
+//       </Profiler>
+//     </React.StrictMode>,
+//     document.getElementById("root")
+// );
 
 
 

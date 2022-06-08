@@ -1,33 +1,3 @@
-import {rest} from 'msw';
-import {ServerError} from "./server/util";
-import * as accountDB from "./server/data/account";
-
-const apiUrl = process.env.REACT_APP_API_URL;
-
-
-const getToken = (req: any) =>
-  req.headers.get("Authorization")?.replace("Bearer ", "");
-
-export async function getUser(req: any) {
-  const token = getToken(req);
-  if (!token) {
-    const error = new ServerError("A token must be provided");
-    error.status = 401;
-    throw error;
-  }
-  let userId;
-  try {
-    userId = atob(token);
-  } catch (e) {
-    const error = new ServerError("Invalid token. Please login again.");
-    error.status = 401;
-    throw error;
-  }
-  return await accountDB.read(+userId);
-}
-
-
-const fakeAuth = {"user": {"id": 2087933171, "name": "test", "token": "MjA4NzkzMzE3MQ=="}}
 export const taskTypes = [
   {
     name: "task",
@@ -81,19 +51,19 @@ export const kanbans = [
 
 export const users = [
   {
-    name: "Adam",
+    name: "高修文",
     organization: "外卖组",
   },
   {
-    name: "Bill",
+    name: "熊天成",
     organization: "外卖组",
   },
   {
-    name: "Cindy",
+    name: "郑华",
     organization: "总部组",
   },
   {
-    name: "Doug",
+    name: "王文静",
     organization: "中台组",
   },
 ];
@@ -186,43 +156,3 @@ export const tasks = [
     note: "",
   },
 ];
-
-
-export const handlers = [
-  rest.get(`${apiUrl}/me`, (req, res, ctx) => {
-    // return res(
-    //   ctx.status(200),
-    //   ctx.json(fakeAuth)
-    // )
-    const user = getUser(req);
-    const token = getToken(req);
-    return res(
-      ctx.status(200),
-      ctx.json({ user: { ...user, token } }));
-  }),
-
-  // @ts-ignore
-  rest.post(`${apiUrl}/login`, (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json(fakeAuth)
-    )
-  }),
-
-  rest.get(`${apiUrl}/projects`, (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json(projects)
-    )
-  }),
-
-  rest.get(`${apiUrl}/users`, (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json(users)
-    )
-  }),
-
-
-]
-
