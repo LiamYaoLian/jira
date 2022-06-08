@@ -1,9 +1,10 @@
 import { required, search, ServerError } from '../util'
 
 class Rest {
-  storageKey = "";
+  storageKey = '';
   list = [];
 
+  // TODO
   get listMap() {
     return this.list.reduce((prev, next) => {
       return { ...prev, [next.id]: next };
@@ -26,6 +27,7 @@ class Rest {
     }
   };
 
+  // TODO
   /**
    *
    * @param fromId
@@ -40,7 +42,7 @@ class Rest {
       return;
     }
     const targetIndex = this.list.findIndex((item) => item.id === referenceId);
-    const insert = type === "after" ? insertAfter : insertBefore;
+    const insert = type === 'after' ? insertAfter : insertBefore;
     insert(this.list, movingItemIndex, targetIndex);
     this.persist();
   }
@@ -76,7 +78,7 @@ class Rest {
     return this.detail(id);
   }
 
-  create({ name = required("name"), ...rest }) {
+  create({ name = required('name'), ...rest }) {
     const ids = Object.keys(this.listMap).map(Number);
     const id = Math.max(...ids, 0) + 1;
     const newItem = { ...rest, name, id };
@@ -91,7 +93,7 @@ class Rest {
 
   queryByOwnerId(userId, param) {
     return this.query(param).filter((item) =>
-      "ownerId" in item ? item["ownerId"] === userId : true
+      'ownerId' in item ? item['ownerId'] === userId : true
     );
   }
 

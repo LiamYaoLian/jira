@@ -1,13 +1,11 @@
 import { ServerError } from '../util'
 
-const usersKey = "__jira_users__";
+const usersKey = '__jira_users__';
 
 let users = {};
 
-const persist = () =>
-  window.localStorage.setItem(usersKey, JSON.stringify(users));
-const load = () =>
-  Object.assign(users, JSON.parse(window.localStorage.getItem(usersKey) || ""));
+const persist = () => window.localStorage.setItem(usersKey, JSON.stringify(users));
+const load = () => Object.assign(users, JSON.parse(window.localStorage.getItem(usersKey) || ''));
 
 try {
   load();
@@ -17,12 +15,12 @@ try {
 
 const validateUserForm = ({ name, password }) => {
   if (!name) {
-    const error = new ServerError("Please input username");
+    const error = new ServerError('Please input username');
     error.status = 400;
     throw error;
   }
   if (!password) {
-    const error = new ServerError("Please input password");
+    const error = new ServerError('Please input password');
     error.status = 400;
     throw error;
   }
@@ -43,14 +41,14 @@ function sanitizeUser(user) {
   return rest;
 }
 
-const authenticate = ({ name, password }) => {
+const authenticate = async ({ name, password }) => {
   validateUserForm({ name, password });
   const id = +hash(name);
   const user = users[id] || {};
   if (user.passwordHash === hash(password)) {
-    return { ...sanitizeUser(user), token: btoa(user.id + "") };
+    return { ...sanitizeUser(user), token: btoa(user.id + '') };
   }
-  const error = new ServerError("Wrong username or password");
+  const error = new ServerError('Wrong username or password');
   error.status = 400;
   throw error;
 };
@@ -93,7 +91,7 @@ async function create({ name, password }) {
   const id = +hash(name);
   const passwordHash = hash(password);
   if (users[id]) {
-    const error = new ServerError(`用户名 "${name}" 已存在`);
+    const error = new ServerError(`Username "${name}" exists already`);
     error.status = 400;
     throw error;
   }
