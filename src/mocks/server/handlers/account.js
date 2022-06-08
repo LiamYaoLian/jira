@@ -35,15 +35,27 @@ export const userHandlers = [
 
   }),
   rest.post(`${apiUrl}/login`, async (req, res, ctx) => {
-
-
     const { username, password } = req.body;
     const user = await accountDB.authenticate({ name: username, password });
     return res(ctx.json({ user }));
   }),
 
+  // TODO
+  rest.post(`${apiUrl}/admin/login`, async (req, res, ctx) => {
+    const { username, password } = req.body;
+    const user = await accountDB.authenticate({ name: username, password });
+    if (user.role === 'admin') {
+      return res(ctx.json({ user }));
+    } else {
+      return res(
+        ctx.statusCode = 403,
+        ctx.json({user})
+      );
+    }
+
+  }),
+
   rest.post(`${apiUrl}/register`, async (req, res, ctx) => {
-    // createAdmin();
 
     const { username, password } = req.body;
     const userFields = { name: username, password };
@@ -76,7 +88,3 @@ const createAdmin = () => {
 createAdmin()
 
 
-const checkRole = (req) => {
-  const user = getUser(req);
-
-}

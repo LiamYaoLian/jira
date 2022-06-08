@@ -7,6 +7,7 @@ import {FullPageErrorFallback, FullPageLoading} from './components/lib';
 // TODO
 const AuthenticatedApp = React.lazy(() => import("authenticated-app"));
 const UnauthenticatedApp = React.lazy(() => import("unauthenticated-app"));
+const AdminApp = React.lazy(() => import ('admin-app'));
 
 // TODO React.Suspense
 function App() {
@@ -17,7 +18,7 @@ function App() {
       <ErrorBoundary fallbackRender={FullPageErrorFallback}>
         {/*React.Suspense: experimental feature*/}
         <React.Suspense fallback={<FullPageLoading/>}>
-          {user ? <AuthenticatedApp/> : <UnauthenticatedApp/>}
+          {user ? (user.role === 'admin'? <AdminApp/> : <AuthenticatedApp/>) : <UnauthenticatedApp/>}
         </React.Suspense>
       </ErrorBoundary>
     </div>

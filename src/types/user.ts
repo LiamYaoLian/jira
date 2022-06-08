@@ -5,4 +5,5 @@ export interface User {
   title: string;
   team: string;
   token: string;
+  role?: string;
 }
