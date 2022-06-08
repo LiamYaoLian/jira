@@ -4,7 +4,7 @@
 import React from "react";
 import {useAuth} from "../context/auth-context";
 import {Form, Input} from "antd";
-import {LongButton} from "./index";
+import {LongButton, ShortButton} from "./index";
 import {useAsync} from "../utils/use-async";
 
 export const LoginScreen = ({onError,}: { onError: (error: Error) => void }) => {
@@ -25,10 +25,11 @@ export const LoginScreen = ({onError,}: { onError: (error: Error) => void }) => 
         <Input placeholder={"username"} type="text" id={"username"}/>
       </Form.Item>
       <Form.Item name={"password"} rules={[{required: true, message: "Please input password"}]}>
-        <input placeholder={"password"} type="password" id={"password"}/>
+        <Input placeholder={"password"} type="password" id={"password"}/>
       </Form.Item>
       <Form.Item>
-        <LongButton loading={isLoading} htmlType={"submit"} type={"primary"}>Log In</LongButton>
+        <ShortButton loading={isLoading} htmlType={"submit"} type={"primary"}>Log In</ShortButton>
+        <ShortButton loading={isLoading} htmlType={"submit"} type={"primary"}>Admin Log In</ShortButton>
       </Form.Item>
     </Form>
   );

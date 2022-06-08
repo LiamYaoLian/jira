@@ -1,6 +1,5 @@
 import * as initialData from './initial-data'
 import { epicDB, kanbanDB, projectDB, tagDB, taskDB, taskTypeDB, userDB } from './data/rest'
-import {create} from "./data/account";
 
 Array.prototype.random = function () {
   return this[Math.floor(Math.random() * this.length)];
@@ -57,6 +56,4 @@ const assignId = (userId, list, other) => {
   return list.map((item) => ({ ...item, ownerId: userId, ...other }));
 };
 
-// create an admin account
-const admin = create({name: 'admin', password: 'complicatedPwd'})
-bootstrap(admin.id);
+

@@ -43,6 +43,11 @@ export const LongButton = styled(Button)`
   width: 100%;
 `;
 
+export const ShortButton = styled(Button)`
+  width: 45%;
+  margin: 2.5%;
+`;
+
 const Title = styled.h2`
   margin-bottom: 2.4rem;
   color: rgb(94, 108, 132);
