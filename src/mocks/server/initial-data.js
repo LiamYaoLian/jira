@@ -37,6 +37,7 @@ export const epics = [
   },
 ];
 
+// TODO
 export const kanbans = [
   {
     name: 'To-do',
@@ -49,6 +50,7 @@ export const kanbans = [
   },
 ];
 
+// TODO RBAC
 export const users = [
   {
     name: 'Adam',
