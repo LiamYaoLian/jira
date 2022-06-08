@@ -41,8 +41,8 @@ export const List = ({users, ...props}: ListProps) => {
           },
         },
         {
-          title: 'Organization',
-          dataIndex: 'organization',
+          title: 'Team',
+          dataIndex: 'team',
         },
 
         {

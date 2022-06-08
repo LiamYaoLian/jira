@@ -51,11 +51,11 @@ export const ProjectModal = () => {
             </Form.Item>
 
             <Form.Item
-              label={'Organization'}
-              name={'organization'}
-              rules={[{required: true, message: 'Please input organization name'}]}
+              label={'Team'}
+              name={'team'}
+              rules={[{required: true, message: 'Please input team name'}]}
             >
-              <Input placeholder={'Please input organization name'}/>
+              <Input placeholder={'Please input team name'}/>
             </Form.Item>
 
             <Form.Item label={'Person in Charge'} name={'personId'}>

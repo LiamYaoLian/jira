@@ -1,3 +1,4 @@
+// TODO
 export const taskTypes = [
   {
     name: 'Task',
@@ -15,7 +16,7 @@ export const tags = [
     name: 'Mid-Term',
   },
   {
-    name: 'Closure',
+    name: 'Closing',
   },
 ];
 
@@ -40,55 +41,60 @@ export const epics = [
 // TODO
 export const kanbans = [
   {
-    name: 'To-do',
+    name: 'Conception and Initiation',
   },
   {
-    name: 'In Progress',
+    name: 'Planning',
   },
   {
-    name: 'Close',
+    name: 'Execution',
+  },
+  {
+    name: 'Performance/Monitoring',
+  },
+  {
+    name: 'Closing',
   },
 ];
 
-// TODO RBAC
 export const users = [
   {
     name: 'Adam',
-    organization: 'Analytics',
+    team: 'Analytics',
   },
   {
     name: 'Jack',
-    organization: 'M&A',
+    team: 'M&A',
   },
   {
     name: 'Leo',
-    organization: 'Account Management',
+    team: 'Account Management',
   },
   {
     name: 'Liam',
-    organization: 'Software Development',
-  },
+    team: 'Software Development',
+  }
 ];
 
 export const projects = [
   {
     name: 'Project A',
     personId: 1,
-    organization: 'Account Management',
+    team: 'Account Management',
     created: 1604989757139,
   },
 
   {
     name: 'ABC',
     personId: 1,
-    organization: 'Software Development',
+    team: 'Software Development',
     created: 1604989757139,
   },
 
   {
     name: 'M&A',
     personId: 1,
-    organization: 'M&A',
+    team: 'M&A',
     created: 1604989757139,
   },
 ];

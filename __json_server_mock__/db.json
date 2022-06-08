@@ -22,35 +22,35 @@
       "id": 1,
       "name": "Driver Management",
       "personId": 1,
-      "organization": "Uber Eats",
+      "team": "Uber Eats",
       "created": 1604989757139
     },
     {
       "id": 2,
       "name": "Shopping APP",
       "personId": 2,
-      "organization": "Shopping",
+      "team": "Shopping",
       "created": 1604989757139
     },
     {
       "id": 3,
       "name": "Material Management",
       "personId": 2,
-      "organization": "Supply Chain Department",
+      "team": "Supply Chain Department",
       "created": 1546300800000
     },
     {
       "id": 4,
       "name": "General Management",
       "personId": 3,
-      "organization": "General Office",
+      "team": "General Office",
       "created": 1604980000011
     },
     {
       "id": 5,
       "name": "Delivery Route Planning",
       "personId": 4,
-      "organization": "Delivery Team",
+      "team": "Delivery Team",
       "created": 1546900800000
     }
   ]

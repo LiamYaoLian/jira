@@ -6,12 +6,12 @@ import { ServerError } from '../util'
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const getToken = (req) =>
-  req.headers.get("Authorization")?.replace("Bearer ", "");
+  req.headers.get('Authorization')?.replace('Bearer ', '');
 
 export async function getUser(req) {
   const token = getToken(req);
   if (!token) {
-    const error = new ServerError("A token must be provided");
+    const error = new ServerError('A token must be provided');
     error.status = 401;
     throw error;
   }
@@ -19,7 +19,7 @@ export async function getUser(req) {
   try {
     userId = atob(token);
   } catch (e) {
-    const error = new ServerError("Invalid token. Please login again.");
+    const error = new ServerError('Invalid token. Please login again.');
     error.status = 401;
     throw error;
   }

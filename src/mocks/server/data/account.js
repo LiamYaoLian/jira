@@ -1,11 +1,11 @@
 import { ServerError } from '../util'
 
-const usersKey = '__jira_users__';
+const userAuthKey = '__jira_user_auth____';
 
 let users = {};
 
-const persist = () => window.localStorage.setItem(usersKey, JSON.stringify(users));
-const load = () => Object.assign(users, JSON.parse(window.localStorage.getItem(usersKey) || ''));
+const persist = () => window.localStorage.setItem(userAuthKey, JSON.stringify(users));
+const load = () => Object.assign(users, JSON.parse(window.localStorage.getItem(userAuthKey) || ''));
 
 try {
   load();
@@ -46,6 +46,7 @@ const authenticate = async ({ name, password }) => {
   const id = +hash(name);
   const user = users[id] || {};
   if (user.passwordHash === hash(password)) {
+    // token: Base64-encoded ASCII string
     return { ...sanitizeUser(user), token: btoa(user.id + '') };
   }
   const error = new ServerError('Wrong username or password');
@@ -53,6 +54,10 @@ const authenticate = async ({ name, password }) => {
   throw error;
 };
 
+/**
+ * a function to check if user with a certain ID exists
+ * @param id
+ */
 function validateUser(id) {
   load();
   if (!users[id]) {
@@ -62,11 +67,22 @@ function validateUser(id) {
   }
 }
 
+/**
+ * a function to return a sanitized user record object with a certain ID
+ * @param id
+ * @returns {Promise<Pick<*, *>>}
+ */
 async function read(id) {
   validateUser(id);
   return sanitizeUser(users[id]);
 }
 
+/**
+ * a function to update a user record object; return sanitized user record object
+ * @param id
+ * @param updates
+ * @returns {Promise<Pick<*, *>>}
+ */
 async function update(id, updates) {
   validateUser(id);
   Object.assign(users[id], updates);
@@ -75,17 +91,28 @@ async function update(id, updates) {
 }
 
 // this would be called `delete` except that's a reserved word in JS :-(
+// a function to remove a user record with a certain ID
 async function remove(id) {
   validateUser(id);
   delete users[id];
   persist();
 }
 
+/**
+ * a function to delete all user records
+ * @returns {Promise<void>}
+ */
 async function reset() {
   users = {};
   persist();
 }
 
+/**
+ * A function to create a user record by username and password
+ * @param name
+ * @param password
+ * @returns {Promise<Pick<*, *>>}
+ */
 async function create({ name, password }) {
   validateUserForm({ name, password });
   const id = +hash(name);
@@ -99,5 +126,7 @@ async function create({ name, password }) {
   persist();
   return read(id);
 }
+
+
 
 export { authenticate, create, read, update, remove, reset };
