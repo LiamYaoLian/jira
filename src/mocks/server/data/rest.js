@@ -1,23 +1,40 @@
 import { required, search, ServerError } from '../util'
 
+/**
+ * Used to CRUD in database
+ */
 class Rest {
   storageKey = '';
   list = [];
 
-  // TODO
+  /**
+   * a function to return a function which return a record list
+   * @returns {*}
+   */
   get listMap() {
     return this.list.reduce((prev, next) => {
       return { ...prev, [next.id]: next };
     }, {});
   }
 
+  /**
+   * a function to save to database (using localStorage)
+   */
   persist = () =>
     window.localStorage.setItem(this.storageKey, JSON.stringify(this.list));
 
+  /**
+   * a function to load from database (using localStorage)
+   * @returns {any|*[]}
+   */
   load = () =>
     (this.list =
       JSON.parse(window.localStorage.getItem(this.storageKey)) || []);
 
+  /**
+   * A function to check if an item with a certain ID exists; if not, throw an error
+   * @param id
+   */
   validateItem = (id) => {
     this.load();
     if (!this.listMap[id]) {
@@ -27,9 +44,9 @@ class Rest {
     }
   };
 
-  // TODO
+
   /**
-   *
+   * a function to reorder items in the database
    * @param fromId
    * @param type 'after'|'before'
    * @param toId
@@ -47,16 +64,29 @@ class Rest {
     this.persist();
   }
 
+  /**
+   * a function to push items into 'list'
+   * @param items items to be pushed into 'list'
+   */
   push(items) {
     items.forEach((item) => this.create(item));
     this.persist();
   }
 
+  /**
+   * a function to return a record object
+   * @param id
+   * @returns {*}
+   */
   detail = (id) => {
     this.validateItem(id);
     return this.listMap[id];
   };
 
+  /**
+   * A function to mark a certain item as "deleted"
+   * @param id
+   */
   remove = (id) => {
     this.validateItem(id);
     const target = this.list.find(item => item.id === id)
@@ -68,6 +98,12 @@ class Rest {
     this.persist();
   };
 
+  /**
+   * A function to update a record object
+   * @param id
+   * @param updates
+   * @returns {*}
+   */
   update(id, updates) {
     this.validateItem(id);
 
@@ -78,6 +114,12 @@ class Rest {
     return this.detail(id);
   }
 
+  /**
+   * A function to create a record object
+   * @param name
+   * @param rest
+   * @returns {*}
+   */
   create({ name = required('name'), ...rest }) {
     const ids = Object.keys(this.listMap).map(Number);
     const id = Math.max(...ids, 0) + 1;
@@ -87,10 +129,21 @@ class Rest {
     return this.detail(id);
   }
 
+  /**
+   * A function to query by params
+   * @param param
+   * @returns {*}
+   */
   query(param) {
     return search(this.list, param).filter(item => !item.deleted);
   }
 
+  /**
+   * A function to query by params and ownerId
+   * @param userId
+   * @param param
+   * @returns {*}
+   */
   queryByOwnerId(userId, param) {
     return this.query(param).filter((item) =>
       'ownerId' in item ? item['ownerId'] === userId : true
@@ -107,6 +160,7 @@ class Rest {
   }
 }
 
+// create databases
 export const projectDB = new Rest("__jira__project");
 export const epicDB = new Rest("__jira__epic");
 export const taskDB = new Rest("__jira__task");
@@ -117,6 +171,7 @@ export const tagDB = new Rest("__jira__tag__");
 
 const insertBefore = (list, from, to) => {
   const toItem = list[to];
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
   const removedItem = list.splice(from, 1)[0];
   const toIndex = list.indexOf(toItem);
   list.splice(toIndex, 0, removedItem);

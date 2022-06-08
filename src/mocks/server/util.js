@@ -19,7 +19,7 @@ export const search = (list, query) => {
   return list.filter((item) => {
     return Object.keys(query).every((queryKey) => {
       const queryValue = query[queryKey];
-      if (queryKey === "name") {
+      if (queryKey === 'name') {
         return item.name.includes(queryValue);
       }
 
