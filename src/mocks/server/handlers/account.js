@@ -40,20 +40,6 @@ export const userHandlers = [
     return res(ctx.json({ user }));
   }),
 
-  // TODO
-  rest.post(`${apiUrl}/admin/login`, async (req, res, ctx) => {
-    const { username, password } = req.body;
-    const user = await accountDB.authenticate({ name: username, password });
-    if (user.role === 'admin') {
-      return res(ctx.json({ user }));
-    } else {
-      return res(
-        ctx.statusCode = 403,
-        ctx.json({user})
-      );
-    }
-  }),
-
   rest.post(`${apiUrl}/register`, async (req, res, ctx) => {
 
     const { username, password } = req.body;
@@ -73,12 +59,12 @@ export const userHandlers = [
   }),
 ];
 
-// TODO
 // create an admin account
 const createAdmin = () => {
   let admin = accountDB.create({ name: 'admin', password: 'admin' }).then(
     (admin) => {
       accountDB.update(admin.id, {role: 'admin'}).then();
+      return admin;
     }
   )
   bootstrap(admin.id);

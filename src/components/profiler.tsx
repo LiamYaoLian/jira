@@ -1,4 +1,5 @@
 // TODO
+//https://reactjs.org/docs/profiler.html
 import React, { ProfilerOnRenderCallback, ProfilerProps } from 'react';
 
 type Props = { metadata?: any; phases?: ('mount' | 'update')[] } & Omit<ProfilerProps, 'onRender'>;
@@ -6,9 +7,7 @@ type Props = { metadata?: any; phases?: ('mount' | 'update')[] } & Omit<Profiler
 let queue: unknown[] = [];
 
 const sendProfileQueue = () => {
-    if (!queue.length) {
-        return;
-    }
+    if (!queue.length) return;
     const queueToSend = [...queue];
     queue = [];
     console.log(queueToSend);

@@ -85,8 +85,6 @@ async function read(id) {
  */
 async function update(id, updates) {
   validateUser(id);
-  // TODO
-  console.log(id);
   Object.assign(users[id], updates);
   persist();
   return read(id);

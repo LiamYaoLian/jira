@@ -30,7 +30,6 @@ const TaskTypeIcon = ({ id }: { id: number }) => {
     return <img alt={'task-icon'} src={name === 'task' ? taskIcon : bugIcon} />;
 };
 
-// TODO Mark
 /**
  * A function to return a TaskCard
  * @param task
@@ -53,35 +52,26 @@ const TaskCard = ({ task }: { task: Task }) => {
     );
 };
 
-// TODO
-export const KanbanColumn = React.forwardRef<
-    HTMLDivElement,
-    { kanban: Kanban }
+// https://reactjs.org/docs/forwarding-refs.html
+export const KanbanColumn = React.forwardRef<HTMLDivElement, { kanban: Kanban }
     >(({ kanban, ...props }, ref) => {
     const { data: allTasks } = useTasks(useTasksSearchParams());
     const tasks = allTasks?.filter(task => task.kanbanId === kanban.id);
     return (
+        // ref.current will point to <Container>
         <Container {...props} ref={ref}>
             <Row between={true}>
                 <h3>{kanban.name}</h3>
                 <More kanban={kanban} key={kanban.id} />
             </Row>
             <TasksContainer>
-                <Drop
-                    type={'ROW'}
-                    direction={'vertical'}
-                    droppableId={String(kanban.id)}
-                >
+                {/* Drop: an area where you can drop something */}
+                <Drop type={'ROW'} direction={'vertical'} droppableId={String(kanban.id)}>
+                    {/* DropChild: a child of Drop, a div */}
                     <DropChild style={{ minHeight: '1rem' }}>
                         {tasks?.map((task, taskIndex) => (
-                            <Drag
-                                key={task.id}
-                                index={taskIndex}
-                                draggableId={'task' + task.id}
-                            >
-                                <div>
-                                    <TaskCard key={task.id} task={task} />
-                                </div>
+                            <Drag key={task.id} index={taskIndex} draggableId={'task' + task.id}>
+                                <div><TaskCard key={task.id} task={task} /></div>
                             </Drag>
                         ))}
                     </DropChild>
@@ -92,7 +82,6 @@ export const KanbanColumn = React.forwardRef<
     );
 });
 
-// TODO
 const More = ({ kanban }: { kanban: Kanban }) => {
     const { mutateAsync } = useDeleteKanban(useKanbansQueryKey());
     const startDelete = () => {
@@ -107,11 +96,7 @@ const More = ({ kanban }: { kanban: Kanban }) => {
     };
     const overlay = (
         <Menu>
-            <Menu.Item>
-                <Button type={'link'} onClick={startDelete}>
-                    Delete
-                </Button>
-            </Menu.Item>
+            <Menu.Item><Button type={'link'} onClick={startDelete}>Delete</Button></Menu.Item>
         </Menu>
     );
     return (
@@ -121,7 +106,6 @@ const More = ({ kanban }: { kanban: Kanban }) => {
     );
 };
 
-// TODO
 export const Container = styled.div`
   min-width: 27rem;
   border-radius: 6px;
@@ -132,9 +116,9 @@ export const Container = styled.div`
   margin-right: 1.5rem;
 `;
 
-// TODO
 const TasksContainer = styled.div`
-  overflow: scroll;
+  overflow: scroll; 
+  // https://developer.mozilla.org/en-US/docs/Web/CSS/flex 
   flex: 1;
   ::-webkit-scrollbar {
     display: none;

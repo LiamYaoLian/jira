@@ -11,7 +11,6 @@ import {useProjectModal} from '../screens/project-list/util';
  */
 export const ProjectPopover = () => {
     const {open} = useProjectModal()
-    // TODO refetch: how to implement
     const {data: projects, refetch} = useProjects()
     const pinnedProjects = projects?.filter(project => project.pin)
 
@@ -27,6 +26,7 @@ export const ProjectPopover = () => {
         <Divider/>
         <ButtonNoPadding onClick={open} type={'link'}>Create New Project</ButtonNoPadding>
     </ContentContainer>
+    // onVisibleChange, refetch to refresh
     return <Popover onVisibleChange={() => refetch()} placement={'bottom'} content={content}><span>Project</span></Popover>
 }
 

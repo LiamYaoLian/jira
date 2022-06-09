@@ -46,7 +46,6 @@ AuthContext.displayName = 'AuthContext';
  * @constructor
  */
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  // TODO
   const {data: user, error, isLoading, isIdle, isError, run, setData: setUser} = useAsync<User | null>();
   const queryClient = useQueryClient();
 
@@ -54,18 +53,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const register = (form: AuthForm) => auth.register(form).then(setUser);
   const logout = () => auth.logout().then((user) => {
     setUser(null)
-    // TODO
+    // The clear method clears all connected caches.
     queryClient.clear()
-    // TODO
+    // after logging out, reset URL
     resetRoute()
   });
 
-  // TODO
-  useMount(
-    useCallback(() => {
-      run(bootstrapUser());
-    }, [])
-  );
+  // when a component is mounted, update user by sending token to backend
+  useMount(useCallback(() => run(bootstrapUser()), []));
 
   if (isIdle || isLoading) {
     return <FullPageLoading />;

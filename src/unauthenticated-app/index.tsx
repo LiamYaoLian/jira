@@ -38,7 +38,6 @@ export default () => {
   );
 };
 
-// TODO css below
 export const LongButton = styled(Button)`
   width: 100%;
 `;
@@ -58,10 +57,11 @@ const Background = styled.div`
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
+  // The background is fixed relative to the viewport.
   background-attachment: fixed;
+  // The background-position CSS property sets the initial position for each background image.
   background-position: left bottom, right bottom;
-  background-size: calc((100vw - 40rem) / 2 - 3.2rem),
-  calc((100vw - 40rem) / 2 - 3.2rem), cover;
+  background-size: calc((100vw - 40rem) / 2 - 3.2rem), calc((100vw - 40rem) / 2 - 3.2rem), cover;
   background-image: url(${left}), url(${right});
 `;
 
@@ -78,7 +78,8 @@ const ShadowCard = styled(Card)`
   padding: 3.2rem 4rem;
   border-radius: 0.3rem;
   box-sizing: border-box;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 0 10px;
+  /* offset-x | offset-y | blur-radius | color */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 `;
 

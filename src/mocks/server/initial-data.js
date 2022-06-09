@@ -1,4 +1,3 @@
-// TODO
 export const taskTypes = [
   {
     name: 'Task',
@@ -38,7 +37,6 @@ export const epics = [
   },
 ];
 
-// TODO
 export const kanbans = [
   {
     name: 'Conception and Initiation',

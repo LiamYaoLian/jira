@@ -35,7 +35,7 @@ export const useKanbansQueryKey = () => ['kanbans', useKanbanSearchParams()];
 export const useTasksSearchParams = () => {
   const [param] = useUrlQueryParam(['name', 'typeId', 'processorId', 'tagId']);
   const projectId = useProjectIdInUrl();
-  // TODO
+  // useMemo will only recompute the memoized value when one of the dependencies has changed.
   return useMemo(
     () => ({
       projectId,

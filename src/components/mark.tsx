@@ -1,6 +1,11 @@
 import React from 'react';
 
-// TODO how is this used?
+/**
+ * a function to highlight keyword in name
+ * @param name
+ * @param keyword
+ * @constructor
+ */
 export const Mark = ({name, keyword}: { name: string; keyword: string }) => {
   if (!keyword) {
     return <>{name}</>;

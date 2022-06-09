@@ -1,4 +1,3 @@
-// TODO
 import React from 'react';
 import {ProjectListScreen} from './screens/project-list';
 import {useAuth} from './context/auth-context';
@@ -31,7 +30,6 @@ export default () => {
   );
 };
 
-// TODO review antd components
 export const PageHeader = () => {
   return (
     <Header between={true}>
@@ -49,17 +47,16 @@ export const PageHeader = () => {
   );
 };
 
-// TODO review antd components
 const User = () => {
   const {logout, user} = useAuth();
 
+  // https://ant.design/components/dropdown/
+  // overlay: the dropdown menu
   return <Dropdown
     overlay={
       <Menu>
         <Menu.Item key={'logout'}>
-          <Button type={'link'} onClick={logout}>
-            Log Out
-          </Button>
+          <Button type={'link'} onClick={logout}>Log Out</Button>
         </Menu.Item>
       </Menu>
     }
@@ -71,8 +68,9 @@ const User = () => {
   </Dropdown>
 }
 
-// TODO review css
-// TODO grid
+// TODO review grid
+// https://css-tricks.com/snippets/css/complete-guide-grid/
+// fr: a fraction of the free space, https://css-tricks.com/introduction-fr-css-unit/
 export const AppContainer = styled.div`
   display: grid;
   grid-template-rows: 6rem 1fr;
@@ -86,12 +84,10 @@ const Header = styled(Row)`
   z-index: 1;
 `;
 
-// TODO Row
 const HeaderLeft = styled(Row)``;
 
 const HeaderRight = styled.header``;
 
-// TODO flex
 export const AppMain = styled.main`
   display: flex;
   overflow: hidden;

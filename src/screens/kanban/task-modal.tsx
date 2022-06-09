@@ -1,4 +1,3 @@
-// TODO
 import React, { useEffect } from 'react';
 import { useTasksModal, useTasksQueryKey } from 'screens/kanban/util';
 import { useDeleteTask, useEditTask } from 'utils/task';
@@ -7,6 +6,7 @@ import { UserSelect } from 'components/user-select';
 import { TaskTypeSelect } from 'components/task-type-select';
 import { EpicSelect } from 'components/epic-select';
 
+// span: how large
 const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 16 },
@@ -15,9 +15,7 @@ const layout = {
 export const TaskModal = () => {
     const [form] = Form.useForm();
     const { editingTaskId, editingTask, close } = useTasksModal();
-    const { mutateAsync: editTask, isLoading: editLoading } = useEditTask(
-        useTasksQueryKey()
-    );
+    const { mutateAsync: editTask, isLoading: editLoading } = useEditTask(useTasksQueryKey());
     const { mutate: deleteTask } = useDeleteTask(useTasksQueryKey());
 
     const onCancel = () => {
@@ -57,6 +55,7 @@ export const TaskModal = () => {
             title={'Edit Task'}
             visible={!!editingTaskId}
         >
+            {/* form: Form control instance created by Form.useForm() */}
             <Form {...layout} initialValues={editingTask} form={form}>
                 <Form.Item
                     label={'Task Name'}
@@ -76,13 +75,7 @@ export const TaskModal = () => {
                 </Form.Item>
             </Form>
             <div style={{ textAlign: 'right' }}>
-                <Button
-                    onClick={startDelete}
-                    style={{ fontSize: '14px' }}
-                    size={'small'}
-                >
-                    Delete
-                </Button>
+                <Button onClick={startDelete} style={{ fontSize: '14px' }} size={'small'}>Delete</Button>
             </div>
         </Modal>
     );

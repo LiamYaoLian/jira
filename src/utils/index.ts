@@ -1,7 +1,7 @@
 /*
 * some util functions
 * */
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState} from 'react';
 
 /*
 * a function to remove keys whose values are undefined, null, or ''
@@ -23,11 +23,8 @@ export const cleanObject = (object?: { [key: string]: unknown }) => {
   return result;
 };
 
-export const isVoid = (value: unknown) => value === undefined || value === null || value === "";
+export const isVoid = (value: unknown) => value === undefined || value === null || value === '';
 
-export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
-
-// TODO
 /*
 * a function to achieve "when a component is mounted, call the callback"
 * */
@@ -67,8 +64,6 @@ export const useDocumentTitle = (title: string, keepOnUnmount = true) => {
   useEffect(() => {
     return () => {
       if (!keepOnUnmount) {
-        // TODO
-        // 如果不指定依赖，读到的就是旧title
         document.title = oldTitle;
       }
     };

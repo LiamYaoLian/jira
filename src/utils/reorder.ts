@@ -33,7 +33,6 @@ const insertBefore = (list: unknown[], from: number, to: number) => {
   const toItem = list[to];
   const removedItem = list.splice(from, 1)[0];
   const toIndex = list.indexOf(toItem);
-  // TODO
   list.splice(toIndex, 0, removedItem);
   return list;
 };

@@ -27,9 +27,8 @@ const useSafeDispatch = <T>(dispatch: (...args: T[]) => void) => {
   return useCallback((...args: T[]) => (mountedRef.current ? dispatch(...args) : void 0), [dispatch, mountedRef])
 }
 
-// TODO
 /**
- *
+ * used to trigger an async request
  * @param initialState
  * @param initialConfig
  */
@@ -55,7 +54,7 @@ export const useAsync = <D>(initialState?: State<D>, initialConfig?: typeof defa
     if (!promise || !promise.then) throw new Error('Please pass a Promise instance')
 
     setRetry(() => () => {
-      if (runConfig?.retry) run(runConfig?.retry(), runConfig)
+      if (runConfig?.retry) run(runConfig?.retry(), runConfig).then()
     })
 
     // use "prevState" to prevent circular dependency
