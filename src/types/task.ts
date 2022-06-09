@@ -8,4 +8,5 @@ export interface Task {
   // bug or task
   typeId: number;
   note: string;
+  planned?: String[];
 }
