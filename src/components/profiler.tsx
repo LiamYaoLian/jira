@@ -1,4 +1,4 @@
-// TODO
+// TODO review Profiler
 //https://reactjs.org/docs/profiler.html
 import React, { ProfilerOnRenderCallback, ProfilerProps } from 'react';
 

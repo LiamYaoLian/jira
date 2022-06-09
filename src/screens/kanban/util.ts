@@ -9,7 +9,6 @@ import { useTask } from 'utils/task';
  */
 export const useProjectIdInUrl = () => {
   const { pathname } = useLocation();
-  // TODO
   const id = pathname.match(/projects\/(\d+)/)?.[1];
   return Number(id);
 };

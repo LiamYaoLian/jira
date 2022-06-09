@@ -79,7 +79,6 @@ export const AppContainer = styled.div`
 
 const Header = styled(Row)`
   padding: 3.2rem;
-  // TODO
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
   z-index: 1;
 `;

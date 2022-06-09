@@ -2,7 +2,7 @@ import React from "react";
 import {Table} from "antd";
 
 export const CapacityTable = (props: React.ComponentProps<typeof Table>) => {
-  // TODO
+  // TODO to finish
   const dataSource = [
     {
       key: '1',

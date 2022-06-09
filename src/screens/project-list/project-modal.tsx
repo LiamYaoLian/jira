@@ -1,4 +1,3 @@
-// TODO
 import React, {useEffect} from 'react';
 import {Button, Drawer, Form, Input, Spin} from 'antd';
 import {useAddProject, useEditProject} from '../../utils/project';
@@ -36,12 +35,7 @@ export const ProjectModal = () => {
         isLoading ? <Spin size={'large'}/> : <>
           <h1>{title}</h1>
           <ErrorBox error={error} />
-          <Form
-            form={form}
-            layout={'vertical'}
-            style={{width: '40rem'}}
-            onFinish={onFinish}
-          >
+          <Form form={form} layout={'vertical'} style={{width: '40rem'}} onFinish={onFinish}>
             <Form.Item
               label={'Name'}
               name={'name'}
@@ -63,13 +57,7 @@ export const ProjectModal = () => {
             </Form.Item>
 
             <Form.Item style={{textAlign: 'right'}}>
-              <Button
-                loading={mutateLoading}
-                type={'primary'}
-                htmlType={'submit'}
-              >
-                Submit
-              </Button>
+              <Button loading={mutateLoading} type={'primary'} htmlType={'submit'}>Submit</Button>
             </Form.Item>
           </Form>
         </>

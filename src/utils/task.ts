@@ -38,7 +38,6 @@ export const useTask = (id?: number) => {
 export const useAddTask = (queryKey: QueryKey) => {
   const client = useHttp();
 
-  // TODO
   // https://react-query.tanstack.com/reference/useMutation
   return useMutation(
     (params: Partial<Task>) =>
