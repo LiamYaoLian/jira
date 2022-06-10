@@ -4,15 +4,13 @@ import React, { useState } from 'react';
 import {useTasks} from "../../utils/task";
 import {useProjectInUrl} from "../kanban/util";
 
-
-// TODO needed?
-const waitTime = (time: number = 100) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true);
-    }, time);
-  });
-};
+// const waitTime = (time: number = 100) => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve(true);
+//     }, time);
+//   });
+// };
 
 type DataSourceType = {
   id: React.Key;
@@ -31,6 +29,7 @@ export const DailyTimeLogTable = () => {
   // useQuery can return undefined at first
   const { data: tasks } = useTasks({ projectId: currentProject?.id });
 
+  // TODO
   const defaultData: DataSourceType[] = [
     {
       id: 624748504,
@@ -81,7 +80,7 @@ export const DailyTimeLogTable = () => {
       valueType: 'option',
       width: 200,
       render: (text, record, _, action) => [
-        // <a key="editable" onClick={() => action?.startEditable?.(record.id)}>Edit</a>,
+        <a key="editable" onClick={() => action?.startEditable?.(record.id)}>Edit</a>,
         <a key="delete"
           onClick={() => setDataSource(dataSource.filter((item) => item.id !== record.id))}
         >
@@ -96,11 +95,12 @@ export const DailyTimeLogTable = () => {
       <EditableProTable<DataSourceType>
         rowKey="id"
         headerTitle=""
-        maxLength={5}
         scroll={{x: 960}}
         recordCreatorProps={
+
           position !== 'hidden'
             ? {
+              creatorButtonText: 'New Record',
               position: position as 'top',
               record: () => ({ id: (Math.random() * 1000000).toFixed(0) }),
             }
@@ -142,9 +142,6 @@ export const DailyTimeLogTable = () => {
           {
             type: 'multiple',
             editableKeys,
-            onSave: async (rowKey, data, row) => {
-              await waitTime(2000);
-            },
             onChange: setEditableRowKeys,
           }
         }
