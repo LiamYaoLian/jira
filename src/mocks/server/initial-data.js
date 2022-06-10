@@ -40,18 +40,81 @@ export const epics = [
 export const kanbans = [
   {
     name: 'Conception and Initiation',
+    projectId: 1,
+    id: 1
   },
   {
     name: 'Planning',
+    projectId: 1,
+    id: 2
   },
   {
     name: 'Execution',
+    projectId: 1,
+    id: 3
   },
   {
     name: 'Performance/Monitoring',
+    projectId: 1,
+    id: 4
   },
   {
     name: 'Closing',
+    projectId: 1,
+    id: 5
+  },
+
+
+  {
+    name: 'Conception and Initiation',
+    projectId: 2,
+    id: 6
+  },
+  {
+    name: 'Planning',
+    projectId: 2,
+    id: 7
+  },
+  {
+    name: 'Execution',
+    projectId: 2,
+    id: 8
+  },
+  {
+    name: 'Performance/Monitoring',
+    projectId: 2,
+    id: 9
+  },
+  {
+    name: 'Closing',
+    projectId: 2,
+    id:10
+  },
+
+  {
+    name: 'Conception and Initiation',
+    projectId: 3,
+    id:11
+  },
+  {
+    name: 'Planning',
+    projectId: 3,
+    id:12
+  },
+  {
+    name: 'Execution',
+    projectId: 3,
+    id:13
+  },
+  {
+    name: 'Performance/Monitoring',
+    projectId: 3,
+    id:14
+  },
+  {
+    name: 'Closing',
+    projectId: 3,
+    id:15
   },
 ];
 
@@ -76,7 +139,7 @@ export const users = [
 
 export const projects = [
   {
-    name: 'Project A',
+    name: 'Healthcare',
     personId: 1,
     team: 'Account Management',
     created: 1604989757139,
@@ -84,14 +147,14 @@ export const projects = [
 
   {
     name: 'ABC',
-    personId: 1,
+    personId: 2,
     team: 'Software Development',
     created: 1604989757139,
   },
 
   {
     name: 'M&A',
-    personId: 1,
+    personId: 3,
     team: 'M&A',
     created: 1604989757139,
   },
@@ -114,18 +177,19 @@ export const tasks = [
     tags: [2],
     reporterId: 1,
     processorId: 2,
-    epicId: 1,
+    epicId: 2,
     kanbanId: 1,
     favorite: true,
     typeId: 1,
     note: 'Use JWT',
+    projectId: 1
   },
   {
     name: 'Unit Test',
     tags: [1],
     reporterId: 1,
     processorId: 2,
-    epicId: 1,
+    epicId: 3,
     kanbanId: 1,
     favorite: true,
     typeId: 1,
@@ -158,7 +222,7 @@ export const tasks = [
     tags: [1],
     reporterId: 1,
     processorId: 2,
-    epicId: 1,
+    epicId: 3,
     kanbanId: 1,
     favorite: true,
     typeId: 1,
