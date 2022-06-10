@@ -3,9 +3,10 @@ import {Link} from 'react-router-dom';
 import {Routes, Route, useLocation} from 'react-router';
 import {EpicScreen} from '../epic';
 import {KanbanScreen} from '../kanban';
-import {CapacityScreen} from '../capacity';
+import {TimeScreen} from '../time';
 import styled from "@emotion/styled";
 import {Menu} from 'antd';
+import {DailyTimeLogScreen} from "../daily-time-log";
 
 /**
  * A function to get the last part after / in URL
@@ -27,8 +28,11 @@ export const ProjectScreen = () => {
           <Menu.Item key={'epic'}>
             <Link to={'epic'}>Epic</Link>
           </Menu.Item>
-          <Menu.Item key={'capacity'}>
-            <Link to={'capacity'}>Capacity</Link>
+          <Menu.Item key={'time'}>
+            <Link to={'time'}>Time</Link>
+          </Menu.Item>
+          <Menu.Item key={'daily-time-log'}>
+            <Link to={'daily-time-log'}>Daily Time Log</Link>
           </Menu.Item>
         </Menu>
       </Aside>
@@ -36,7 +40,8 @@ export const ProjectScreen = () => {
         <Routes>
           <Route path={'/kanban'} element={<KanbanScreen/>}/>
           <Route path={'/epic'} element={<EpicScreen/>}/>
-          <Route path={'/capacity'} element={<CapacityScreen/>}/>
+          <Route path={'/time'} element={<TimeScreen/>}/>
+          <Route path={'/daily-time-log'} element={<DailyTimeLogScreen/>}/>
           <Route index element={<KanbanScreen/>}/>
         </Routes>
       </Main>

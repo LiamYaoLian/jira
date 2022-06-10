@@ -9,5 +9,6 @@ export interface Task {
   typeId: number;
   note: string;
   planned?: String[];
+  plannedProgress?: number;
   actualProgress?: number;
 }

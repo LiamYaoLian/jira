@@ -1,7 +1,7 @@
 import React from "react";
 import {Table} from "antd";
 
-export const CapacityTable = (props: React.ComponentProps<typeof Table>) => {
+export const TimeTable = (props: React.ComponentProps<typeof Table>) => {
   // TODO to finish
   const dataSource = [
     {
