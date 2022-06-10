@@ -161,13 +161,13 @@ class Rest {
 }
 
 // create databases
-export const projectDB = new Rest("__jira__project");
-export const epicDB = new Rest("__jira__epic");
-export const taskDB = new Rest("__jira__task");
-export const kanbanDB = new Rest("__jira__kanban");
-export const userDB = new Rest("__jira__user");
-export const taskTypeDB = new Rest("__jira__task__type");
-export const tagDB = new Rest("__jira__tag__");
+export const projectDB = new Rest("__evm__project");
+export const epicDB = new Rest("__evm__epic");
+export const taskDB = new Rest("__evm__task");
+export const kanbanDB = new Rest("__evm__kanban");
+export const userDB = new Rest("__evm__user");
+export const taskTypeDB = new Rest("__evm__task__type");
+export const tagDB = new Rest("__evm__tag__");
 
 const insertBefore = (list, from, to) => {
   const toItem = list[to];

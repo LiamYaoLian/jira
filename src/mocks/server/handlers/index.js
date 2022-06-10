@@ -13,7 +13,7 @@ function ls(key, defaultVal) {
   return Number.isFinite(val) ? val : defaultVal;
 }
 
-const sleep = (t = ls("__jira_min_request_time__", 200)) =>
+const sleep = (t = ls("__evm_min_request_time__", 200)) =>
   new Promise((resolve) => setTimeout(resolve, t));
 
 export const handlers = [
@@ -56,7 +56,7 @@ export const handlers = [
 //   if (req.url.searchParams.toString()?.includes("FAIL")) return true;
 //   if (process.env.NODE_ENV === "test") return false;
 //   const failureRate = Number(
-//     window.localStorage.getItem("__jira_failure_rate__") || 0
+//     window.localStorage.getItem("__evm_failure_rate__") || 0
 //   );
 //   if (Math.random() < failureRate) return true;
 //   if (requestMatchesFailConfig(req)) return true;
@@ -73,11 +73,11 @@ function requestMatchesFailConfig(req) {
   }
   try {
     const failConfig = JSON.parse(
-      window.localStorage.getItem("__jira_request_fail_config__") || "[]"
+      window.localStorage.getItem("__evm_request_fail_config__") || "[]"
     );
     if (failConfig.some(configMatches)) return true;
   } catch (error) {
-    window.localStorage.removeItem("__jira_request_fail_config__");
+    window.localStorage.removeItem("__evm_request_fail_config__");
   }
   return false;
 }

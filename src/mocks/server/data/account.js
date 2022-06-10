@@ -1,6 +1,6 @@
 import { ServerError } from '../util'
 
-const userAuthKey = '__jira_user_auth____';
+const userAuthKey = '__evm_user_auth____';
 
 let users = {};
 
