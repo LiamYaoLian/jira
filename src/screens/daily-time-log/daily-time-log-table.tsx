@@ -68,24 +68,44 @@ export const DailyTimeLogTable = () => {
         default: { text: 'Please choose', status: 'Default' },
         ...options
       },
+      formItemProps: {
+        rules: [
+          // non-negative float
+          {required: true}
+        ]
+      }
+
     },
     {
       title: 'Planned Hour',
       dataIndex: 'plannedHour',
       formItemProps: {
         rules: [
-          {type: 'number', message: 'Please input a number'}
+          // non-negative float
+          {required: true, pattern: new RegExp('^\\d+(\\.\\d+)?$'), message: 'Please input a number'}
         ]
       }
     },
     {
       title: 'Actual Hour',
       dataIndex: 'actualHour',
+      formItemProps: {
+        rules: [
+          // non-negative float
+          {required: true}
+        ]
+      }
     },
     {
       title: 'Activity Date',
       dataIndex: 'occurred_at',
       valueType: 'date',
+      formItemProps: {
+        rules: [
+          // non-negative float
+          {required: true}
+        ]
+      }
     },
     {
       title: 'Operation',
