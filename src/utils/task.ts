@@ -17,20 +17,11 @@ export const useTasks = (param?: Partial<Task>) => {
   const client = useHttp();
   const debouncedParam = {...param, name: useDebounce(param?.name, 200)};
 
-  // TODO test
-  // return useQuery<Task[]>(["tasks", debouncedParam], () =>
-  //   client("tasks", {data: debouncedParam})
-  // );
-  return useQuery<Task[]>(["tasks", debouncedParam], async () =>
-    await client("tasks", {data: debouncedParam})
+  return useQuery<Task[]>(["tasks", debouncedParam], () =>
+    client("tasks", {data: debouncedParam})
   );
-};
 
-// TODO test
-// export const useTasksOfProjectId = (id: number) => {
-//   const client = useHttp();
-//   return useQuery<Task[]>(['tasks',id], () => client('tasks', {data: {'projectId': id}}))
-// }
+};
 
 /*
 * a function to get a task by id from backend

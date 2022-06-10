@@ -30,10 +30,10 @@ export const RegisterScreen = ({onError}: { onError: (error: Error) => void }) =
         <Input placeholder={'username'} type='text' id={'username'}/>
       </Form.Item>
       <Form.Item name={'password'} rules={[{required: true, message: 'Please input password'}]}>
-        <input placeholder={'password'} type='password' id={'password'}/>
+        <Input placeholder={'password'} type='password' id={'password'}/>
       </Form.Item>
       <Form.Item name={'confirmedPassword'} rules={[{required: true, message: 'Please confirm password'}]}>
-        <input placeholder={'confirm password'} type='password' id={'confirmedPassword'}/>
+        <Input placeholder={'confirm password'} type='password' id={'confirmedPassword'}/>
       </Form.Item>
       <Form.Item>
         <LongButton loading={isLoading} htmlType={'submit'} type={'primary'}>Register</LongButton>

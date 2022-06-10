@@ -29,7 +29,7 @@ export const DailyTimeLogTable = () => {
   // useQuery can return undefined at first
   const { data: tasks } = useTasks({ projectId: currentProject?.id });
 
-  // TODO
+  // TODO from and to backend
   const defaultData: DataSourceType[] = [
     {
       id: 624748504,
@@ -124,7 +124,7 @@ export const DailyTimeLogTable = () => {
                 value: 'bottom',
               },
               {
-                label: 'Hide Editing Button',
+                label: 'Hide New Record Button',
                 value: 'hidden',
               },
             ]}
