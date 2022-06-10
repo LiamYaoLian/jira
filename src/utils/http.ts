@@ -58,6 +58,9 @@ export const http = async (
 * */
 export const useHttp = () => {
   const {user} = useAuth();
-  return useCallback((...[endpoint, config]: Parameters<typeof http>) =>
-    http(endpoint, {...config, token: user?.token}), [user?.token]);
+  // return useCallback((...[endpoint, config]: Parameters<typeof http>) =>
+  //   http(endpoint, {...config, token: user?.token}), [user?.token]);
+  // TODO
+  return useCallback(async (...[endpoint, config]: Parameters<typeof http>) =>
+    await http(endpoint, {...config, token: user?.token}), [user?.token]);
 };
