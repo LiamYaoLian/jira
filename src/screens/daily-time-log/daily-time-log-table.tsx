@@ -14,7 +14,8 @@ import {useProjectInUrl} from "../kanban/util";
 
 type DataSourceType = {
   id: React.Key;
-  hour?: number;
+  plannedHour?: number;
+  actualHour?: number;
   task?: string;
   occurred_at?: string;
   update_at?: string;
@@ -33,14 +34,16 @@ export const DailyTimeLogTable = () => {
   const defaultData: DataSourceType[] = [
     {
       id: 624748504,
-      hour: 3,
+      plannedHour: 2,
+      actualHour: 3,
       task: 'open',
       occurred_at: '2020-05-26T09:42:56Z',
       update_at: '2020-05-26T09:42:56Z',
     },
     {
       id: 624691229,
-      hour: 5,
+      plannedHour: 6,
+      actualHour: 5,
       task: 'closed',
       occurred_at: '2020-05-26T08:19:22Z',
       update_at: '2020-05-26T08:19:22Z',
@@ -67,8 +70,17 @@ export const DailyTimeLogTable = () => {
       },
     },
     {
-      title: 'Hour',
-      dataIndex: 'hour',
+      title: 'Planned Hour',
+      dataIndex: 'plannedHour',
+      formItemProps: {
+        rules: [
+          {type: 'number', message: 'Please input a number'}
+        ]
+      }
+    },
+    {
+      title: 'Actual Hour',
+      dataIndex: 'actualHour',
     },
     {
       title: 'Activity Date',

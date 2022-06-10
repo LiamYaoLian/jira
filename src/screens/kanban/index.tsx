@@ -34,7 +34,7 @@ export const KanbanScreen = () => {
       <Profiler id={'kanban-page'}>
         <DragDropContext onDragEnd={onDragEnd}>
           <ScreenContainer>
-            <h1>{currentProject?.name}Kanban</h1>
+            <h1>{currentProject?.name} Kanban</h1>
             <SearchPanel />
             {isLoading ? (
                 <Spin size={'large'} />
