@@ -7,6 +7,7 @@ import {TimeScreen} from '../time';
 import styled from "@emotion/styled";
 import {Menu} from 'antd';
 import {DailyTimeLogScreen} from "../daily-time-log";
+import {EvmScreen} from "../evm";
 
 /**
  * A function to get the last part after / in URL
@@ -34,6 +35,9 @@ export const ProjectScreen = () => {
           <Menu.Item key={'daily-time-log'}>
             <Link to={'daily-time-log'}>Daily Time Log</Link>
           </Menu.Item>
+          <Menu.Item key={'evm'}>
+            <Link to={'evm'}>EVM</Link>
+          </Menu.Item>
         </Menu>
       </Aside>
       <Main>
@@ -42,6 +46,7 @@ export const ProjectScreen = () => {
           <Route path={'/epic'} element={<EpicScreen/>}/>
           <Route path={'/time'} element={<TimeScreen/>}/>
           <Route path={'/daily-time-log'} element={<DailyTimeLogScreen/>}/>
+          <Route path={'/evm'} element={<EvmScreen/>}/>
           <Route index element={<KanbanScreen/>}/>
         </Routes>
       </Main>
