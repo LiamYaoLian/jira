@@ -21,17 +21,19 @@ export const SearchPanel = () => {
     return (
         <Row marginBottom={4} gap={true}>
             <Input
-                style={{ width: '20rem' }}
+                style={{ width: '20rem', marginRight: '1rem' }}
                 placeholder={'Task Name'}
                 value={searchParams.name}
                 onChange={(evt) => setSearchParams({ name: evt.target.value })}
             />
             <UserSelect
+                style={{marginRight: '1rem' }}
                 defaultOptionName={'Processor'}
                 value={searchParams.processorId}
                 onChange={(value) => setSearchParams({ processorId: value })}
             />
             <TaskTypeSelect
+                style={{marginRight: '1rem' }}
                 defaultOptionName={'Type'}
                 value={searchParams.typeId}
                 onChange={(value) => setSearchParams({ typeId: value })}

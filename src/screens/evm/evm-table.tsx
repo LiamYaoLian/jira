@@ -217,77 +217,77 @@ export const EvmTable = (props: React.ComponentProps<typeof Table>) => {
     }
   ];
 
-  // TODO style
   return <Table dataSource={dataSource}
+                scroll={{x:'10rem', y: '45rem'}}
                 columns={[
-                  {title: 'Task', dataIndex: 'task', key: 'task'},
+                  {title: 'Task', dataIndex: 'task', key: 'task', width: '20rem'},
                   {
-                    title: 'BAC', dataIndex: 'bac', key: 'bac',
+                    title: 'BAC', dataIndex: 'bac', key: 'bac', width: '10rem',
                     render: (text, record, index) => {
                       return <>{numeral(record.bac).format('$0,0.0')}</>;
                     }
                   },
-                  {title: 'PV', dataIndex: 'pv', key: 'pv',
+                  {title: 'PV', dataIndex: 'pv', key: 'pv', width: '10rem',
                     render: (text, record, index) => {
                       return <>{numeral(record.pv).format('$0,0.0')}</>;
                     }
                   },
-                  {title: 'EV', dataIndex: 'ev', key: 'ev',
+                  {title: 'EV', dataIndex: 'ev', key: 'ev', width: '10rem',
                     render: (text, record, index) => {
                       return <>{numeral(record.ev).format('$0,0.0')}</>;
                     }
                   },
-                  {title: 'AC', dataIndex: 'ac', key: 'ac',
+                  {title: 'AC', dataIndex: 'ac', key: 'ac', width: '10rem',
                     render: (text, record, index) => {
                       return <>{numeral(record.ac).format('$0,0.0')}</>;
                     }
                   },
-                  {title: 'CV', dataIndex: 'cv', key: 'cv',
+                  {title: 'CV', dataIndex: 'cv', key: 'cv', width: '10rem',
                     render: (text, record, index) => {
                       return <>{numeral(record.cv).format('$0,0.0')}</>;
                     }
                   },
-                  {title: 'SV', dataIndex: 'sv', key: 'sv',
+                  {title: 'SV', dataIndex: 'sv', key: 'sv', width: '10rem',
                     render: (text, record, index) => {
                       return <>{numeral(record.sv).format('$0,0.0')}</>;
                     }
                   },
-                  {title: 'CPI', dataIndex: 'cpi', key: 'cpi',
+                  {title: 'CPI', dataIndex: 'cpi', key: 'cpi', width: '10rem',
                     render: (text, record, index) => {
                       return <>{Math.round(record.cpi * 100)/100}</>;
                     }
                   },
-                  {title: 'SPI', dataIndex: 'spi', key: 'spi',
+                  {title: 'SPI', dataIndex: 'spi', key: 'spi', width: '10rem',
                     render: (text, record, index) => {
                       return <>{Math.round(record.spi * 100)/100}</>;
                     }
                   },
-                  {title: 'EAC', dataIndex: 'eac', key: 'eac',
+                  {title: 'EAC', dataIndex: 'eac', key: 'eac', width: '10rem',
                     render: (text, record, index) => {
                       return <>{numeral(record.eac).format('$0,0.0')}</>;
                     }
                   },
-                  {title: 'ETC', dataIndex: 'etc', key: 'etc',
+                  {title: 'ETC', dataIndex: 'etc', key: 'etc', width: '10rem',
                     render: (text, record, index) => {
                       return <>{numeral(record.etc).format('$0,0.0')}</>;
                     }
                   },
-                  {title: 'VAC', dataIndex: 'vac', key: 'vac',
+                  {title: 'VAC', dataIndex: 'vac', key: 'vac', width: '10rem',
                     render: (text, record, index) => {
                       return <>{numeral(record.vac).format('$0,0.0')}</>;
                     }
                   },
-                  {title: 'Planned(%)', dataIndex: 'plannedProgress', key: 'plannedProgress',
+                  {title: 'Planned(%)', dataIndex: 'plannedProgress', key: 'plannedProgress', width: '15rem',
                     render: (text, record, index) => {
                       return <>{numeral(record.plannedProgress).format('0%')}</>;
                     }
                   },
-                  {title: 'Actual(%)', dataIndex: 'actualProgress', key: 'actualProgress',
+                  {title: 'Actual(%)', dataIndex: 'actualProgress', key: 'actualProgress', width: '15rem',
                     render: (text, record, index) => {
                       return <>{numeral(record.actualProgress).format('0%')}</>;
                     }
                   },
-                  {title: 'Progress Delay', dataIndex: 'progressDelay', key: 'progressDelay',
+                  {title: 'Progress Delay', dataIndex: 'progressDelay', key: 'progressDelay', width: '15rem',
                     render: (text, record, index) => {
                       return <>{numeral(record.progressDelay).format('0%')}</>;
                     }

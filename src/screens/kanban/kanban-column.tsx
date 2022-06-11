@@ -114,6 +114,8 @@ export const Container = styled.div`
   flex-direction: column;
   padding: 0.7rem 0.7rem 1rem;
   margin-right: 1.5rem;
+  // TODO  
+  overflow-x: scroll;
 `;
 
 const TasksContainer = styled.div`
