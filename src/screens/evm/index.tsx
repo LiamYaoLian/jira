@@ -14,6 +14,7 @@ export const EvmScreen = () => {
       </Row>
       <Container>
         <EvmTable/>
+        <div style={{width: '3rem'}}></div>
       </Container>
     </ScreenContainer>
 
@@ -21,8 +22,7 @@ export const EvmScreen = () => {
 };
 
 export const Container = styled.div`
-  width: 115rem;
+  width: calc(100vw - 16rem - 7rem);
   display: flex;
-  flex-direction: column;
   overflow: scroll;
 `;
