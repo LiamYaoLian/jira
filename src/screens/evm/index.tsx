@@ -8,21 +8,23 @@ export const EvmScreen = () => {
   const { data: currentProject } = useProjectInUrl();
 
   return (
-    <ScreenContainer>
-      <Row between={true} style={{marginBottom: '2rem'}} >
-        <h1>{currentProject?.name} EVM</h1>
-      </Row>
+    <>
+
       <Container>
+        <Row between={true} style={{marginBottom: '2rem'}} >
+          <h1>{currentProject?.name} EVM</h1>
+        </Row>
         <EvmTable/>
-        <div style={{width: '3rem'}}></div>
       </Container>
-    </ScreenContainer>
+    </>
 
   );
 };
 
 export const Container = styled.div`
-  width: calc(100vw - 16rem - 7rem);
+  padding: 3.2rem;
+  width: calc(100vw - 16rem);
   display: flex;
+  flex-direction: column;
   overflow: scroll;
 `;
