@@ -35,7 +35,7 @@ export const PageHeader = () => {
     <Header between={true}>
       <HeaderLeft gap={true}>
         <ButtonNoPadding type={'link'} onClick={resetRoute}>
-          <SoftwareLogo width={'18rem'} color={'rgb(38, 132, 255)'}/>
+          <SoftwareLogo/>
         </ButtonNoPadding>
         <ProjectPopover/>
         <UserPopover/>
@@ -75,6 +75,7 @@ export const AppContainer = styled.div`
   display: grid;
   grid-template-rows: 6rem 1fr;
   height: 100vh;
+  width: 100vw;
 `;
 
 const Header = styled(Row)`
@@ -83,7 +84,8 @@ const Header = styled(Row)`
   z-index: 1;
 `;
 
-const HeaderLeft = styled(Row)``;
+const HeaderLeft = styled(Row)`
+`;
 
 const HeaderRight = styled.header``;
 

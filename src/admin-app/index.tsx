@@ -9,7 +9,7 @@ import {TimeScreen} from "../screens/time";
 import {Aside, Main, useRouteType} from "../screens/project";
 import {AppMain, PageHeader} from "../authenticated-app";
 import {AppContainer} from "../authenticated-app";
-import {DailyTimeLogScreen} from "../screens/daily-time-log";
+import {TimeLogScreen} from "../screens/time-log";
 
 export default () => {
   const routeType = useRouteType()

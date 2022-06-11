@@ -13,13 +13,20 @@ export const ProjectPopover = () => {
     const {open} = useProjectModal()
     const {data: projects, refetch} = useProjects()
     const pinnedProjects = projects?.filter(project => project.pin)
+    const setRoute = (projectId: number) => {
+        window.location.href = window.location.origin + '/projects/' + projectId
+    }
 
     const content = <ContentContainer>
         <Typography.Text type={'secondary'}>Pinned Project</Typography.Text>
         <List>
             {
                 pinnedProjects?.map(project => <List.Item>
-                    <List.Item.Meta title={project.name}/>
+                    {/*<List.Item.Meta title={project.name}/>*/}
+                    <ButtonNoPadding
+                      style={{textAlign: "left"}}
+                      type={'link'}
+                      onClick={() => setRoute(project.id)}>{project.name}</ButtonNoPadding>
                 </List.Item>)
             }
         </List>

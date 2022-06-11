@@ -5,7 +5,6 @@ import {useHttp} from "utils/http";
 import {QueryKey, useMutation, useQuery} from "react-query";
 import {Task} from "types/task";
 import {useAddConfig, useDeleteConfig, useEditConfig, useReorderTaskConfig,} from "utils/use-optimistic-options";
-import {Project} from "types/project";
 import {SortProps} from "utils/kanban";
 import {useDebounce} from "utils/index";
 
@@ -28,7 +27,6 @@ export const useTasks = (param?: Partial<Task>) => {
 * */
 export const useTask = (id?: number) => {
   const client = useHttp();
-  // TODO
   return useQuery<Task>(["task", {id}], () => client(`tasks/${id}`), {
     enabled: Boolean(id),
   });

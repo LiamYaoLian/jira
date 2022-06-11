@@ -1,17 +1,17 @@
 import React from 'react';
 import { Row, ScreenContainer } from 'components/lib';
 import { useProjectInUrl } from 'screens/kanban/util';
-import {DailyTimeLogTable} from "./daily-time-log-table";
+import {TimeLogTable} from "./time-log-table";
 
-export const DailyTimeLogScreen = () => {
+export const TimeLogScreen = () => {
   const { data: currentProject } = useProjectInUrl();
 
   return (
     <ScreenContainer>
       <Row between={true}>
-        <h1>{currentProject?.name} Daily Time Log</h1>
+        <h1>{currentProject?.name} Time Log</h1>
       </Row>
-      <DailyTimeLogTable/>
+      <TimeLogTable/>
     </ScreenContainer>
   );
 };

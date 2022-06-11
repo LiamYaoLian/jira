@@ -21,7 +21,7 @@ type DataSourceType = {
   update_at?: string;
 };
 
-export const DailyTimeLogTable = () => {
+export const TimeLogTable = () => {
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
   const [dataSource, setDataSource] = useState<DataSourceType[]>([]);
   const [position, setPosition] = useState<'top' | 'bottom' | 'hidden'>('bottom');

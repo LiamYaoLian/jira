@@ -1,5 +1,5 @@
 import * as initialData from './initial-data'
-import { epicDB, kanbanDB, projectDB, tagDB, taskDB, taskTypeDB, userDB } from './data/rest'
+import { epicDB, kanbanDB, projectDB, tagDB, taskDB, taskTypeDB, userDB, evmDB } from './data/rest'
 
 export const bootstrap = (id) => {
 
@@ -17,6 +17,8 @@ export const bootstrap = (id) => {
   kanbanDB.push(assignId(id, initialData.kanbans));
   epicDB.push(assignId(id, initialData.epics));
   taskDB.push(assignId(id, initialData.tasks));
+  console.log('evms' +JSON.stringify(initialData.evms));
+  evmDB.push(assignId(id, initialData.evms));
 };
 
 const assignId = (userId, list, other) => {

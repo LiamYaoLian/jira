@@ -6,7 +6,7 @@ import {KanbanScreen} from '../kanban';
 import {TimeScreen} from '../time';
 import styled from "@emotion/styled";
 import {Menu} from 'antd';
-import {DailyTimeLogScreen} from "../daily-time-log";
+import {TimeLogScreen} from "../time-log";
 import {EvmScreen} from "../evm";
 
 /**
@@ -32,8 +32,8 @@ export const ProjectScreen = () => {
           <Menu.Item key={'time'}>
             <Link to={'time'}>Time</Link>
           </Menu.Item>
-          <Menu.Item key={'daily-time-log'}>
-            <Link to={'daily-time-log'}>Daily Time Log</Link>
+          <Menu.Item key={'time-log'}>
+            <Link to={'time-log'}>Time Log</Link>
           </Menu.Item>
           <Menu.Item key={'evm'}>
             <Link to={'evm'}>EVM</Link>
@@ -45,7 +45,7 @@ export const ProjectScreen = () => {
           <Route path={'/kanban'} element={<KanbanScreen/>}/>
           <Route path={'/epic'} element={<EpicScreen/>}/>
           <Route path={'/time'} element={<TimeScreen/>}/>
-          <Route path={'/daily-time-log'} element={<DailyTimeLogScreen/>}/>
+          <Route path={'/time-log'} element={<TimeLogScreen/>}/>
           <Route path={'/evm'} element={<EvmScreen/>}/>
           <Route index element={<KanbanScreen/>}/>
         </Routes>
@@ -72,5 +72,6 @@ export const Main = styled.div`
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 16rem 1fr;
+  //grid-template-columns: 16rem 1fr;
+  grid-template-columns: 13rem 1fr;
 `

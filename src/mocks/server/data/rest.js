@@ -168,6 +168,7 @@ export const kanbanDB = new Rest("__evm__kanban");
 export const userDB = new Rest("__evm__user");
 export const taskTypeDB = new Rest("__evm__task__type");
 export const tagDB = new Rest("__evm__tag__");
+export const evmDB = new Rest('__evm__evm__');
 
 const insertBefore = (list, from, to) => {
   const toItem = list[to];
