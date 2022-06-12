@@ -480,3 +480,68 @@ export const evms = [
   }
 ];
 
+export const capacity = [
+  {
+    id: 1,
+    userId: 1,
+    timeStamp: 1520010030,
+    type: 'weekly',
+    totalHours: 35,
+    plannedHours: 34,
+    actualHours: 20,
+    remainingPlannedHours: 35-34,
+    remainingActualHours: 35-20
+  },
+  {
+    id: 2,
+    userId: 2,
+    timeStamp: 1520010130,
+    type: 'weekly',
+    totalHours: 35,
+    plannedHours: 30,
+    actualHours: 20,
+    remainingPlannedHours: 35-30,
+    remainingActualHours: 35-20
+  },
+  {
+    id: 3,
+    userId: 3,
+    timeStamp: 1520010130,
+    type: 'weekly',
+    totalHours: 20,
+    plannedHours: 20,
+    actualHours: 23,
+    remainingPlannedHours: 0,
+    remainingActualHours: -3
+  },
+  {
+    id: 4,
+    userId: 4,
+    timeStamp: 1520010130,
+    type: 'weekly',
+    totalHours: 37.5,
+    plannedHours: 20,
+    actualHours: 23,
+    remainingPlannedHours: 37.5-20,
+    remainingActualHours: 37.5-23
+  }
+]
+
+export const timeLogs = [
+  {
+    id: 1,
+    projectId: 1,
+    plannedHour: 2,
+    actualHour: 3,
+    taskName: 'Project Kick-off',
+    occurredAt: '2020-05-26T09:42:56Z',
+  },
+  {
+    id: 2,
+    projectId: 1,
+    plannedHour: 6,
+    actualHour: 5,
+    taskName: 'Project Charter',
+    occurredAt: '2020-05-26T08:19:22Z',
+  },
+];

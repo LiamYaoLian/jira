@@ -10,7 +10,6 @@ export const useUserIdInUrl = () => {
   return Number(id);
 }
 
-// TODO test
 export const useUser= (id?: number) => {
   const client = useHttp();
   return useQuery<User>(["users", {id}], () => client(`users/${id}`),

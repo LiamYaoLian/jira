@@ -3,9 +3,6 @@ import { Divider, List, Popover, Typography } from 'antd';
 import styled from '@emotion/styled';
 import { useUsers } from 'utils/user';
 import {ButtonNoPadding} from "./lib";
-import {Route, Routes} from "react-router";
-import {KanbanScreen} from "../screens/kanban";
-import {EpicScreen} from "../screens/epic";
 
 /**
  * UserPopover component

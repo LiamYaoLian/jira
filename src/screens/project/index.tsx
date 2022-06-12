@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import {Routes, Route, useLocation} from 'react-router';
 import {EpicScreen} from '../epic';
 import {KanbanScreen} from '../kanban';
-import {TimeScreen} from '../time';
 import styled from "@emotion/styled";
 import {Menu} from 'antd';
 import {TimeLogScreen} from "../time-log";
@@ -29,9 +28,6 @@ export const ProjectScreen = () => {
           <Menu.Item key={'epic'}>
             <Link to={'epic'}>Epic</Link>
           </Menu.Item>
-          <Menu.Item key={'time'}>
-            <Link to={'time'}>Time</Link>
-          </Menu.Item>
           <Menu.Item key={'time-log'}>
             <Link to={'time-log'}>Time Log</Link>
           </Menu.Item>
@@ -44,7 +40,6 @@ export const ProjectScreen = () => {
         <Routes>
           <Route path={'/kanban'} element={<KanbanScreen/>}/>
           <Route path={'/epic'} element={<EpicScreen/>}/>
-          <Route path={'/time'} element={<TimeScreen/>}/>
           <Route path={'/time-log'} element={<TimeLogScreen/>}/>
           <Route path={'/evm'} element={<EvmScreen/>}/>
           <Route index element={<KanbanScreen/>}/>

@@ -1,6 +1,6 @@
 import { userHandlers } from './account'
 import { getRestHandlers } from './rest-handlers'
-import { epicDB, kanbanDB, projectDB, tagDB, taskDB, taskTypeDB, userDB, evmDB } from '../data/rest'
+import {epicDB, kanbanDB, projectDB, tagDB, taskDB, taskTypeDB, userDB, evmDB, capacityDB, timeLogDB} from '../data/rest'
 import { reorderHandlers } from './reorder-handlers'
 
 
@@ -16,5 +16,7 @@ export const handlers = [
   ...getRestHandlers("tags", tagDB),
   ...getRestHandlers("users", userDB),
   ...getRestHandlers("evms", evmDB),
+  ...getRestHandlers("capacity", capacityDB),
+  ...getRestHandlers("timeLogs", timeLogDB),
   ...reorderHandlers,
 ]

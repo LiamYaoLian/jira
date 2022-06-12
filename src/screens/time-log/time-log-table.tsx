@@ -1,71 +1,57 @@
-import type { ProColumns } from '@ant-design/pro-components';
-import { EditableProTable, ProFormRadio } from '@ant-design/pro-components';
-import React, { useState } from 'react';
+import type {ProColumns} from '@ant-design/pro-components';
+import {EditableProTable, ProFormRadio} from '@ant-design/pro-components';
+import React, {useState} from 'react';
 import {useTasks} from "../../utils/task";
 import {useProjectInUrl} from "../kanban/util";
+import {TimeLog} from "../../types/time-log";
+import {Task} from "../../types/task";
+import {useTimeLogs} from "../../utils/time-log";
 
-// const waitTime = (time: number = 100) => {
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve(true);
-//     }, time);
-//   });
-// };
+interface TimeLogTableProps {
+  tasks: Task[]
+  timeLogs: TimeLog[]
+}
 
-type DataSourceType = {
-  id: React.Key;
-  plannedHour?: number;
-  actualHour?: number;
-  task?: string;
-  occurred_at?: string;
-  update_at?: string;
-};
+export const TimeLogTable = (props: TimeLogTableProps) => {
 
-export const TimeLogTable = () => {
-  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
-  const [dataSource, setDataSource] = useState<DataSourceType[]>([]);
-  const [position, setPosition] = useState<'top' | 'bottom' | 'hidden'>('bottom');
-  const { data: currentProject } = useProjectInUrl();
-
+  const {data: currentProject} = useProjectInUrl();
   // useQuery can return undefined at first
-  const { data: tasks } = useTasks({ projectId: currentProject?.id });
-
-  // TODO from and to backend
-  const defaultData: DataSourceType[] = [
-    {
-      id: 624748504,
-      plannedHour: 2,
-      actualHour: 3,
-      task: 'open',
-      occurred_at: '2020-05-26T09:42:56Z',
-      update_at: '2020-05-26T09:42:56Z',
-    },
-    {
-      id: 624691229,
-      plannedHour: 6,
-      actualHour: 5,
-      task: 'closed',
-      occurred_at: '2020-05-26T08:19:22Z',
-      update_at: '2020-05-26T08:19:22Z',
-    },
-  ];
-
-  // useQuery can return undefined at first
+  // const {data: tasks} = useTasks({projectId: currentProject?.id});
+  const tasks = props.tasks;
   let options = {}
   if (tasks) {
     tasks.forEach((task) => {
-      options = {...options, ...{['task' +task.id]: {'text': task.name}}}
+      options = {...options, ...{['task' + task.id]: {'text': task.name}}}
     })
   }
 
-  const columns: ProColumns<DataSourceType>[] = [
+  // const {data: timeLogs, isLoading} = useTimeLogs({projectId: currentProject?.id});
+  //
+  // let defaultDataSource: TimeLog[] = []
+  //
+  //
+  // if (timeLogs) {
+  //   defaultDataSource = timeLogs;
+  //   // console.log(JSON.stringify(defaultDataSource) + "isLoading: " + isLoading);
+  // }
+  const defaultDataSource: TimeLog[] = props.timeLogs;
+
+
+  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
+  const [dataSource, setDataSource] = useState<TimeLog[] | undefined>([]);
+  const [position, setPosition] = useState<'top' | 'bottom' | 'hidden'>('bottom');
+
+
+
+
+  const columns: ProColumns<TimeLog>[] = [
     {
       title: 'Task',
-      key: 'task',
-      dataIndex: 'task',
+      key: 'taskName',
+      dataIndex: 'taskName',
       valueType: 'select',
       valueEnum: {
-        default: { text: 'Please choose', status: 'Default' },
+        default: {text: 'Please choose', status: 'Default'},
         ...options
       },
       formItemProps: {
@@ -98,7 +84,7 @@ export const TimeLogTable = () => {
     },
     {
       title: 'Activity Date',
-      dataIndex: 'occurred_at',
+      dataIndex: 'occurredAt',
       valueType: 'date',
       formItemProps: {
         rules: [
@@ -114,7 +100,7 @@ export const TimeLogTable = () => {
       render: (text, record, _, action) => [
         <a key="editable" onClick={() => action?.startEditable?.(record.id)}>Edit</a>,
         <a key="delete"
-          onClick={() => setDataSource(dataSource.filter((item) => item.id !== record.id))}
+           onClick={() => setDataSource(dataSource?.filter((item) => item.id !== record.id))}
         >
           Delete
         </a>,
@@ -124,17 +110,16 @@ export const TimeLogTable = () => {
 
   return (
     <>
-      <EditableProTable<DataSourceType>
+      <EditableProTable<TimeLog>
         rowKey="id"
         headerTitle=""
         scroll={{x: 960}}
         recordCreatorProps={
-
           position !== 'hidden'
             ? {
               creatorButtonText: 'New Record',
               position: position as 'top',
-              record: () => ({ id: (Math.random() * 1000000).toFixed(0) }),
+              record: () => ({id: (Math.random() * 1000000).toFixed(0), projectId: currentProject?.id as number}),
             }
             : false
         }
@@ -162,9 +147,10 @@ export const TimeLogTable = () => {
             ]}
           />,
         ]}
+
         columns={columns}
         request={async () => ({
-          data: defaultData,
+          data: defaultDataSource,
           total: 3,
           success: true,
         })}

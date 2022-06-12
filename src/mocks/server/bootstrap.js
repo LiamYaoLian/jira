@@ -1,5 +1,5 @@
 import * as initialData from './initial-data'
-import { epicDB, kanbanDB, projectDB, tagDB, taskDB, taskTypeDB, userDB, evmDB } from './data/rest'
+import { epicDB, kanbanDB, projectDB, tagDB, taskDB, taskTypeDB, userDB, evmDB, capacityDB, timeLogDB } from './data/rest'
 
 export const bootstrap = (id) => {
 
@@ -8,20 +8,21 @@ export const bootstrap = (id) => {
   if (hasBootstrapped === 'true') {
     return;
   }
-  // TODO
+
+
   window.localStorage.setItem(hasBootstrappedKey, 'true');
-  userDB.push(assignId(id, initialData.users));
-  taskTypeDB.push(assignId(id, initialData.taskTypes));
-  projectDB.push(assignId(id, initialData.projects));
-  tagDB.push(assignId(id, initialData.tags));
-  kanbanDB.push(assignId(id, initialData.kanbans));
-  epicDB.push(assignId(id, initialData.epics));
-  taskDB.push(assignId(id, initialData.tasks));
-  evmDB.push(assignId(id, initialData.evms));
+  userDB.push(initialData.users);
+  taskTypeDB.push(initialData.taskTypes);
+  projectDB.push(initialData.projects);
+  tagDB.push(initialData.tags);
+  kanbanDB.push(initialData.kanbans);
+  epicDB.push(initialData.epics);
+  taskDB.push(initialData.tasks);
+  evmDB.push(initialData.evms);
+  capacityDB.push(initialData.capacity);
+  timeLogDB.push(initialData.timeLogs);
 };
 
-const assignId = (userId, list, other) => {
-  return list.map((item) => ({ ...item, ownerId: userId, ...other }));
-};
+
 
 

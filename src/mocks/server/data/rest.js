@@ -120,10 +120,18 @@ class Rest {
    * @param rest
    * @returns {*}
    */
-  create({ name = required('name'), ...rest }) {
+  // create({ name = required('name'), ...rest }) {
+  //   const ids = Object.keys(this.listMap).map(Number);
+  //   const id = Math.max(...ids, 0) + 1;
+  //   const newItem = { ...rest, name, id };
+  //   this.list.push(newItem);
+  //   this.persist();
+  //   return this.detail(id);
+  // }
+  create({ ...rest }) {
     const ids = Object.keys(this.listMap).map(Number);
     const id = Math.max(...ids, 0) + 1;
-    const newItem = { ...rest, name, id };
+    const newItem = { ...rest, id };
     this.list.push(newItem);
     this.persist();
     return this.detail(id);
@@ -170,6 +178,8 @@ export const userDB = new Rest("__evm__users");
 export const taskTypeDB = new Rest("__evm__task__type");
 export const tagDB = new Rest("__evm__tag__");
 export const evmDB = new Rest('__evm__evm__');
+export const capacityDB = new Rest('__evm__capacity__');
+export const timeLogDB = new Rest('__evm__time__log__');
 
 const insertBefore = (list, from, to) => {
   const toItem = list[to];

@@ -9,7 +9,7 @@ const tryToNumber = (value) => Array.isArray(value) ? value.map(Number) : Number
 const convertIds = (object) => {
   const result = {}
   Object.keys(object).forEach((key) => {
-    // 如果包含Id，比如personId，就要转换成数字
+    // convert id (e.g. personId) to number
     result[key] = key.includes('Id') ? tryToNumber(object[key]) : object[key]
   })
   result.id = tryToNumber(result.id)
@@ -62,15 +62,6 @@ export const getRestHandlers = (endpoint, db) => {
           created: new Date().getTime()
         }
       }
-
-      // const nameExist = !!db
-      //   .queryByOwnerId(user.id)
-      //   .find((item) => item.name === targetAddItem.name);
-      // if (nameExist) {
-      //   const error = new ServerError("此名字已存在");
-      //   error.status = 400;
-      //   throw error;
-      // }
 
       const detail = await db.create(convertIds(targetAddItem))
       return res(ctx.json(detail))
