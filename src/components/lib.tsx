@@ -9,7 +9,8 @@ export const Row = styled.div<{
   display: flex;
   align-items: center;
   justify-content: ${(props) => (props.between ? 'space-between' : undefined)};
-  margin-bottom: ${(props) => props.marginBottom + 'rem'};
+  // margin-bottom: ${(props) => props.marginBottom + 'rem'};
+  margin-bottom: 2rem;
   > * {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
@@ -53,7 +54,7 @@ export const ErrorBox = ({ error }: { error: unknown }) => {
 };
 
 export const ScreenContainer = styled.div`
-  padding: 3.2rem;
+  padding: 3.2rem 3.2rem 3.2rem 5rem;
   width: 100%;
   display: flex;
   flex-direction: column;

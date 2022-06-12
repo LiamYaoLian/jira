@@ -3,13 +3,11 @@ import React from 'react';
 import {Menu} from "antd";
 import {Link} from "react-router-dom";
 import {Route, Routes} from "react-router";
-import {KanbanScreen} from "../screens/kanban";
 import {EpicScreen} from "../screens/epic";
-import {TimeScreen} from "../screens/time";
 import {Aside, Main, useRouteType} from "../screens/project";
 import {AppMain, PageHeader} from "../authenticated-app";
 import {AppContainer} from "../authenticated-app";
-import {TimeLogScreen} from "../screens/time-log";
+import {UserScreen} from "../screens/user";
 
 export default () => {
   const routeType = useRouteType()
@@ -32,7 +30,7 @@ export default () => {
           </Aside>
           <Main>
             <Routes>
-              <Route path={'/kanban'} element={<KanbanScreen/>}/>
+              <Route path={'/member'} element={<UserScreen/>}/>
               <Route path={'/epic'} element={<EpicScreen/>}/>
 
             </Routes>

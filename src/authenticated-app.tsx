@@ -11,6 +11,7 @@ import {ProjectModal} from './screens/project-list/project-modal';
 import {ProjectPopover} from './components/project-popover';
 import {UserPopover} from './components/user-popover';
 import {resetRoute} from './utils';
+import {UserScreen} from "./screens/user";
 
 export default () => {
   return (
@@ -19,9 +20,8 @@ export default () => {
       <AppMain>
         <Routes>
           <Route path={'/projects'} element={<ProjectListScreen/>}/>
-          <Route
-            path={'/projects/:projectId/*'}
-            element={<ProjectScreen/>}/>
+          <Route path={'/projects/:projectId/*'} element={<ProjectScreen/>}/>
+          <Route path={'/users/:userId/*'} element={<UserScreen/>}/>
           <Route index element={<ProjectListScreen/>}/>
         </Routes>
       </AppMain>

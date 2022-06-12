@@ -17,7 +17,6 @@ export const bootstrap = (id) => {
   kanbanDB.push(assignId(id, initialData.kanbans));
   epicDB.push(assignId(id, initialData.epics));
   taskDB.push(assignId(id, initialData.tasks));
-  console.log('evms' +JSON.stringify(initialData.evms));
   evmDB.push(assignId(id, initialData.evms));
 };
 
