@@ -1,22 +1,24 @@
 import type {ProColumns} from '@ant-design/pro-components';
 import {EditableProTable, ProFormRadio} from '@ant-design/pro-components';
 import React, {useState} from 'react';
-import {useTasks} from "../../utils/task";
 import {useProjectInUrl} from "../kanban/util";
 import {TimeLog} from "../../types/time-log";
 import {Task} from "../../types/task";
-import {useTimeLogs} from "../../utils/time-log";
 
 interface TimeLogTableProps {
   tasks: Task[]
   timeLogs: TimeLog[]
 }
 
+// TODO time log persistency
+
 export const TimeLogTable = (props: TimeLogTableProps) => {
 
   const {data: currentProject} = useProjectInUrl();
-  // useQuery can return undefined at first
-  // const {data: tasks} = useTasks({projectId: currentProject?.id});
+  const defaultDataSource: TimeLog[] = props.timeLogs;
+  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
+  const [dataSource, setDataSource] = useState<TimeLog[] | undefined>([]);
+  const [position, setPosition] = useState<'top' | 'bottom' | 'hidden'>('bottom');
   const tasks = props.tasks;
   let options = {}
   if (tasks) {
@@ -24,25 +26,6 @@ export const TimeLogTable = (props: TimeLogTableProps) => {
       options = {...options, ...{['task' + task.id]: {'text': task.name}}}
     })
   }
-
-  // const {data: timeLogs, isLoading} = useTimeLogs({projectId: currentProject?.id});
-  //
-  // let defaultDataSource: TimeLog[] = []
-  //
-  //
-  // if (timeLogs) {
-  //   defaultDataSource = timeLogs;
-  //   // console.log(JSON.stringify(defaultDataSource) + "isLoading: " + isLoading);
-  // }
-  const defaultDataSource: TimeLog[] = props.timeLogs;
-
-
-  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
-  const [dataSource, setDataSource] = useState<TimeLog[] | undefined>([]);
-  const [position, setPosition] = useState<'top' | 'bottom' | 'hidden'>('bottom');
-
-
-
 
   const columns: ProColumns<TimeLog>[] = [
     {
@@ -151,6 +134,7 @@ export const TimeLogTable = (props: TimeLogTableProps) => {
         columns={columns}
         request={async () => ({
           data: defaultDataSource,
+          // TODO
           total: 3,
           success: true,
         })}

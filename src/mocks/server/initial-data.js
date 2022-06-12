@@ -38,6 +38,36 @@ export const epics = [
     end: new Date('2021-02-14').getTime(),
     projectId: 3
   },
+  {
+    name: 'Group D',
+    start: new Date('2021-01-12').getTime(),
+    end: new Date('2021-02-14').getTime(),
+    projectId: 1
+  },
+  {
+    name: 'Group E',
+    start: new Date('2021-01-12').getTime(),
+    end: new Date('2021-02-14').getTime(),
+    projectId: 1
+  },
+  {
+    name: 'Group F',
+    start: new Date('2021-01-12').getTime(),
+    end: new Date('2021-02-14').getTime(),
+    projectId: 1
+  },
+  {
+    name: 'Group G',
+    start: new Date('2021-01-12').getTime(),
+    end: new Date('2021-02-14').getTime(),
+    projectId: 1
+  },
+  {
+    name: 'Group H',
+    start: new Date('2021-01-12').getTime(),
+    end: new Date('2021-02-14').getTime(),
+    projectId: 1
+  },
 ];
 
 export const kanbans = [
@@ -255,7 +285,6 @@ export const tasks = [
 
 export const evms = [
   {
-    // TODO
     name: 'Master Service Agreement (MSA)',
     projectId: 1,
     bac: 2323.8,

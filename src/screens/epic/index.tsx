@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { useEpicSearchParams, useEpicsQueryKey } from 'screens/epic/util';
 import { Epic } from 'types/epic';
 import { CreateEpic } from 'screens/epic/create-epic';
+import styled from "@emotion/styled";
 
 export const EpicScreen = () => {
   const { data: currentProject } = useProjectInUrl();
@@ -38,7 +39,7 @@ export const EpicScreen = () => {
         <Button onClick={() => setEpicCreateOpen(true)} type={'link'}>Create Epic</Button>
       </Row>
       <List
-        style={{ overflow: 'scroll' }}
+        style={{ height: 'calc(100vh - 30rem)', width: 'calc(40vw)', overflow: 'scroll' }}
         dataSource={epics}
         itemLayout={'vertical'}
         renderItem={(epic) => (
@@ -75,3 +76,5 @@ export const EpicScreen = () => {
     </ScreenContainer>
   );
 };
+
+
