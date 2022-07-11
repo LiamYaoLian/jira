@@ -28,8 +28,6 @@ export const LoginScreen = ({onError,}: { onError: (error: Error) => void }) => 
         <Input placeholder={"password"} type="password" id={"password"}/>
       </Form.Item>
       <Form.Item>
-        {/*<ShortButton loading={isLoading} htmlType={"submit"} type={"primary"}>Log In</ShortButton>*/}
-        {/*<ShortButton loading={isLoading} htmlType={"submit"} type={"primary"}>Admin Log In</ShortButton>*/}
         <LongButton loading={isLoading} htmlType={"submit"} type={"primary"}>Log In</LongButton>
       </Form.Item>
     </Form>

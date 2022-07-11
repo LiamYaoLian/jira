@@ -12,7 +12,6 @@ import { Link } from 'react-router-dom';
 import { useEpicSearchParams, useEpicsQueryKey } from 'screens/epic/util';
 import { Epic } from 'types/epic';
 import { CreateEpic } from 'screens/epic/create-epic';
-import styled from "@emotion/styled";
 
 export const EpicScreen = () => {
   const { data: currentProject } = useProjectInUrl();

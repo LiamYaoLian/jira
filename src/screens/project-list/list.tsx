@@ -19,6 +19,7 @@ interface ListProps extends TableProps<Project> {
 
 export const List = ({users, ...props}: ListProps) => {
   const {mutate} = useEditProject(useProjectsQueryKey())
+  // Currying
   const pinProject = (id: number) => (pin: boolean) => mutate({id, pin})
 
   return (

@@ -1,5 +1,5 @@
 import {useCallback, useReducer, useState} from 'react';
-import {useMountedRef} from "./index";
+import {useMountedRef} from './index';
 
 interface State<D> {
   error: Error | null;
@@ -41,6 +41,7 @@ export const useAsync = <D>(initialState?: State<D>, initialConfig?: typeof defa
   * if we pass a function into useState(), the function will be used for lazy init
   * Therefore, if we want to store a function as a state, we cannot pass the function directly
   * */
+  // retry is used to refresh the page after editing
   const [retry, setRetry] = useState(() => () => {})
 
   const setData = useCallback((data: D) =>
@@ -51,27 +52,33 @@ export const useAsync = <D>(initialState?: State<D>, initialConfig?: typeof defa
 
   // used to trigger an async request
   const run = useCallback((promise: Promise<D>, runConfig?: { retry: () => Promise<D> }) => {
-    if (!promise || !promise.then) throw new Error('Please pass a Promise instance')
+    // if it is not a Promise object
+    if (!promise || !promise.then) throw new Error('Please pass a Promise object')
 
     setRetry(() => () => {
       if (runConfig?.retry) run(runConfig?.retry(), runConfig).then()
     })
 
     // use "prevState" to prevent circular dependency
+    // waiting for a response, now the status is 'loading'
     safeDispatch({stat: 'loading'});
     return promise
       .then((data) => {
+        // update data, status, error
         setData(data);
         return data;
       })
       .catch((error) => {
+        // update data, status, error
         setError(error);
+        // return a rejected Promise obj so that we can deal with it outside this function
         if (config.throwOnError) return Promise.reject(error)
         return error;
       });
   }, [config.throwOnError, setData, setError, safeDispatch])
 
 
+  // return status and functions
   return {
     isIdle: state.stat === 'idle',
     isLoading: state.stat === 'loading',

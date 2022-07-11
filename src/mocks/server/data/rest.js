@@ -173,7 +173,6 @@ export const projectDB = new Rest("__evm__project");
 export const epicDB = new Rest("__evm__epic");
 export const taskDB = new Rest("__evm__task");
 export const kanbanDB = new Rest("__evm__kanban");
-// TODO
 export const userDB = new Rest("__evm__users");
 export const taskTypeDB = new Rest("__evm__task__type");
 export const tagDB = new Rest("__evm__tag__");

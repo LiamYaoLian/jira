@@ -17,7 +17,7 @@ export const Pin = ({checked, onCheckedChange, ...restProps}: PinProps) => {
     return <Rate
         count={1}
         value={checked? 1 : 0}
-        onChange={num => onCheckedChange?.(!!num)}
+        onChange={value => onCheckedChange?.(!!value)}
         {...restProps}
     />
 }

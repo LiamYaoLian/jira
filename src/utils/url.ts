@@ -7,11 +7,12 @@ import {cleanObject, subset} from './index';
 
 /**
  * a function to get the parameters in the page url based on keys and a function to set search params in a clean way
- * How:
  * Highlight: useMemo; clean params in url
  */
 export const useUrlQueryParam = <K extends string>(keys: K[]) => {
   // an array of search params
+  // searchParams is state. If we put it in deps, it will not cause infinite loop
+  // deps can have primitive type and component state, which will not cause infinite loop.
   const [searchParams] = useSearchParams();
   // a function to clean params in url
   const setSearchParams = useSetUrlSearchParam();

@@ -114,6 +114,11 @@ async function reset() {
  * @returns {Promise<Pick<*, *>>}
  */
 async function create({ name, password }) {
+
+  if (password.length < 8) {
+    throw new ServerError('Password should have at least 8 characters')
+  }
+
   validateUserForm({ name, password });
   const id = +hash(name);
   const passwordHash = hash(password);

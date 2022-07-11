@@ -55,11 +55,11 @@ export const ErrorBox = ({ error }: { error: unknown }) => {
 
 export const ScreenContainer = styled.div`
   padding: 3.2rem 3.2rem 3.2rem 5rem;
-  width: 100%;
+  width: calc(100vw - 19rem);
   display: flex;
   flex-direction: column;
   // TODO
-  overflow-y: scroll;
+  overflow: scroll;
 `;
 
 export const ButtonNoPadding = styled(Button)`

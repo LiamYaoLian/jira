@@ -3,8 +3,6 @@ import { getRestHandlers } from './rest-handlers'
 import {epicDB, kanbanDB, projectDB, tagDB, taskDB, taskTypeDB, userDB, evmDB, capacityDB, timeLogDB} from '../data/rest'
 import { reorderHandlers } from './reorder-handlers'
 
-
-// TODO
 export const handlers = [
   ...userHandlers,
   ...getRestHandlers("projects", projectDB),

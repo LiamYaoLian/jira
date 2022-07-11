@@ -4,7 +4,7 @@
 import React from 'react';
 import {Form, Input} from 'antd';
 import {UserSelect} from 'components/user-select';
-import {Project} from "../../types/project";
+import {Project} from '../../types/project';
 
 interface SearchPanelProps {
   param: Partial<Pick<Project, 'name' | 'personId'>>;

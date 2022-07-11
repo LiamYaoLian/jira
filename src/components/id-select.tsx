@@ -14,7 +14,7 @@ interface IdSelectProps
 
 /**
  * Select component
- * Note: When value is not a number, select defaultOptionName, onChange(undefined)
+ * Note: When Number(value) is not a number, toNumber(value) will be 0, will select defaultOptionName, may call onChange(undefined)
  * @param props
  * @constructor
  */
@@ -22,6 +22,7 @@ export const IdSelect = (props: IdSelectProps) => {
   const { value, onChange, defaultOptionName, options, ...restProps } = props;
   return (
     <Select
+      // when waiting for the response, select the default option
       value={options?.length ? toNumber(value) : 0}
       onChange={(value) => onChange?.(toNumber(value) || undefined)}
       {...restProps}

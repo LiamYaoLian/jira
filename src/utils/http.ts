@@ -34,6 +34,7 @@ export const http = async (
     config.body = JSON.stringify(data || {});
   }
 
+  // axios will throw an error when status code is not 2xx
   return window
     .fetch(`${apiUrl}/${endpoint}`, config)
     .then(async (response) => {
@@ -48,6 +49,7 @@ export const http = async (
       if (response.ok) {
         return data;
       } else {
+        // need this!
         return Promise.reject(data);
       }
     });
@@ -59,5 +61,6 @@ export const http = async (
 export const useHttp = () => {
   const {user} = useAuth();
   return useCallback(async (...[endpoint, config]: Parameters<typeof http>) =>
-    await http(endpoint, {...config, token: user?.token}), [user?.token]);
+    await http(endpoint, {...config, token: user?.token}),
+    [user?.token]);
 };

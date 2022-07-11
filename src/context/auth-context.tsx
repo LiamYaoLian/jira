@@ -59,7 +59,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     resetRoute()
   });
 
-  // when a component is mounted, update user by sending token to backend
+  /* when a component is mounted, update user by sending token to backend,
+  to maintain login status after the user refreshes the page
+  */
   useMount(useCallback(() => run(bootstrapUser()), []));
 
   if (isIdle || isLoading) {
@@ -86,6 +88,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
  * A function to return the current context value
  */
 export const useAuth = () => {
+  /*
+  * Accepts a context object (the value returned from React.createContext)
+  * and returns the current context value,
+  * as given by the nearest context provider for the given context.
+  * */
   const context = React.useContext(AuthContext);
   if (!context) {
     throw new Error('useAuth can be used only in AuthProvider');

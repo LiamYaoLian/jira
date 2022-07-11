@@ -2,15 +2,14 @@
  * ProjectListScreen
  */
 import React from 'react';
-import styled from '@emotion/styled';
 import {SearchPanel} from './search-panel';
 import {List} from './list';
 import {useDebounce, useDocumentTitle} from '../../utils';
 import {useProjects} from '../../utils/project';
 import {useUsers} from '../../utils/user';
 import {useProjectModal, useProjectsSearchParams} from './util';
-import {ButtonNoPadding, ErrorBox, Row, ScreenContainer} from "components/lib";
-import {Profiler} from "../../components/profiler";
+import {ButtonNoPadding, ErrorBox, Row, ScreenContainer} from 'components/lib';
+import {Profiler} from '../../components/profiler';
 
 export const ProjectListScreen = () => {
 

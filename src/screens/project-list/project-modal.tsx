@@ -11,7 +11,7 @@ export const ProjectModal = () => {
   const {projectModalOpen, close, editingProject, isLoading} = useProjectModal()
   const useMutateProject = editingProject ? useEditProject : useAddProject
 
-  const {mutateAsync, error, isLoading: mutateLoading} = useMutateProject(useProjectsQueryKey());
+  const {mutateAsync, error, isLoading: mutateLoading} = useMutateProject(useProjectsQueryKey())
   const [form] = Form.useForm();
   const onFinish = (values: any) => {
     mutateAsync({...editingProject, ...values}).then(() => {
