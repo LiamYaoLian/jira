@@ -22,7 +22,7 @@ const defaultConfig = {
  * @param dispatch
  */
 const useSafeDispatch = <T>(dispatch: (...args: T[]) => void) => {
-  //a function to indicate whether a component is mounted (true) or not (false)
+  // a function to indicate whether a component is mounted (true) or not (false)
   const mountedRef = useMountedRef()
   return useCallback((...args: T[]) => (mountedRef.current ? dispatch(...args) : void 0), [dispatch, mountedRef])
 }

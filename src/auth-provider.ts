@@ -28,6 +28,7 @@ export const login = (data: { username: string; password: string }) => {
 /*
 * How: put token into localStorage
 */
+// TODO
 export const handleUserResponse = ({ user }: { user: User }) => {
   window.localStorage.setItem(localStorageKey, user.token || '');
   return user;
