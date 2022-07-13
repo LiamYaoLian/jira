@@ -28,10 +28,11 @@ export const KanbanScreen = () => {
   const { isLoading: taskIsLoading } = useTasks(useTasksSearchParams());
   const isLoading = taskIsLoading || kanbanIsLoading;
 
-  // TODO
+  // to update state when dragging ends
   const onDragEnd = useDragEnd();
   return (
       <Profiler id={'kanban-page'}>
+        {/* DragDropContext: onDragEnd is required */}
         <DragDropContext onDragEnd={onDragEnd}>
           <ScreenContainer>
             <h1>{currentProject?.name} Kanban</h1>
@@ -40,18 +41,11 @@ export const KanbanScreen = () => {
                 <Spin size={'large'} />
             ) : (
                 <ColumnsContainer>
-                  <Drop
-                      type={'COLUMN'}
-                      direction={'horizontal'}
-                      droppableId={'kanban'}
-                  >
+                  <Drop type={'COLUMN'} direction={'horizontal'} droppableId={'kanban'}>
                     <DropChild style={{ display: 'flex' }}>
                       {kanbans?.map((kanban, index) => (
-                          <Drag
-                              key={kanban.id}
-                              draggableId={'kanban' + kanban.id}
-                              index={index}
-                          >
+                          // draggableId and index are required
+                          <Drag key={kanban.id} draggableId={'kanban' + kanban.id} index={index}>
                             <KanbanColumn kanban={kanban} key={kanban.id} />
                           </Drag>
                       ))}

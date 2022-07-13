@@ -10,7 +10,6 @@ import {
 
 type DropProps = Omit<DroppableProps, 'children'> & { children: ReactNode };
 
-// https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/droppable.md
 /**
  * A custom version of Droppable
  * @param children
@@ -19,8 +18,19 @@ type DropProps = Omit<DroppableProps, 'children'> & { children: ReactNode };
  */
 export const Drop = ({children, ...props}: DropProps) => {
   return (
+    /*
+    * https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/droppable.md
+    * Droppable:
+    * required props:
+    * droppableId
+    *
+    * children function:
+    * Droppable needs a function as its child. This function returns a React component
+    * this component needs:
+    * ref={provided.innerRef}: provided.innerRef is a function used to supply with DOM node of your component to React-Beautiful-Dnd
+    * {...provided.droppableProps}
+    * */
     <Droppable {...props}>
-      {/* provided: DraggableProvided */}
       {(provided) => {
         if (React.isValidElement(children)) {
           return React.cloneElement(children, {
@@ -36,6 +46,17 @@ export const Drop = ({children, ...props}: DropProps) => {
 };
 
 type DropChildProps = Partial<{ provided: DroppableProvided } & DroppableProvidedProps> & React.HTMLAttributes<HTMLDivElement>;
+/*
+* A placeholder is a React element used to increase the available space in a Droppable during a drag when it's needed.
+* A placeholder needs to be a child of the component that you designate as a Droppable
+*
+* https://reactjs.org/docs/refs-and-the-dom.html
+* You may not use the ref attribute on function components because they don’t have instances.
+* If you want to allow people to take a ref to your function component, you can use forwardRef
+*
+* Ref forwarding is an opt-in feature that lets some components take a ref they receive,
+* and pass it further down (in other words, “forward” it) to a child.
+* */
 export const DropChild = React.forwardRef<HTMLDivElement, DropChildProps>(
   ({children, ...props}, ref) => (
     <div ref={ref} {...props}>
@@ -45,7 +66,6 @@ export const DropChild = React.forwardRef<HTMLDivElement, DropChildProps>(
   )
 );
 
-// https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/draggable.md
 type DragProps = Omit<DraggableProps, 'children'> & { children: ReactNode };
 /**
  * A custom version of Draggable
@@ -53,9 +73,15 @@ type DragProps = Omit<DraggableProps, 'children'> & { children: ReactNode };
  * @param props
  * @constructor
  */
+/*
+* Draggable: a component that you can drag and drop onto <Droppable />
+* https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/draggable.md
+*
+* provided.dragHandleProps: this should be applied to the part of component that we want to use to control
+* the entire component. You can use this to drag a large item by just a small part of it
+* */
 export const Drag = ({children, ...props}: DragProps) => {
   return (
-    // Draggable: a component that you can drag and drop onto <Droppable />s
     <Draggable {...props}>
       {(provided) => {
         if (React.isValidElement(children)) {

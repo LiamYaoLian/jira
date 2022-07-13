@@ -4,7 +4,6 @@
 import {useHttp} from "utils/http";
 import {useQuery} from "react-query";
 import {Evm} from "types/evm";
-import {Capacity} from "../types/capacity";
 
 /*
 * a function to get an array of evm records of a projectId from backend

@@ -4,7 +4,7 @@
 import React from "react";
 import {useAuth} from "../context/auth-context";
 import {Form, Input} from "antd";
-import {LongButton, ShortButton} from "./index";
+import {LongButton} from "./index";
 import {useAsync} from "../utils/use-async";
 
 export const LoginScreen = ({onError,}: { onError: (error: Error) => void }) => {

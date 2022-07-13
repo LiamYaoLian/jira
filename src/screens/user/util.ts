@@ -1,7 +1,6 @@
 import {useLocation} from "react-router";
 import {useHttp} from "../../utils/http";
 import {useQuery} from "react-query";
-import {useProjectIdInUrl} from "../kanban/util";
 import {User} from "../../types/user";
 
 export const useUserIdInUrl = () => {

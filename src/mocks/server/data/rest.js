@@ -1,4 +1,4 @@
-import { required, search, ServerError } from '../util'
+import { search, ServerError } from '../util'
 
 /**
  * Used to CRUD in database
