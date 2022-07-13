@@ -158,6 +158,13 @@ class Rest {
     );
   }
 
+  // TODO need userId?
+  queryMaxId() {
+    const ids = Object.keys(this.listMap).map(Number);
+    const id = Math.max(...ids, 0);
+    return id
+  }
+
   constructor(storageKey) {
     this.storageKey = storageKey;
     try {

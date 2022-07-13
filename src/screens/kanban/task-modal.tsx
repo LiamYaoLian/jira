@@ -16,10 +16,14 @@ const layout = {
     wrapperCol: { span: 16 },
 };
 
-// TODO
+/**
+ * TaskModal Component
+ * @constructor
+ */
 export const TaskModal = () => {
     const [form] = Form.useForm();
     const { editingTaskId, editingTask, close } = useTasksModal();
+    // get from url
     const { mutateAsync: editTask, isLoading: editLoading } = useEditTask(useTasksQueryKey());
     const { mutate: deleteTask } = useDeleteTask(useTasksQueryKey());
 
@@ -33,8 +37,6 @@ export const TaskModal = () => {
         }
         return editingTask;
     }
-
-
 
     const onCancel = () => {
         close();
@@ -104,7 +106,6 @@ export const TaskModal = () => {
                 >
                     <Input/>
                 </Form.Item>
-
 
             </Form>
             <div style={{ textAlign: 'right' }}>

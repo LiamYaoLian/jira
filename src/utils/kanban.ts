@@ -1,20 +1,20 @@
 /**
  * util functions to create, read, update, delete Kanbans
  */
-import {useHttp} from "utils/http";
-import {QueryKey, useMutation, useQuery} from "react-query";
-import {Kanban} from "types/kanban";
-import {useAddConfig, useDeleteConfig, useReorderKanbanConfig,} from "utils/use-optimistic-options";
+import {useHttp} from 'utils/http';
+import {QueryKey, useMutation, useQuery} from 'react-query';
+import {Kanban} from 'types/kanban';
+import {useAddConfig, useDeleteConfig, useReorderKanbanConfig,} from 'utils/use-optimistic-options';
 
 /*
 * a function to get an array of Kanbans from backend
-* How: send an HTTP request to "kanbans" to get an array of Kanbans
+* How: send an HTTP request to 'kanbans' to get an array of Kanbans
 * */
 export const useKanbans = (param?: Partial<Kanban>) => {
   const client = useHttp();
 
-  return useQuery<Kanban[]>(["kanbans", param], () =>
-    client("kanbans", {data: param})
+  return useQuery<Kanban[]>(['kanbans', param], () =>
+    client('kanbans', {data: param})
   );
 };
 
@@ -29,7 +29,7 @@ export const useAddKanban = (queryKey: QueryKey) => {
     (params: Partial<Kanban>) =>
       client(`kanbans`, {
         data: params,
-        method: "POST",
+        method: 'POST',
       }),
     useAddConfig(queryKey)
   );
@@ -44,7 +44,7 @@ export const useDeleteKanban = (queryKey: QueryKey) => {
   return useMutation(
     ({id}: { id: number }) =>
       client(`kanbans/${id}`, {
-        method: "DELETE",
+        method: 'DELETE',
       }),
     useDeleteConfig(queryKey)
   );
@@ -59,7 +59,7 @@ export interface SortProps {
   referenceId: number;
 
   // put the item before or after the target item
-  type: "before" | "after";
+  type: 'before' | 'after';
 
   fromKanbanId?: number;
 
@@ -72,9 +72,9 @@ export interface SortProps {
 export const useReorderKanban = (queryKey: QueryKey) => {
   const client = useHttp();
   return useMutation((params: SortProps) => {
-    return client("kanbans/reorder", {
+    return client('kanbans/reorder', {
       data: params,
-      method: "POST",
+      method: 'POST',
     });
   }, useReorderKanbanConfig(queryKey));
 };

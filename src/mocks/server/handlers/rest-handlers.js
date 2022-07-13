@@ -28,12 +28,18 @@ export const getRestHandlers = (endpoint, db) => {
       )
       return res(ctx.json(queryResult))
     }),
+    // TODO test
+    // query max id
+    rest.get(`${apiUrl}/${endpoint}/max-id`, async (req, res, ctx) => {
+      return res(ctx.json(db.queryMaxId()));
+    }),
     // query detail
     rest.get(`${apiUrl}/${endpoint}/:id`, async (req, res, ctx) => {
       const { id } = req.params
       const item = db.detail(+id)
       return res(ctx.json(item))
     }),
+
     // put item
     rest.patch(`${apiUrl}/${endpoint}/:id`, async (req, res, ctx) => {
       const { id } = convertIds(req.params)

@@ -1,24 +1,32 @@
 import type {ProColumns} from '@ant-design/pro-components';
 import {EditableProTable, ProFormRadio} from '@ant-design/pro-components';
-import React, {useState} from 'react';
+import React, {Dispatch, SetStateAction, useState} from 'react';
 import {useProjectInUrl} from "../kanban/util";
 import {TimeLog} from "../../types/time-log";
 import {Task} from "../../types/task";
+import {useAddTimeLog, useDeleteTimeLog, useEditTimeLog, useMaxTimeLogId} from "../../utils/time-log";
+import {useTimeLogsQueryKey} from "./util";
 
 interface TimeLogTableProps {
   tasks: Task[]
   timeLogs: TimeLog[]
+  dataSource: TimeLog[] | undefined,
+  setDataSource: Dispatch<SetStateAction<TimeLog[] | undefined>>
 }
-
-// TODO time log persistency
 
 export const TimeLogTable = (props: TimeLogTableProps) => {
 
   const {data: currentProject} = useProjectInUrl();
-  const defaultDataSource: TimeLog[] = props.timeLogs;
+  // TODO task name
+  const {data: maxId} = useMaxTimeLogId();
+  const {mutateAsync: addTimeLog} = useAddTimeLog(useTimeLogsQueryKey());
+  const {mutateAsync: deleteTimeLog} = useDeleteTimeLog(useTimeLogsQueryKey());
+  const {mutateAsync: editTimeLog} = useEditTimeLog(useTimeLogsQueryKey());
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
-  const [dataSource, setDataSource] = useState<TimeLog[] | undefined>([]);
   const [position, setPosition] = useState<'top' | 'bottom' | 'hidden'>('bottom');
+
+
+
   const tasks = props.tasks;
   let options = {}
   if (tasks) {
@@ -39,8 +47,8 @@ export const TimeLogTable = (props: TimeLogTableProps) => {
       },
       formItemProps: {
         rules: [
-          // non-negative float
-          {required: true}
+          // TODO
+          {required: true, pattern: new RegExp('^(?!Please\schoose$)'), message: 'Cannot choose the default option'}
         ]
       }
 
@@ -51,7 +59,7 @@ export const TimeLogTable = (props: TimeLogTableProps) => {
       formItemProps: {
         rules: [
           // non-negative float
-          {required: true, pattern: new RegExp('^\\d+(\\.\\d+)?$'), message: 'Please input a number'}
+          {required: true, pattern: new RegExp('^\\d+(\\.\\d+)?$'), message: 'Please input a non-negative number'}
         ]
       }
     },
@@ -61,7 +69,7 @@ export const TimeLogTable = (props: TimeLogTableProps) => {
       formItemProps: {
         rules: [
           // non-negative float
-          {required: true}
+          {required: true, pattern: new RegExp('^\\d+(\\.\\d+)?$'), message: 'Please input a non-negative number'}
         ]
       }
     },
@@ -71,7 +79,6 @@ export const TimeLogTable = (props: TimeLogTableProps) => {
       valueType: 'date',
       formItemProps: {
         rules: [
-          // non-negative float
           {required: true}
         ]
       }
@@ -83,7 +90,12 @@ export const TimeLogTable = (props: TimeLogTableProps) => {
       render: (text, record, _, action) => [
         <a key="editable" onClick={() => action?.startEditable?.(record.id)}>Edit</a>,
         <a key="delete"
-           onClick={() => setDataSource(dataSource?.filter((item) => item.id !== record.id))}
+           onClick={() => {
+             deleteTimeLog({id: Number(record.id)}).then(() => {
+               props.setDataSource(props.dataSource?.filter((item) => item.id !== record.id))
+             })
+
+           }}
         >
           Delete
         </a>,
@@ -102,7 +114,7 @@ export const TimeLogTable = (props: TimeLogTableProps) => {
             ? {
               creatorButtonText: 'New Record',
               position: position as 'top',
-              record: () => ({id: (Math.random() * 1000000).toFixed(0), projectId: currentProject?.id as number}),
+              record: () => ({id: (Number(maxId) + 1).toFixed(0), projectId: currentProject!.id as number}),
             }
             : false
         }
@@ -133,18 +145,23 @@ export const TimeLogTable = (props: TimeLogTableProps) => {
 
         columns={columns}
         request={async () => ({
-          data: defaultDataSource,
-          // TODO
-          total: 3,
-          success: true,
+          data: props.timeLogs
         })}
-        value={dataSource}
-        onChange={setDataSource}
+        value={props.dataSource}
+        onChange={props.setDataSource}
         editable={
           {
             type: 'multiple',
             editableKeys,
             onChange: setEditableRowKeys,
+            onSave: (key, record, originalRow, newLineConfig) => {
+              return editTimeLog(record).catch(() => {
+                return addTimeLog(record).then(() => {});
+              });
+              //return addTimeLog(record);
+
+
+            }
           }
         }
       />

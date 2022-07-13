@@ -31,7 +31,7 @@ export const useKanbanSearchParams = () => ({ projectId: useProjectIdInUrl() });
 export const useKanbansQueryKey = () => ['kanbans', useKanbanSearchParams()];
 
 /**
- * a function to a memoized object, e.g. {projectId: 1, typeId: 1, processorId: 1, tagIg: 1, name: ''}
+ * a function to return a memoized object, e.g. {projectId: 1, typeId: 1, processorId: 1, tagIg: 1, name: ''}
  */
 export const useTasksSearchParams = () => {
   const [param] = useUrlQueryParam(['name', 'typeId', 'processorId', 'tagId']);

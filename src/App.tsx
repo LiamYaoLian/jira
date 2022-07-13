@@ -4,7 +4,6 @@ import {useAuth} from './context/auth-context';
 import {ErrorBoundary} from './components/error-boundary';
 import {FullPageErrorFallback, FullPageLoading} from './components/lib';
 
-// TODO
 const AuthenticatedApp = React.lazy(() => import("authenticated-app"));
 const UnauthenticatedApp = React.lazy(() => import("unauthenticated-app"));
 const AdminApp = React.lazy(() => import ('admin-app'));

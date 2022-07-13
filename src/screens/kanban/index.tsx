@@ -61,9 +61,9 @@ export const KanbanScreen = () => {
   );
 };
 
-// TODO
 export const useDragEnd = () => {
   const { data: kanbans } = useKanbans(useKanbanSearchParams());
+  // to send requests to backend
   const { mutate: reorderKanban } = useReorderKanban(useKanbansQueryKey());
   const { mutate: reorderTask } = useReorderTask(useTasksQueryKey());
   const { data: allTasks = [] } = useTasks(useTasksSearchParams());
@@ -88,9 +88,9 @@ export const useDragEnd = () => {
           const fromTask = allTasks.filter(
               (task) => task.kanbanId === fromKanbanId
           )[source.index];
-          const toTask = allTasks.filter((task) => task.kanbanId === toKanbanId)[
-              destination.index
-              ];
+          const toTask = allTasks.filter(
+            (task) => task.kanbanId === toKanbanId
+          )[destination.index];
           if (fromTask?.id === toTask?.id) {
             return;
           }

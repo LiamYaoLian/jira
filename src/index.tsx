@@ -11,8 +11,6 @@ import {AppProviders} from 'context';
 import {Profiler} from 'components/profiler';
 import {ConfigProvider} from 'antd';
 
-// TODO profiler
-
 loadServer(() =>
   ReactDOM.render(
     <React.StrictMode>

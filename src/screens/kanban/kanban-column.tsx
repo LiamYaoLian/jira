@@ -52,6 +52,9 @@ const TaskCard = ({ task }: { task: Task }) => {
     );
 };
 
+/**
+ * KanbanColumn Component
+ */
 // https://reactjs.org/docs/forwarding-refs.html
 export const KanbanColumn = React.forwardRef<HTMLDivElement, { kanban: Kanban }
     >(({ kanban, ...props }, ref) => {
@@ -82,6 +85,11 @@ export const KanbanColumn = React.forwardRef<HTMLDivElement, { kanban: Kanban }
     );
 });
 
+/**
+ * More Component
+ * @param kanban
+ * @constructor
+ */
 const More = ({ kanban }: { kanban: Kanban }) => {
     const { mutateAsync } = useDeleteKanban(useKanbansQueryKey());
     const startDelete = () => {
@@ -114,14 +122,12 @@ export const Container = styled.div`
   flex-direction: column;
   padding: 0.7rem 0.7rem 1rem;
   margin-right: 1.5rem;
-  // TODO  
   overflow-x: scroll;
 `;
 
 const TasksContainer = styled.div`
   overflow: scroll; 
-  // https://developer.mozilla.org/en-US/docs/Web/CSS/flex 
-  // TODO  
+  // https://developer.mozilla.org/en-US/docs/Web/CSS/flex
   flex: 1;
   ::-webkit-scrollbar {
     display: none;
