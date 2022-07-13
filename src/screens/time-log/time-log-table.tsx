@@ -17,7 +17,6 @@ interface TimeLogTableProps {
 export const TimeLogTable = (props: TimeLogTableProps) => {
 
   const {data: currentProject} = useProjectInUrl();
-  // TODO task name
   const {data: maxId} = useMaxTimeLogId();
   const {mutateAsync: addTimeLog} = useAddTimeLog(useTimeLogsQueryKey());
   const {mutateAsync: deleteTimeLog} = useDeleteTimeLog(useTimeLogsQueryKey());
@@ -25,13 +24,12 @@ export const TimeLogTable = (props: TimeLogTableProps) => {
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
   const [position, setPosition] = useState<'top' | 'bottom' | 'hidden'>('bottom');
 
-
-
   const tasks = props.tasks;
   let options = {}
   if (tasks) {
     tasks.forEach((task) => {
-      options = {...options, ...{['task' + task.id]: {'text': task.name}}}
+      // 'task' + task.id
+      options = {...options, ...{[task.name]: {'text': task.name}}}
     })
   }
 
@@ -42,13 +40,11 @@ export const TimeLogTable = (props: TimeLogTableProps) => {
       dataIndex: 'taskName',
       valueType: 'select',
       valueEnum: {
-        default: {text: 'Please choose', status: 'Default'},
         ...options
       },
       formItemProps: {
         rules: [
-          // TODO
-          {required: true, pattern: new RegExp('^(?!Please\schoose$)'), message: 'Cannot choose the default option'}
+          {required: true}
         ]
       }
 
@@ -156,7 +152,7 @@ export const TimeLogTable = (props: TimeLogTableProps) => {
             onChange: setEditableRowKeys,
             onSave: (key, record, originalRow, newLineConfig) => {
               return editTimeLog(record).catch(() => {
-                return addTimeLog(record).then(() => {});
+                return addTimeLog(record);
               });
               //return addTimeLog(record);
 

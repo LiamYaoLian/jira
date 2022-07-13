@@ -27,7 +27,7 @@ export const useMaxTimeLogId = () => {
   );
 }
 
-
+// TODO enabled
 /*
 * a function to get a time log record by id from backend
 * */
