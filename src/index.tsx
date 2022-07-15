@@ -2,7 +2,7 @@ import './wdyr'; // must be the first line
 import React from 'react';
 import ReactDOM from 'react-dom';
 //import ReactDOM from 'react-dom/client';
-import enGB from 'antd/lib/locale/en_GB';
+import enUS from 'antd/lib/locale/en_US';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {loadServer} from './mocks';
@@ -16,7 +16,7 @@ loadServer(() =>
     <React.StrictMode>
       <Profiler id={'Root App'} phases={['mount']}>
         <AppProviders>
-          <ConfigProvider locale={enGB}>
+          <ConfigProvider locale={enUS}>
           <App />
           </ConfigProvider>
         </AppProviders>

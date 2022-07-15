@@ -149,6 +149,7 @@ export const TimeLogTable = (props: TimeLogTableProps) => {
           {
             type: 'multiple',
             editableKeys,
+            deletePopconfirmMessage: "Delete this line?",
             onChange: setEditableRowKeys,
             onSave: (key, record, originalRow, newLineConfig) => {
               return editTimeLog(record).catch(() => {
