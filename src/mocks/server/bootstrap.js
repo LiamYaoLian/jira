@@ -1,5 +1,6 @@
 import * as initialData from './initial-data'
 import { epicDB, kanbanDB, projectDB, tagDB, taskDB, taskTypeDB, userDB, evmDB, capacityDB, timeLogDB } from './data/rest'
+import * as accountDB from "./data/account";
 
 export const bootstrap = (id) => {
 
@@ -9,8 +10,6 @@ export const bootstrap = (id) => {
     return;
   }
 
-
-  window.localStorage.setItem(hasBootstrappedKey, 'true');
   userDB.push(initialData.users);
   taskTypeDB.push(initialData.taskTypes);
   projectDB.push(initialData.projects);
@@ -20,7 +19,23 @@ export const bootstrap = (id) => {
   taskDB.push(initialData.tasks);
   evmDB.push(initialData.evms);
   capacityDB.push(initialData.capacity);
-  timeLogDB.push(initialData.timeLogs);
+
+  let timeLogs = initialData.timeLogs.map(item => {
+    return {
+      ...item,
+      userId: id
+    }
+  })
+  timeLogDB.push(timeLogs);
+
+  let admin = accountDB.create({ name: 'admin', password: 'admin12345678' }).then(
+    (admin) => {
+      accountDB.update(admin.id, {role: 'admin'}).then();
+      return admin;
+    }
+  )
+
+  window.localStorage.setItem(hasBootstrappedKey, 'true');
 };
 
 

@@ -16,6 +16,7 @@ interface TimeLogTableProps {
 
 export const TimeLogTable = (props: TimeLogTableProps) => {
 
+
   const {data: currentProject} = useProjectInUrl();
   const {data: maxId} = useMaxTimeLogId();
   const {mutateAsync: addTimeLog} = useAddTimeLog(useTimeLogsQueryKey());
@@ -109,7 +110,7 @@ export const TimeLogTable = (props: TimeLogTableProps) => {
           position !== 'hidden'
             ? {
               creatorButtonText: 'New Record',
-              position: position as 'top',
+              position: position as 'bottom',
               record: () => ({id: (Number(maxId) + 1).toFixed(0), projectId: currentProject!.id as number}),
             }
             : false
@@ -123,10 +124,6 @@ export const TimeLogTable = (props: TimeLogTableProps) => {
               onChange: (e) => setPosition(e.target.value),
             }}
             options={[
-              {
-                label: 'Add to Top',
-                value: 'top',
-              },
               {
                 label: 'Add to Bottom',
                 value: 'bottom',

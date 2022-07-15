@@ -48,7 +48,8 @@ export const userHandlers = [
     let user;
     try {
       user = await accountDB.authenticate(userFields);
-      // bootstrap(user.id);
+      bootstrap(user.id);
+
     } catch (error) {
       return res(
         ctx.status(error.status),
@@ -59,17 +60,5 @@ export const userHandlers = [
   }),
 ];
 
-// create an admin account
-const createAdmin = () => {
-  let admin = accountDB.create({ name: 'admin', password: 'admin' }).then(
-    (admin) => {
-      accountDB.update(admin.id, {role: 'admin'}).then();
-      return admin;
-    }
-  )
-  bootstrap(admin.id);
-}
-
-createAdmin()
 
 

@@ -206,7 +206,6 @@ export const tasks = [
     epicId: 1,
     kanbanId: 1,
     favorite: true,
-    // TODO
     typeId: 2,
     note: 'ASAP',
   },
