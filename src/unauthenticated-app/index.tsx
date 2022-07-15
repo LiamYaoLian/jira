@@ -48,6 +48,13 @@ const Title = styled.h2`
   color: rgb(94, 108, 132);
 `;
 
+const Header = styled.header`
+  background: url(${logo}) no-repeat center;
+  padding: 5rem 0;
+  background-size: 8rem;
+  width: 100%;
+`;
+
 const Background = styled.div`
   position: absolute;
   width: 100%;
@@ -66,7 +73,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  // TODO
 `;
 
 const ShadowCard = styled(Card)`
@@ -80,9 +86,4 @@ const ShadowCard = styled(Card)`
   text-align: center;
 `;
 
-const Header = styled.header`
-  background: url(${logo}) no-repeat center;
-  padding: 5rem 0;
-  background-size: 8rem;
-  width: 100%;
-`;
+
