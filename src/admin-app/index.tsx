@@ -23,8 +23,6 @@ export default () => {
               <Menu.Item key={'epic'}>
                 <Link to={'epic'}>Epic</Link>
               </Menu.Item>
-
-
             </Menu>
 
           </Aside>

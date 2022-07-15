@@ -154,9 +154,6 @@ export const TimeLogTable = (props: TimeLogTableProps) => {
               return editTimeLog(record).catch(() => {
                 return addTimeLog(record);
               });
-              //return addTimeLog(record);
-
-
             }
           }
         }

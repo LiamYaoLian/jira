@@ -25,7 +25,7 @@ export const ProjectListScreen = () => {
       <ScreenContainer>
         <Row between={true}>
           <h1>Project List</h1>
-          <ButtonNoPadding onClick={open} type={'link'}>Create New Project</ButtonNoPadding>
+          <ButtonNoPadding onClick={open} type={'link'}>New Project</ButtonNoPadding>
         </Row>
         <SearchPanel param={param} setParam={setParam}/>
         <ErrorBox error={error}/>

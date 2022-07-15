@@ -31,7 +31,7 @@ export const ProjectPopover = () => {
             }
         </List>
         <Divider/>
-        <ButtonNoPadding onClick={open} type={'link'}>Create New Project</ButtonNoPadding>
+        <ButtonNoPadding onClick={open} type={'link'}>New Project</ButtonNoPadding>
     </ContentContainer>
     // onVisibleChange, refetch to refresh
     return <Popover onVisibleChange={() => refetch()} placement={'bottom'} content={content}><span>Project</span></Popover>

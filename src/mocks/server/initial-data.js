@@ -1,9 +1,9 @@
 export const taskTypes = [
   {
-    name: 'Task',
+    name: 'task',
   },
   {
-    name: 'Bug',
+    name: 'bug',
   },
 ];
 
@@ -206,7 +206,8 @@ export const tasks = [
     epicId: 1,
     kanbanId: 1,
     favorite: true,
-    typeId: 1,
+    // TODO
+    typeId: 2,
     note: 'ASAP',
   },
   {
